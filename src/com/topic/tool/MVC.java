@@ -5,7 +5,6 @@ import java.util.Map;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-@SuppressWarnings("unused")  
 public class MVC {  
     public static ModelAndView toString(Map<String, Object> map){  
         ModelAndView mav = new ModelAndView();  

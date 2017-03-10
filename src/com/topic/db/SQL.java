@@ -2,7 +2,9 @@ package com.topic.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,7 +12,7 @@ import com.topic.tool.FileOperation;
 
 public class SQL {
 
-	private String dbtype = "mongodb";
+	private String dbtype = "mysql";
 	private Map<String, String> map = new HashMap<String, String>();
 
 	public SQL() {
@@ -40,4 +42,24 @@ public class SQL {
 	    return conn;
 	}
 
+	public static void main(String[] args){
+		SQL sql = new SQL();
+		Connection conn = sql.getConn();
+		String str = "select * from user";
+		Statement sta;
+		try {
+			sta = conn.createStatement();
+			ResultSet rs = sta.executeQuery(str);
+			while(rs.next()){
+				System.out.println(rs.getString("user_account"));
+			}
+			rs.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
 }

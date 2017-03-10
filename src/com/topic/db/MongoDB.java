@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
 import com.mongodb.Mongo;
 import com.topic.tool.FileOperation;
 
@@ -34,5 +36,15 @@ public class MongoDB {
 			e.printStackTrace();
 		}
 		return db;
+	}
+	
+	public static void main(String[] args){
+		MongoDB mongo = new MongoDB();
+		DB db = mongo.getConnect();
+		DBCollection collection = db.getCollection("world");
+		DBCursor cur = collection.find(null,null);
+		int num = collection.find(null,null).count();
+		System.out.println(cur.toArray());
+		System.out.println(num);
 	}
 }

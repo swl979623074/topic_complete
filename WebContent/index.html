@@ -36,6 +36,7 @@
 		//连接成功建立的回调方法
 		websocket.onopen = function(event) {
 			setMessageInnerHTML("open");
+			websocket.send("swl");
 		}
 
 		//接收到消息的回调方法
@@ -67,12 +68,10 @@
 		function send() {
 			var message = document.getElementById('text').value;
 			var data = {
-					msg:message
+				msg : message
 			}
 			websocket.send(JSON.stringify(data));
 		}
-
-		
 	</script>
 	<!-- <script>
 		
