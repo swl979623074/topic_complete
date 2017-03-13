@@ -10,12 +10,12 @@ import java.util.Map;
 
 import com.topic.tool.FileOperation;
 
-public class SQL {
+public class JDBC {
 
 	private String dbtype = "mysql";
 	private Map<String, String> map = new HashMap<String, String>();
 
-	public SQL() {
+	public JDBC() {
 		try {
 			FileOperation fileOperation = new FileOperation();
 			map = fileOperation.getData(dbtype);
@@ -43,7 +43,7 @@ public class SQL {
 	}
 
 	public static void main(String[] args){
-		SQL sql = new SQL();
+		JDBC sql = new JDBC();
 		Connection conn = sql.getConn();
 		String str = "select * from user";
 		Statement sta;

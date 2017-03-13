@@ -12,8 +12,6 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
-import net.sf.json.JSONObject;
-
 //该注解用来指定一个URI，客户端可以通过这个URI来连接到WebSocket。类似Servlet的注解mapping。无需在web.xml中配置。
 @ServerEndpoint("/mywebsocket")
 public class MyWebSocket {
@@ -23,8 +21,9 @@ public class MyWebSocket {
 	// concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。若要实现服务端与单一客户端通信的话，可以使用Map来存放，其中Key可以为用户标识
 	private static CopyOnWriteArraySet<MyWebSocket> webSocketSet = new CopyOnWriteArraySet<MyWebSocket>();
 
-	private static Map<String,MyWebSocket> websocketMap = new HashMap<String,MyWebSocket>();
-	
+	// 使用Map保存seeson，实现一对一通信
+	private static Map<String, MyWebSocket> websocketMap = new HashMap<String, MyWebSocket>();
+
 	// 与某个客户端的连接会话，需要通过它来给客户端发送数据
 	private Session session;
 
