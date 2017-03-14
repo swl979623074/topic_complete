@@ -1,5 +1,6 @@
 package com.topic.db;
 
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -14,22 +15,29 @@ public class JDBC {
 
 	private String dbtype = "mysql";
 	private Map<String, String> map = new HashMap<String, String>();
-
+	private FileOperation fileOperation = new FileOperation();
+	
 	public JDBC() {
-		try {
-			FileOperation fileOperation = new FileOperation();
-			map = fileOperation.getData(dbtype);
-		} catch (Exception e) {
-			System.out.println("Class MongoDB Initialization ERROR");
-		}
+			try {
+				this.map = this.fileOperation.getConfigData(dbtype);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 	}
 	
 	public Connection getConn(){
+		System.out.println("JDBC.java -- Config File: "+ this.map);
 		String driver = map.get("driver");
 	    String url = map.get("url");
 	    String username = map.get("username");
 	    String password = map.get("password");
+	    
+//	    String driver = "com.mysql.jdbc.Driver";
+//	    String url = "jdbc:mysql://localhost:3306/topic";
+//	    String username = "root";
+//	    String password = "123456";
 	    Connection conn = null;
 	    try {
 	        Class.forName(driver); //classLoader,加载对应驱动

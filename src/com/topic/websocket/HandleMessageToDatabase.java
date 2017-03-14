@@ -9,6 +9,7 @@ import net.sf.json.JSONObject;
 
 import com.topic.db.OperateJDBC;
 import com.topic.tool.DataFormat;
+import com.topic.tool.DateFormat;
 /**
  * 将处理后的消息存储到数据库
  * @author SWL
@@ -37,7 +38,7 @@ public class HandleMessageToDatabase implements HandleMessage {
 	private int handleOpenMessage() {
 		int key = 0;
 		String sql = "update user set user_online = '1' where user_id ='"
-				+ this.JSONObj.getString("userid") + "'";
+				+ this.JSONObj.optString("userid") + "'";
 		key = OJDBC.executeUpdate(sql);
 		return key;
 	}
@@ -45,27 +46,27 @@ public class HandleMessageToDatabase implements HandleMessage {
 	private int handleCloseMessage() {
 		int key = 0;
 		String sql = "update user set user_online = '0' where user_id ='"
-				+ this.JSONObj.getString("userid") + "'";
+				+ this.JSONObj.optString("userid") + "'";
 		key = OJDBC.executeUpdate(sql);
 		return key;
 	}
 
 	private int handleTalkMessageToDB() {
 		int key = 0;
-		String talkType = this.JSONObj.getString("recipienttype");
-		String sender = this.JSONObj.getString("senderId");
-		String recipient = this.JSONObj.getString("recipientId");
-		String msg = this.JSONObj.getString("msg");
-		Date date = new Date();
+		String talkType = this.JSONObj.optString("recipienttype");
+		String sender = this.JSONObj.optString("senderid");
+		String recipient = this.JSONObj.optString("recipientid");
+		String msg = this.JSONObj.optString("msg");
+		String time = DateFormat.getDateString();
 		String sql = null;
 		switch (talkType) {
 		case "persion":
-			sql = "insert into conversation ('user_come','user_to','conv_content','conv_time') values ("
-					+ sender + "," + recipient + "," + msg + "," + date + ",)";
+			sql = "insert into conversation (user_come,user_to,conv_content,conv_time) values ('"
+					+ sender + "','" + recipient + "','" + msg + "','" + time + "')";
 			break;
 		case "group":
-			sql = "insert into meeting ('meet_userid','meet_groupid','meet_content','conv_time') values ("
-					+ sender + "," + recipient + "," + msg + "," + date + ",)";
+			sql = "insert into meeting (meet_userid,meet_groupid,meet_content,conv_time) values ('"
+					+ sender + "','" + recipient + "','" + msg + "','" + time + "')";
 			break;
 		default:
 			break;
@@ -82,7 +83,7 @@ public class HandleMessageToDatabase implements HandleMessage {
 	 */
 	@Override
 	public int handleMessage(Map<String,Session> map) {
-		String msgType = this.JSONObj.getString("type");
+		String msgType = this.JSONObj.optString("type");
 		int key = 0;
 		switch (msgType) {
 		case "onOpen":

@@ -17,9 +17,9 @@ public class MongoDB {
 	public MongoDB() {
 		try {
 			FileOperation fileOperation = new FileOperation();
-			map = fileOperation.getData(dbtype);
+			map = fileOperation.getConfigData(dbtype);
 		} catch (Exception e) {
-			System.out.println("Class MongoDB Initialization ERROR");
+//			System.out.println("Class MongoDB Initialization ERROR");
 		}
 
 	}
@@ -39,12 +39,12 @@ public class MongoDB {
 	}
 	
 	public static void main(String[] args){
-		MongoDB mongo = new MongoDB();
-		DB db = mongo.getConnect();
-		DBCollection collection = db.getCollection("world");
-		DBCursor cur = collection.find(null,null);
-		int num = collection.find(null,null).count();
-		System.out.println(cur.toArray());
-		System.out.println(num);
+//		MongoDB mongo = new MongoDB();
+//		DB db = mongo.getConnect();
+//		DBCollection collection = db.getCollection("world");
+//		DBCursor cur = collection.find(null,null);
+//		int num = collection.find(null,null).count();
+//		System.out.println(cur.toArray());
+//		System.out.println(num);
 	}
 }

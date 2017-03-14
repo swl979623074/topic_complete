@@ -50,11 +50,11 @@ public class HandleMessageToClient implements HandleMessage {
 	 * 
 	 */
 	private void sendMsgToPersion(Session session) {
-		Boolean online = this.isOnLine(this.JSONObj.getString("recipientId"));
+		Boolean online = this.isOnLine(this.JSONObj.optString("recipientid"));
 		Boolean onwindow = this.isOpenWindow(
-				this.JSONObj.getString("senderId"),
-				this.JSONObj.getString("recipientId"),
-				this.JSONObj.getString("recipienttype"));
+				this.JSONObj.optString("senderid"),
+				this.JSONObj.optString("recipientid"),
+				this.JSONObj.optString("recipienttype"));
 
 		if (true == online && true == onwindow) {
 			try {
@@ -65,9 +65,9 @@ public class HandleMessageToClient implements HandleMessage {
 			}
 		} else {
 			String sql = "update firend set fire_missmsg = '1' where user_id = '"
-					+ this.JSONObj.getString("senderId")
+					+ this.JSONObj.optString("senderId")
 					+ "' and fire_id = '"
-					+ this.JSONObj.getString("recipientId") + "'";
+					+ this.JSONObj.optString("recipientId") + "'";
 			OJDBC.executeUpdate(sql);
 		}
 	}
@@ -78,7 +78,7 @@ public class HandleMessageToClient implements HandleMessage {
 	 * @param session
 	 */
 	private void sendMsgToGroup(Map<String,Session> map) {
-		String groupTopicId = this.JSONObj.getString("recipientId");
+		String groupTopicId = this.JSONObj.optString("recipientId");
 		String sql_group = "select group_userid , group_topicid ,user_online , group_openwindow from group , user where user_id = group_userid and group_topicid = '"
 				+ groupTopicId + "'";
 
@@ -92,7 +92,7 @@ public class HandleMessageToClient implements HandleMessage {
 
 				if ("1" == online && "1" == onwindow) {
 					try {
-						(map.get(this.JSONObj.getString(recipientUserId))).getBasicRemote().sendText(this.message);
+						(map.get(this.JSONObj.optString(recipientUserId))).getBasicRemote().sendText(this.message);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -144,11 +144,11 @@ public class HandleMessageToClient implements HandleMessage {
 			String recipientType) {
 		Boolean onwindow = false;
 		String sql = null;
-		if ("persion" == recipientType) {
-			sql = "select fire_openwindow form firend where user_id = '"
+		if (recipientType.equals("persion")) {
+			sql = "select fire_openwindow from firend where user_id = '"
 					+ senderId + "' and fire_id = '" + recipientId + "'";
-		} else if ("group" == recipientType) {
-			sql = "select group_openwindow form group where group_userid = '"
+		} else if (recipientType.equals("group")) {
+			sql = "select group_openwindow from group where group_userid = '"
 					+ senderId + "' and group_topicid = '" + recipientId + "'";
 		} else {
 			System.out.println("recipientType ERROR: " + recipientType);
@@ -173,10 +173,10 @@ public class HandleMessageToClient implements HandleMessage {
 
 	@Override
 	public int handleMessage(Map<String,Session> map) {
-		String talkType = this.JSONObj.getString("recipienttype");
+		String talkType = this.JSONObj.optString("recipienttype");
 		switch (talkType) {
 		case "persion":
-			this.sendMsgToPersion(map.get(this.JSONObj.getString("recipientid")));
+			this.sendMsgToPersion(map.get(this.JSONObj.optString("recipientid")));
 			;
 			break;
 		case "group":
@@ -186,6 +186,6 @@ public class HandleMessageToClient implements HandleMessage {
 		default:
 			break;
 		}
-		return 0;
+		return 1;
 	}
 }
