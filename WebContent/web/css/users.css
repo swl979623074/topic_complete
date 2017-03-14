@@ -1,0 +1,241 @@
+@charset "utf-8";
+html,
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+}
+
+
+/**************************header**************************/
+
+body>header {
+	width: 100%;
+	height: 10%;
+	background: #CCC;
+}
+
+body>header ul {
+	margin: 0px;
+	height: 100%;
+	display: flex;
+	padding-left: 2rem;
+}
+
+body>header li {
+	list-style: none;
+	margin-left: 0.5rem;
+	height: 100%;
+}
+
+body>header input {
+	margin: 1.5rem auto;
+	height: 2rem;
+	width: 15rem;
+	font-family: "宋体";
+	font-size: 1rem;
+	padding: 0rem;
+	border: 0.1rem solid #CCC;
+}
+
+body>header button {
+	height: 2rem;
+	font-family: "宋体";
+	width: 8rem;
+	font-size: 1rem;
+	margin-right: 0.5rem;
+	border-radius: 0.1rem;
+	background: lightgrey;
+	border: 0.1rem solid lightsteelblue;
+	cursor: pointer;
+}
+
+body>header img {
+	width: 100%;
+	height: 100%;
+}
+
+body>header li:last-child {
+	width: 8%;
+}
+
+body>header li:last-child>div {
+	height: 100%;
+	border-radius: 50%;
+	cursor: pointer;
+	width: 3rem;
+	height: 3rem;
+	margin: 0.8rem auto;
+	overflow: hidden;
+}
+
+
+/**********section**********/
+
+section {
+	height: 90%;
+}
+
+
+/**********aside**********/
+
+aside {
+	position: fixed;
+	top: 0;
+	left: 50%;
+	margin-left: -15rem;
+	width: 30rem;
+	height: 40rem;
+	background: white;
+	z-index: order;
+	border: 0.1rem solid silver;
+	box-shadow: -0.1rem 0.3rem 0.5rem 0.3rem #CCCCCC;
+}
+
+.addUserDialog> header {
+	height: 2rem;
+	width: 100%;
+	background: gray;
+}
+
+.addUserDialog> header img {
+	width: 2rem;
+	height: 2rem;
+	float: right;
+	cursor: pointer;
+}
+
+.addUserDialog> section {
+	width: 80%;
+	height: 38rem;
+	margin: 0 auto;
+	font-family: "宋体";
+	font-size: 1.3rem;
+}
+
+.addUserDialog> section>div:first-child {
+	text-align: center;
+	margin-top: 2rem;
+}
+
+.addUserDialog> section> div:nth-child(2) {
+	height: 80%;
+	width: 100%;
+	position: relative;
+	top: 1.5rem;
+}
+
+.addUserDialog> section> div:nth-child(2)> div {
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	top: 0px;
+	position: absolute;
+}
+
+.addUserDialog> section> div:nth-child(2)> div:first-child img {
+	width: 100%;
+	height: 100%;
+}
+
+.userMessage {
+	width: 100%;
+	height: 100%;
+	border: 1px solid blue;
+	padding: 0px;
+	margin: 0px;
+}
+
+.userMessage li {
+	list-style: none;
+	width: 100%;
+	display: block;
+	margin-top: 1rem;
+	text-indent: 2rem;
+	border-bottom: 0.1rem dashed #CCC;
+}
+
+.userMessage label {
+	font-family: "宋体";
+	font-weight: bolder;
+}
+
+.userMessage span {
+	padding-top: 1rem;
+	line-height: 2rem;
+}
+
+.userMessage li:first-child {
+	height: 10rem;
+	width: 100%;
+	display: flex;
+	text-indent: 0rem;
+}
+
+.userMessage li:first-child> div {
+	width: 8rem;
+	height: 8rem;
+	margin: 1rem;
+	overflow: hidden;
+}
+
+.userMessage li:first-child> div:first-child {
+	border: 0.2rem solid #CCC;
+	padding: 0.2rem;
+}
+
+.userMessage img {
+	width: 100%;
+	height: 100%;
+	border-radius: 1rem;
+}
+
+.userMessage li:first-child> div:nth-child(2) {
+	width: 15rem;
+	font-size: 1.5rem;
+	font-family: "楷体";
+	font-weight: bolder;
+}
+
+.userMessage li:first-child> div:nth-child(2)>div {
+	height: 2.5rem;
+	line-height: 2.5rem;
+	width: 100%;
+	overflow: auto;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	border-bottom: 0.1rem dashed #CCC;
+}
+
+.userMessage li:last-child {
+	position: absolute;
+	bottom: 2rem;
+	border: none;
+	text-align: center;
+	text-indent: 0rem;
+}
+
+.userMessage li:last-child button {
+	width: 10rem;
+	height: 3rem;
+	font-family: "楷体";
+	font-size: 2rem;
+	background: dodgerblue;
+	border: 0.1rem solid #CCC;
+	cursor: pointer;
+	color: white;
+}
+
+
+/**********************common*******************/
+
+.show {
+	display: block;
+}
+
+.hide {
+	display: none;
+}

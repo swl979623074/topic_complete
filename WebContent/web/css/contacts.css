@@ -1,0 +1,390 @@
+@charset "utf-8";
+html,
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+}
+
+
+/**************************section 左侧列表**************************/
+
+body>section {
+	background: #E2E4E6;
+	height: 100%;
+	display: flex;
+}
+
+body>section>div {
+	height: 100%;
+}
+
+body>section>div:first-child {
+	width: 20%;
+	background: darkgray;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+body>section>div:nth-child(2) {
+	width: 65%;
+}
+
+.list {
+	list-style: none;
+	padding: 0px;
+	margin-top: 0.5rem;
+	width: 100%;
+}
+
+.list li {
+	width: 95%;
+	height: 5rem;
+	margin: 0 auto;
+	display: flex;
+	cursor: pointer;
+	position: relative;
+	background: lightgoldenrodyellow;
+	border-bottom: 0.5rem solid lightblue;
+	border-radius: 0.2rem;
+	overflow: hidden;
+}
+
+.list li> div:first-child {
+	width: 5rem;
+	height: 5rem;
+	overflow: hidden;
+}
+
+.list img {
+	width: 100%;
+	height: 100%;
+}
+
+.list>li> div:nth-child(2)> div {
+	height: 2.5rem;
+	line-height: 2.5rem;
+	font-family: "楷体";
+	font-size: 1.5rem;
+}
+
+
+/*用户操作 update delete*/
+
+.list>li> div:nth-child(2)> div:last-child {
+	position: absolute;
+	width: 2rem;
+	height: 5rem;
+	top: 0rem;
+	right: 0rem;
+	display: none; //隐藏操作键
+}
+
+.list>li> div:nth-child(2)> div:last-child div {
+	height: 2.5rem;
+}
+
+
+/*new message*/
+
+.list>li>div:last-child {
+	width: 2rem;
+	height: 2rem;
+	border-radius: 50%;
+	position: absolute;
+	overflow: hidden;
+	right: 2rem;
+	opacity: 0.5;
+	/*display: none;*/
+	/*初始化时要隐藏*/
+}
+
+
+/**************************section 中间对话框**************************/
+
+
+/***********上端消息显示区***********/
+
+.message {
+	margin: 0rem;
+}
+
+.message>div {
+	width: 100%;
+}
+
+.message>div:first-child {
+	height: 65%;
+	overflow-y: auto;
+}
+
+.message>div:nth-child(2) {
+	margin: auto;
+	height: 5%;
+	border: 0.1rem solid #CCC;
+}
+
+.message>div:last-child {
+	height: 30%;
+	margin-bottom: 0rem;
+	/*position: relative;*/
+	background: white;
+}
+
+.message>div:first-child> div {
+	height: 2rem;
+	width: 100%;
+	font-family: "宋体";
+	font-size: 1.3rem;
+	color: blue;
+	text-align: center;
+}
+
+.message>div:first-child> div span {
+	border-bottom: 0.1rem dashed blue;
+	cursor: pointer;
+}
+
+.statement {
+	list-style: none;
+	padding: 0px;
+	margin-top: 0.5rem;
+	width: 100%;
+}
+
+.statement>li {
+	width: 100%;
+	margin-top: 1rem;
+}
+
+.statement>li>div {
+	max-width: 70%;
+	display: flex;
+}
+
+.statement>li>div> .headImg {
+	width: 3rem;
+}
+
+.statement img {
+	width: 3rem;
+	height: 3rem;
+	border-radius: 50%;
+}
+
+.statement p {
+	font-size: 1.4rem;
+	font-family: "楷体";
+	margin: 0.2rem 0.5rem;
+}
+
+.statement p:first-child span {
+	font-weight: bolder;
+}
+
+.statement p:last-child {
+	border: 0.1rem dashed #CCC;
+	border-radius: 0.5rem;
+	font-family: "宋体";
+}
+
+.right>div {
+	margin-left: 28%;
+	text-align: right;
+}
+
+.left>div {
+	margin-left: 2%;
+}
+
+
+/***********中间表情***********/
+
+.message>div:nth-child(2) {
+	display: flex;
+}
+
+.message>div:nth-child(2) img {
+	width: 2rem;
+	height: 2rem;
+	border-radius: 50%;
+	margin-left: 0.5rem;
+	cursor: pointer;
+}
+
+
+/***********下端消息输入去***********/
+
+.message>div:last-child>div:first-child {
+	width: 100%;
+	height: 75%;
+}
+
+.message>div:last-child>div:first-child textarea {
+	width: 99.5%;
+	height: 100%;
+	font-family: "微软雅黑";
+	font-size: 1.3rem;
+	padding: 0px;
+	margin: 0px;
+}
+
+.message>div:last-child>div:last-child {
+	width: 100%;
+	margin-top: 0.7rem;
+	text-align: right;
+}
+
+.message>div:last-child>div:last-child button {
+	width: 12rem;
+	height: 2.2rem;
+	font-size: 1.2rem;
+	margin-right: 0.5rem;
+	border-radius: 0.1rem;
+	background: lightgrey;
+	border: 0.1rem solid white;
+}
+
+
+/**************************section 右侧简介**************************/
+
+.summary {
+	background: white;
+	width: 15%;
+	height: 100%;
+}
+
+.summary_model {
+	width: 100%;
+	height: 50%;
+}
+
+.summary_model>header {
+	height: 10%;
+	width: 100%;
+	background: #ADD8E6;
+	font-size: 1.3rem;
+	line-height: 2rem;
+}
+
+.summary_model>section {
+	width: 100%;
+	height: 75%;
+	overflow-y: auto;
+	box-shadow: 0.1rem 0.2rem 1rem 0.1rem #CCC;
+}
+
+.summary_model>footer {
+	width: 100%;
+	height: 15%;
+	text-align: center;
+	border-left: 0.1rem solid #CCC;
+}
+
+.summary_model>section>ul {
+	margin: 0px auto;
+	padding: 0px;
+	height: 100%;
+	width: 95%;
+}
+
+.summary_model>section li {
+	list-style: none;
+	font-family: '楷体';
+	padding-top: 0.5rem;
+}
+
+.summary_model>section label {
+	font-size: 1.2rem;
+	font-weight: bolder;
+	color: #3E3E40;
+	padding-left: 1rem;
+}
+
+.summary_model>section span {
+	color: #3E3E40;
+	font-family: "宋体";
+	font-size: 1rem;
+}
+
+.summary_model>footer>button {
+	width: 9rem;
+	height: 2rem;
+	margin-top: 1rem;
+	border: none;
+	border-radius: 0.5rem;
+	cursor: pointer;
+	font-size: 1rem;
+	line-height: 1.5rem;
+	text-align: center;
+}
+
+
+/**********************aside********************/
+
+aside {
+	position: fixed;
+	top: 0;
+	left: 50%;
+	margin-left: -12.5rem;
+	width: 25rem;
+	height: 15rem;
+	background: white;
+	z-index: order;
+	border: 0.1rem solid silver;
+	box-shadow: -0.1rem 0.3rem 0.5rem 0.3rem #CCCCCC;
+}
+
+aside> header {
+	height: 2rem;
+	width: 100%;
+	background: gray;
+}
+
+aside> header img {
+	width: 2rem;
+	height: 2rem;
+	float: right;
+	cursor: pointer;
+}
+
+aside>section {
+	height: 8rem;
+	font-size: 1.5rem;
+	line-height: 8rem;
+	text-align: center;
+}
+
+aside>section input {
+	height: 3rem;
+	width: 70%;
+	margin-top: 2rem;
+	border: 0.1rem solid #CCC;
+	font-size: 1.3rem;
+}
+
+aside>footer {
+	width: 100%;
+	text-align: center;
+	margin-top: 1rem;
+}
+
+aside>footer>button {
+	width: 30%;
+	height: 2.5rem;
+	border: 0.1rem solid #CCC;
+	background: dodgerblue;
+	cursor: pointer;
+	font-size: 1.3rem;
+	border-radius: 0.5rem;
+	color: white;
+}
+
+
+
+/**********************common********************/
+.hide{
+	display: none;
+}

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Topic news</title>
+		<meta name="author" content="swl" />
+		<meta name="keywords" content="topic,swl" />
+		<meta name='description' content="the news module" />
+		<link rel="shortcut icon" href="./../img/logo.png" />
+		<link rel="stylesheet" href="../css/news.css" />
+		<script type="text/javascript" src="../js/jquery-2.1.0.js"></script>
+		<script type="text/javascript" src="../js/angular.js"></script>
+		<script type="text/javascript" src="../js/news.js"></script>
+
+	</head>
+
+	<body>
+		<section>
+			<div class="newstype">
+				<ul>
+					<li>今日头条</li>
+					<li>历&nbsp&nbsp史</li>
+					<li>军&nbsp&nbsp事</li>
+					<li>动&nbsp&nbsp漫</li>
+					<li>科&nbsp&nbsp技</li>
+					<li>政&nbsp&nbsp治</li>
+				</ul>
+			</div>
+			<div>
+				<ul class="newslist">
+					<li class='toutiao'>
+						<div>
+							<span>#1</span>
+							<span>华为meta9正式发布华为meta9正式发布华为meta9正式发布华为meta9正式发布</span>
+						</div>
+						<div> <img src="../img/logo.png" title="create topic" class="pointer" onclick="showDialog()" /> </div>
+					</li>
+
+					<li class='model simple'>
+						<div><img src="../img/logo.png" /> </div>
+						<div>
+							<header class="header">华为meta9正式发布</header>
+							<section>
+								<span>图为新闻发布会现场林馨摄　　中新网柳州1月23日电(林馨李佳)广西柳州市中级人民法院23日通报称，2016年全...</span>
+							</section>
+							<footer class="footer">
+								<div>
+									<span>2017-01-23 18:20 来源：中国新闻网</span>
+								</div>
+								<div>
+									<img src="../img/logo.png" title="create topic" class="pointer" onclick="showDialog()" />
+								</div>
+							</footer>
+						</div>
+					</li>
+					<li class="model complex">
+						<header class="header">
+							华为meta9正式发布
+						</header>
+						<section>
+							<img src="../img/logo.png" />
+							<img src="../img/logo.png" />
+							<img src="../img/logo.png" />
+						</section>
+						<footer class='footer'>
+							<div>
+								<span>2017-01-23 18:20 来源：中国新闻网</span>
+							</div>
+							<div>
+								<img src="../img/logo.png" title="create topic" class="pointer" onclick="showDialog()" />
+							</div>
+						</footer>
+					</li>
+
+					<li class='toutiao'>
+						<div>
+							<span>#1</span>
+							<span>华为meta9正式发布华为meta9正式发布华为meta9正式发布华为meta9正式发布</span>
+						</div>
+						<div> <img src="../img/logo.png" title="create topic" class="pointer" onclick="showDialog()" /> </div>
+					</li>
+
+					<li class='model simple'>
+						<div><img src="../img/logo.png" /> </div>
+						<div>
+							<header class="header">华为meta9正式发布</header>
+							<section>
+								<span>图为新闻发布会现场林馨摄　　中新网柳州1月23日电(林馨李佳)广西柳州市中级人民法院23日通报称，2016年全...</span>
+							</section>
+							<footer class="footer">
+								<div>
+									<span>2017-01-23 18:20 来源：中国新闻网</span>
+								</div>
+								<div>
+									<img src="../img/logo.png" title="create topic" class="pointer" onclick="showDialog()" />
+								</div>
+							</footer>
+						</div>
+					</li>
+					<li class="model complex">
+						<header class="header">
+							华为meta9正式发布
+						</header>
+						<section>
+							<img src="../img/logo.png" />
+							<img src="../img/logo.png" />
+							<img src="../img/logo.png" />
+						</section>
+						<footer class='footer'>
+							<div>
+								<span>2017-01-23 18:20 来源：中国新闻网</span>
+							</div>
+							<div>
+								<img src="../img/logo.png" title="create topic" onclick="showDialog()" />
+							</div>
+						</footer>
+					</li>
+
+				</ul>
+
+			</div>
+		</section>
+		<aside class='createTopic hide'>
+			<header>
+				<img title='关闭' src="../img/logo.png" onclick="hideDialog()" />
+			</header>
+			<section>
+				<table>
+					<tr>
+						<td>标&nbsp&nbsp题：</td>
+						<td><input type="text" /></td>
+					</tr>
+					<tr>
+						<td>描&nbsp&nbsp述：</td>
+						<td><textarea placeholder="up to 150 words"></textarea></td>
+					</tr>
+					<tr>
+						<td>维持时间：</td>
+						<td><input type="text" placeholder="hour" /></td>
+					</tr>
+					<tr>
+						<td>参与等级：</td>
+						<td>
+							<select>
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>话题来源：</td>
+						<td><input type="text" placeholder="url" /></td>
+					</tr>
+				</table>
+			</section>
+			<footer>
+				<button title="create topic">create</button>
+			</footer>
+		</aside>
+	</body>
+
+</html>

@@ -1,0 +1,202 @@
+@charset "utf-8";
+html,
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+}
+
+
+/**************************header**************************/
+
+body>header {
+	width: 100%;
+	height: 10%;
+	background: #CCC;
+}
+
+body>header ul {
+	margin: 0px;
+	height: 100%;
+	display: flex;
+	padding-left: 2rem;
+}
+
+body>header li {
+	list-style: none;
+	margin-left: 0.5rem;
+	height: 100%;
+}
+
+body>header input {
+	margin: 1.5rem auto;
+	height: 2rem;
+	width: 15rem;
+	font-family: "宋体";
+	font-size: 1rem;
+	padding: 0rem;
+	border: 0.1rem solid #CCC;
+}
+
+body>header button {
+	height: 2rem;
+	font-family: "宋体";
+	width: 8rem;
+	font-size: 1rem;
+	margin-right: 0.5rem;
+	border-radius: 0.1rem;
+	background: lightgrey;
+	border: 0.1rem solid lightsteelblue;
+	cursor: pointer;
+}
+
+body>header img {
+	width: 100%;
+	height: 100%;
+}
+
+body>header li:last-child {
+	width: 8%;
+}
+
+body>header li:last-child>div {
+	height: 100%;
+	border-radius: 50%;
+	cursor: pointer;
+	width: 3rem;
+	height: 3rem;
+	margin: 0.8rem auto;
+	overflow: hidden;
+}
+
+
+/**********section**********/
+
+section {
+	height: 90%;
+}
+
+
+/**********************model createTopic*******************/
+
+aside {
+	position: fixed;
+	top: 0;
+	left: 50%;
+	margin-left: -15rem;
+	width: 30rem;
+	height: 35rem;
+	background: white;
+	z-index: order;
+	border: 0.1rem solid silver;
+	box-shadow: -0.1rem 0.3rem 0.5rem 0.3rem #CCCCCC;
+}
+
+.createTopic> header {
+	height: 2rem;
+	width: 100%;
+	background: gray;
+}
+
+.createTopic> header img {
+	width: 2rem;
+	height: 2rem;
+	float: right;
+	cursor: pointer;
+}
+
+.createTopic> section {
+	width: 100%;
+	height: 75%;
+	margin: 0 auto;
+	font-family: "宋体";
+	font-size: 1.3rem;
+	display: flex;
+}
+
+.createTopic>section>table {
+	width: 100%;
+	height: 100%;
+	margin-top: 1rem;
+}
+
+.createTopic>section>table input {
+	width: 15rem;
+	height: 1.5rem;
+	line-height: 1.5rem;
+	border: 0.1rem solid #CCC;
+	font-size: 1rem;
+	padding: 0rem;
+}
+
+.createTopic>section>table select {
+	width: 15.2rem;
+	height: 2rem;
+	border: 0.1rem solid #CCC;
+	font-size: 1rem;
+	padding: 0rem;
+}
+
+.createTopic>section>table textarea {
+	width: 15rem;
+	height: 6rem;
+	border: 0.1rem solid #CCC;
+	font-size: 1rem;
+	padding: 0rem;
+}
+
+.createTopic>section>table tr {
+	height: 4rem;
+}
+
+.createTopic>section>table td:first-child {
+	width: 10rem;
+	text-align: right;
+	font-family: "宋体";
+	font-weight: bolder;
+	font-size: 1.5rem;
+}
+
+.createTopic>section>table td:nth-child(2) {
+	font-size: 1.3rem;
+	font-family: "宋体";
+}
+
+.createTopic>section>table tr:nth-child(2) {
+	vertical-align: top;
+}
+
+.createTopic>footer {
+	width: 100%;
+	height: 20%;
+	margin-top: 2rem;
+	text-align: center;
+}
+
+.createTopic>footer>button {
+	width: 10rem;
+	height: 3rem;
+	font-family: "楷体";
+	font-size: 2rem;
+	background: dodgerblue;
+	border: 0.1rem solid #CCC;
+	cursor: pointer;
+	color: white;
+}
+
+
+/**********************common*******************/
+
+.show {
+	display: block;
+}
+
+.hide {
+	display: none;
+}
+
+.pointer {
+	cursor: pointer;
+}

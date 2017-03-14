@@ -1,0 +1,40 @@
+@charset "utf-8";
+html,
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+}
+
+body>header{
+	height:7%;
+	width: 100%;
+	display: flex;
+	border-bottom: 0.1rem solid #CCC;
+	padding-top: 0.5rem;
+}
+body>header>div{
+	height: 100%;
+	width: 10rem;
+	font-size: 1.3rem;
+	cursor: pointer;
+	line-height: 4rem;
+	text-align: center;
+}
+body>header>div:hover{
+	background: #D3D3D3;
+}
+.menu_select{
+	border-bottom: 0.1rem solid white;
+	border-top: 0.1rem solid #CCC;
+	border-left: 0.1rem solid #CCC;
+	border-right: 0.1rem solid #CCC;
+	background: #D3D3D3;
+}
+body>section{
+	height: 90%;
+	width: 100%;
+	overflow: hidden;
+}

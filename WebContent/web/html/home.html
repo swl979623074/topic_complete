@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Topic home</title>
+		<meta name="author" content="swl" />
+		<meta name="keywords" content="topic,swl" />
+		<meta name='description' content="the home of which app based on topic is created for communication" />
+		<link rel="shortcut icon" href="./../img/logo.png" />
+		<link rel="stylesheet" href="../css/home.css" />
+		<link rel="stylesheet" href="../css/swl.css" />
+		<script type="text/javascript" src="../js/jquery-2.1.0.js"></script>
+		<script type="text/javascript" src="../js/angular.js"></script>
+		<script type="text/javascript" src="../js/home.js"></script>
+		
+	</head>
+
+	<body ng-app>
+		<header>
+			<div class='logo'>
+				<a href="home.html"><img src="../img/logo.png"></a>
+			</div>
+			<div class="title">
+				<a href="home.html">Topic</a>
+			</div>
+			<div class='usermsg'>
+				<span><a href="./login.html">sign in</a> | <a href="./register.html">sign up</a></span>
+			</div>
+		</header>
+		<section>
+			<div id='mainmenu'>
+				<div>
+					<ul class='mainmenu'>
+						<li title='新闻' id="menu_news">
+							<a href="#"><img src="../img/logo.png" /></a>
+						</li>
+						<li title='话题' id="menu_topic">
+							<a href="#"><img src="../img/logo.png" /></a>
+						</li>
+						<li title='联系人' id="menu_users">
+							<a href="#"><img src="../img/logo.png" /></a>
+						</li>
+						<li title='用户' id="menu_user">
+							<a href="#"><img src="../img/logo.png" /></a>
+						</li>
+					</ul>
+				</div>
+				<div>
+					<div class='reset' id="menu_setup" title='设置'>
+						<a href="#"><img src="../img/logo.png" /></a>
+					</div>
+				</div>
+			</div>
+			<div id='content'>
+				<iframe id='changUrl' src="./news.html" scrolling="no" frameborder="0" width="100%" height="100%"></iframe>
+			</div>
+		</section>
+
+	</body>
+
+</html>

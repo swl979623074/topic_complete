@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Topic users</title>
+		<meta name="author" content="swl" />
+		<meta name="keywords" content="topic,swl" />
+		<meta name='description' content="the users model" />
+		<link rel="shortcut icon" href="./../img/logo.png" />
+		<link rel="stylesheet" href="../css/users.css" />
+		<script type="text/javascript" src="../js/jquery-2.1.0.js"></script>
+		<script type="text/javascript" src="../js/angular.js"></script>
+		<script type="text/javascript" src="../js/users.js"></script>
+	</head>
+
+	<body>
+		<header>
+			<ul>
+				<li>
+					<input type="text" placeholder="please input one searched user's name " />
+					<button>search</button>
+				</li>
+				<li>
+					<div>
+						<img src="../img/logo.png" title='add user' onclick="showDialog()" />
+					</div>
+				</li>
+
+			</ul>
+
+		</header>
+		<section>
+			<iframe src="contacts.html" scrolling="no" frameborder="0" width="100%" height="100%"></iframe>
+		</section>
+		<aside class='addUserDialog hide'>
+			<header>
+				<img title='关闭' src="../img/logo.png" onclick="hideDialog()" />
+			</header>
+			<section>
+				<div>
+					<input type="text" placeholder="input user id" />
+					<button>search</button>
+				</div>
+				<div title="user message">
+					<div class="hide" title="问号头像">
+						<img src="../img/logo.png" />
+					</div>
+					<div>
+						<ul class="userMessage">
+							<li>
+								<div>
+									<img src="../img/logo.png" alt='head photo' />
+								</div>
+								<div>
+									<div>
+										<span>孙文龙</span>
+										<span>男</span>
+									</div>
+									<div>
+										<label>ID:</label>
+										<span>979623074</span>
+									</div>
+									<div>
+										<label>等级:</label>
+										<span>48级</span>
+									</div>
+								</div>
+							</li>
+							<li>
+								<label>创建时间：</label><span>2016-12-12</span>
+							</li>
+							<li>
+								<label>Ta的职业:</label>
+								<span>程序员、商贩、歌手</span>
+							</li>
+							<li>
+								<label>Ta的话题类型:</label>
+								<span>历史、政治、政治、政治、政治、政治、政治</span>
+							</li>
+							<li>
+								<button title="添加为好友">添加</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+		</aside>
+
+		<aside class='updateUser hide'></aside>
+		<aside class="deleteUser hide"></aside>
+	</body>
+
+</html>
