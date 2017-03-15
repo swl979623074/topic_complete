@@ -1,151 +1,149 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="utf-8" />
-		<title>Topic login</title>
-		<meta name="author" content="swl" />
-		<meta name="keywords" content="topic,swl" />
-		<meta name='description' content="the login model" />
-		<link rel="shortcut icon" href="./../img/logo.png" />
-		<script type="text/javascript" src="../js/jquery-2.1.0.js"></script>
-		<script type="text/javascript" src="../js/angular.js"></script>
-		<script type="text/javascript" src="../js/login.js"></script>
-		<style>
-			html,
-			body {
-				width: 100%;
-				height: 100%;
-				overflow: hidden;
-				margin: 0px;
-				padding: 0px;
-				background: linear-gradient(lightblue, white);
-			}
-			/**************************header****************************/
-			
-			body>header {
-				width: 100%;
-				height: 8%;
-				background: #CCC;
-			}
-			
-			body>header div {
-				height: 100%;
-			}
-			
-			.logo {	
-				margin-left: 5%;
-				float: left;
-				width: 4rem;
-			}
-			
-			.logo img {
-				height: 100%;
-				width: 100%;
-			}
-			.title{
-				text-decoration: none;
-				font-size: 2rem;
-				line-height: 4rem;
-				display: inline-block;
-				height: 100%;
-				font-family: "blackadder itc";
-				font-weight: bolder;
-				
-			}
-			.title>a{
-				text-decoration: none;
-				color: black;
-			}
-			/**************************ssection****************************/
-			
-			body>section {
-				width: 30%;
-				height: 50%;
-				margin: 5rem auto;
-				border: 0.1rem solid #CCC;
-				text-align: center;
-				border-radius: 1rem;
-				overflow: hidden;
-				background: white;
-			}
-			
-			body>section>header {
-				background: dodgerblue;
-				height: 3rem;
-				font-size: 2rem;
-				line-height: 3rem;
-			}
-			
-			body>section>section {
-				height: 14rem;
-				width: 100%;
-			}
-			
-			body>section>section>input {
-				height: 3rem;
-				width: 70%;
-				margin-top: 2rem;
-				border: 0.1rem solid #CCC;
-				font-size: 1.3rem;
-			}
-			
-			body>section>footer {
-				width: 100%;
-			}
-			
-			body>section>footer>button {
-				width: 30%;
-				height: 3rem;
-				border: 0.1rem solid #CCC;
-				background: dodgerblue;
-				cursor: pointer;
-				font-size: 1.3rem;
-				border-radius: 0.5rem;
-				color: white;
-			}
-			
-			body>section>footer>button>a {
-				text-decoration: none;
-				color: inherit;
-			}
-			body>section>aside{
-				text-align: right;
-				margin-top: 2rem;
-				height: 2rem;
-				font-size: 1rem;
-				padding-right: 1rem;
-			}
-		</style>
-	</head>
+<head>
+<meta charset="utf-8" />
+<title>Topic login</title>
+<meta name="author" content="swl" />
+<meta name="keywords" content="topic,swl" />
+<meta name='description' content="the login model" />
+<link rel="shortcut icon" href="./../img/logo.png" />
+<script type="text/javascript" src="../js/jquery-2.1.0.js"></script>
+<script type="text/javascript" src="../js/angular.js"></script>
 
-	<body>
-		<header>
-			<div class='logo'>
-				<a href="home.html"><img src="../img/logo.png"></a>
-			</div>
-			<div class="title">
-				<a href="home.html">Topic</a>
-			</div>
-		</header>
+<style>
+html,body {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px;
+	background: linear-gradient(lightblue, white);
+}
+/**************************header****************************/
+body>header {
+	width: 100%;
+	height: 8%;
+	background: #CCC;
+}
+
+body>header div {
+	height: 100%;
+}
+
+.logo {
+	margin-left: 5%;
+	float: left;
+	width: 4rem;
+}
+
+.logo img {
+	height: 100%;
+	width: 100%;
+}
+
+.title {
+	text-decoration: none;
+	font-size: 2rem;
+	line-height: 4rem;
+	display: inline-block;
+	height: 100%;
+	font-family: "blackadder itc";
+	font-weight: bolder;
+}
+
+.title>a {
+	text-decoration: none;
+	color: black;
+}
+/**************************ssection****************************/
+body>section {
+	width: 30%;
+	height: 50%;
+	margin: 5rem auto;
+	border: 0.1rem solid #CCC;
+	text-align: center;
+	border-radius: 1rem;
+	overflow: hidden;
+	background: white;
+}
+
+body>section>header {
+	background: dodgerblue;
+	height: 3rem;
+	font-size: 2rem;
+	line-height: 3rem;
+}
+
+body>section>section {
+	height: 14rem;
+	width: 100%;
+}
+
+body>section>section>input {
+	height: 3rem;
+	width: 70%;
+	margin-top: 2rem;
+	border: 0.1rem solid #CCC;
+	font-size: 1.3rem;
+}
+
+body>section>footer {
+	width: 100%;
+}
+
+body>section>footer>button {
+	width: 30%;
+	height: 3rem;
+	border: 0.1rem solid #CCC;
+	background: dodgerblue;
+	cursor: pointer;
+	font-size: 1.3rem;
+	border-radius: 0.5rem;
+	color: white;
+}
+
+body>section>footer>button>a {
+	text-decoration: none;
+	color: inherit;
+}
+
+body>section>aside {
+	text-align: right;
+	margin-top: 2rem;
+	height: 2rem;
+	font-size: 1rem;
+	padding-right: 1rem;
+}
+</style>
+</head>
+
+<body>
+	<header>
+		<div class='logo'>
+			<a href="home.html"><img src="../img/logo.png"></a>
+		</div>
+		<div class="title">
+			<a href="home.html">Topic</a>
+		</div>
+	</header>
+	<section>
+		<header> Topic </header>
 		<section>
-			<header>
-				Topic
-			</header>
-			<section>
-				<input type="text" placeholder="Username" /><br />
-				<input type="password" placeholder="Password" />
-			</section>
-			<footer>
-				<button>sign in</button>
-				<button>
-					<a href="./register.html">sign up</a>
-				</button>
-			</footer>
-			<aside>
-				<a href="#">Forget Password>></a>
-			</aside>
+			<input id='userName' type="text" placeholder="Username" /><br /> <input
+				id='passwd' type="password" placeholder="Password" />
 		</section>
-	</body>
+		<footer>
+			<button id='signIn'>sign in</button>
+			<button>
+				<a href="./register.html">sign up</a>
+			</button>
+		</footer>
+		<aside>
+			<a href="#">Forget Password>></a>
+		</aside>
+	</section>
+</body>
 
+<script type="text/javascript" src="../js/login.js"></script>
 </html>

@@ -44,9 +44,10 @@ public class OperateJDBC {
 		}
 		
 	}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
+	public static void main(String[] args){
+		OperateJDBC OJDBC = new OperateJDBC();
+		int key = OJDBC.executeUpdate("update user set user_online = '1' where user_account = 'sdaf' and user_pwd = 'sad'");
+		System.out.println(key);
 	}
-
 }

@@ -1,4 +1,5 @@
-
+var userMsg = window.sessionStorage;
+alert(userMsg.getItem("userAccount"))
 
 (function(){
 	window.onresize = function() {
