@@ -2856,10 +2856,10 @@
 						}
 
 						compile = Sizzle.compile = function(selector, group /*
-																			 * Internal
-																			 * Use
-																			 * Only
-																			 */) {
+						 * Internal
+						 * Use
+						 * Only
+						 */) {
 							var i, setMatchers = [], elementMatchers = [], cached = compilerCache[selector
 									+ " "];
 
@@ -3605,7 +3605,7 @@
 								if (list[firingIndex].apply(data[0], data[1]) === false
 										&& options.stopOnFalse) {
 									memory = false; // To prevent further calls
-													// using add
+									// using add
 									break;
 								}
 							}
@@ -3774,9 +3774,9 @@
 											return this;
 										},
 										then : function( /*
-															 * fnDone, fnFail,
-															 * fnProgress
-															 */) {
+										 * fnDone, fnFail,
+										 * fnProgress
+										 */) {
 											var fns = arguments;
 											return jQuery
 													.Deferred(
@@ -3912,9 +3912,9 @@
 
 								// Deferred helper
 								when : function(subordinate /*
-															 * , ...,
-															 * subordinateN
-															 */) {
+								 * , ...,
+								 * subordinateN
+								 */) {
 									var i = 0, resolveValues = slice
 											.call(arguments), length = resolveValues.length,
 
@@ -5691,7 +5691,7 @@
 							.extend({
 
 								on : function(types, selector, data, fn, /* INTERNAL */
-										one) {
+								one) {
 									var origFn, type;
 
 									// Types can be a map of types/handlers
@@ -6224,10 +6224,10 @@
 								},
 
 								remove : function(selector, keepData /*
-																		 * Internal
-																		 * Use
-																		 * Only
-																		 */) {
+								 * Internal
+								 * Use
+								 * Only
+								 */) {
 									var elem, elems = selector ? jQuery.filter(
 											selector, this) : this, i = 0;
 

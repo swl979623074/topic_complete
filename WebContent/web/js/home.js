@@ -1,5 +1,20 @@
 var userMsg = window.sessionStorage;
-alert(userMsg.getItem("userAccount"))
+var userAccount = userMsg.getItem("userAccount");
+var userId = userMsg.getItem("userId");
+var userAlias = userMsg.getItem("userAlias");
+
+(function(initMsg){
+	console.log(initMsg);
+	if("" != userId && null != userId && "null" != userId){
+		if("" != userAlias && null != userAlias && "null" != userAlias){
+			console.log("userAlias: "+ userAlias);
+			$(".usermsg a:first").text(userAlias);
+		}else{
+			$(".usermsg a:first").text(userAccount);
+		}
+	}
+})("init user message");
+
 
 (function(){
 	window.onresize = function() {

@@ -73,7 +73,7 @@ body>header div {
 section {
 	width: 90%;
 	height: 91%;
-	margin: 0 auto;
+	margin: 0.2rem auto;
 	padding-top: 0.1rem;
 	border-radius: 0.5rem;
 	border: 0.1rem solid #CCC;
