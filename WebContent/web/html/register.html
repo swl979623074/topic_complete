@@ -32,10 +32,10 @@
 					</li>
 					<li><label>用户名：</label> <input type="text" id='userAccount' />
 						<span>*请使用英文字母或数字，长度为8-16位</span></li>
-					<li><label>密码：</label> <input type="text" id='userPasswd' />
+					<li><label>密码：</label> <input type="password" id='userPasswd' />
 						<span class="">*密码长度为6-20位，不得包含特殊字符</span></li>
-					<li><label>重复新密码：</label> <input type="text" id='reUserPasswd' />
-						<span class="error">*两次密码不一致</span></li>
+					<li><label>重复新密码：</label> <input type="password" id='reUserPasswd' />
+						<span class="">*两次密码不一致</span></li>
 					<li><label>邮箱：</label> <input type="text" id='userEmial' /> <span>*用于找回密码</span>
 					</li>
 				</ul>
@@ -46,12 +46,12 @@
 			<section>
 				<ul>
 					<li class="sex"><label>性别：</label> <input type="radio"
-						name="sex" />男 <input type="radio" name="sex" />女</li>
-					<li class="profession"><label>职业：</label> <input type="text" />
+						name="sex" value='boy' checked/>男 <input type="radio" name="sex" value='girl'  />女</li>
+					<li class="profession"><label>职业：</label> <input type="text" id='userProfession'/>
 						<span>多个职业请以分号隔开</span></li>
 					<li><label>兴趣：</label>
 						<div class="newsType">
-							<div>
+							<div data-type='ent'>
 								<div>
 									<span>计算机</span>
 								</div>
@@ -59,7 +59,7 @@
 									<img src="../img/logo.png" />
 								</div>
 							</div>
-							<div>
+							<div data-type='ent'>
 								<div>
 									<span>计算机</span>
 								</div>
@@ -67,7 +67,7 @@
 									<img src="../img/logo.png" />
 								</div>
 							</div>
-							<div>
+							<div data-type='ent'>
 								<div>
 									<span>计算机</span>
 								</div>
@@ -75,7 +75,7 @@
 									<img src="../img/logo.png" />
 								</div>
 							</div>
-							<div>
+							<div data-type='ent'>
 								<div>
 									<span>计算机</span>
 								</div>
@@ -83,7 +83,7 @@
 									<img src="../img/logo.png" />
 								</div>
 							</div>
-							<div>
+							<div data-type='ent'>
 								<div>
 									<span>计算机</span>
 								</div>

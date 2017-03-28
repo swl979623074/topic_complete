@@ -1,10 +1,10 @@
 @charset "utf-8";
-html,
-body {
+
+html,body {
 	width: 100%;
 	height: 100%;
 	margin: 0px;
-	padding: 0px auto;
+	padding: 0px;
 	background: #FAFAFA;
 }
 
@@ -30,9 +30,7 @@ body>header>div>button {
 	cursor: pointer;
 }
 
-
 /********************section table**************************/
-
 .userMessage {
 	width: 85%;
 	height: 46rem;
@@ -44,7 +42,6 @@ body>header>div>button {
 
 .userMessage table {
 	width: 100%;
-	
 }
 
 .userMessage table td {
@@ -58,6 +55,7 @@ body>header>div>button {
 .headImg {
 	width: 100%;
 	height: 100%;
+	margin-top: -25%;
 }
 
 .headImg>div:first-child {
@@ -68,7 +66,7 @@ body>header>div>button {
 	border: 0.5rem solid #CCC;
 }
 
-.headImg>div:first-child> img {
+.headImg>div:first-child>img {
 	width: 100%;
 	height: 100%;
 }
@@ -103,4 +101,48 @@ body>header>div>button {
 	font-family: "楷体";
 	background: #CCC;
 	border-radius: 1rem;
+}
+
+.newsType {
+	display: inline-block;
+	font-family: "楷体";
+	font-size: 1.5rem;
+}
+
+.newsType>div {
+	width: 13rem;
+	height: 5rem;
+	display: inline-block;
+	margin: 0.8rem 0.1rem;
+	float: left;
+	border-radius: 1rem;
+	border: 0.1rem solid #CCC;
+	background: #CCC;
+	cursor: pointer;
+}
+
+.newsType>div>div:first-child {
+	width: 13rem;
+	height: 3rem;
+	text-align: center;
+	line-height: 5rem;
+}
+
+.newsType>div>div:nth-child(2) {
+	width: 13rem;
+	height: 1.5rem;
+	text-align: right;
+}
+
+.newsType>div>div:nth-child(2)>img {
+	text-align: right;
+	border-radius: 50%;
+	width: 2rem;
+	height: 2rem;
+}
+
+/*****************Prompt 提示**********************/
+
+.hide {
+	visibility: hidden;
 }
