@@ -11,20 +11,20 @@
 <link rel="stylesheet" href="../css/user.css" />
 <script type="text/javascript" src="../js/jquery-2.1.0.js"></script>
 <script type="text/javascript" src="../js/angular.js"></script>
-<script type="text/javascript" src="../js/user.js"></script>
+
 
 </head>
 
 <body>
 	<header>
 		<div>
-			<button title="edit">编辑</button>
-			<button title="save modification">保存</button>
+			<button title="edit" id='edit'>编辑</button>
+			<button title="save modification" id='save'>保存</button>
 		</div>
 	</header>
 	<section>
 		<div class="userMessage">
-			<table>
+			<table style="table-layout: fixed">
 				<tr>
 					<td>ID：</td>
 					<td>979623074</td>
@@ -43,21 +43,27 @@
 				</tr>
 				<tr>
 					<td>昵称：</td>
-					<td contenteditable="true">孙文龙</td>
-					<td>性别：</td>
-					<td contenteditable="true">男</td>
+					<td>
+						<div id='alias'>孙文龙</div>
+					</td>
+					<td>性别(男/女)：</td>
+					<td>
+						<div id='sex'>男</div>
+					</td>
 				</tr>
 				<tr>
 					<td>邮箱：</td>
-					<td contenteditable="true">979623074@qq.com</td>
+					<td>
+						<div id='emial'>979623074@qq.com</div>
+					</td>
 					<td>创建时间：</td>
 					<td>2016-12-12</td>
 				</tr>
 				<tr>
-					<td colspan="6">擅长的领域：</td>
+					<td colspan="6">职业：</td>
 				</tr>
 				<tr>
-					<td colspan="6" class="block">
+					<td colspan="6" class="block" id='profession'>
 						<div>计算机</div>
 						<div>计算机</div>
 						<div>计算机</div>
@@ -97,6 +103,8 @@
 			</table>
 		</div>
 	</section>
+
+	<script type="text/javascript" src="../js/user.js"></script>
 </body>
 
 </html>
