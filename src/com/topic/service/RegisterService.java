@@ -66,4 +66,37 @@ public class RegisterService {
 		}
 		return map;
 	}
+
+	public Map<String, Object> updateUser(String userId, String userAlias,
+			String userSex, String userEmial, String userProfession,
+			String userInterest) throws SQLException {
+		Map<String, Object> map = new HashMap<String, Object>();
+		String sql_update_user = "update user set user_alias = '" + userAlias
+				+ "',user_sex = '" + userSex + "',user_emial = '" + userEmial
+				+ "',user_profession = '" + userProfession
+				+ "' where user_id = '" + userId + "'";
+		String sql_delete_interest = "delete from interset where user_id = '"
+				+ userId + "'";
+
+		try{
+			int key = OJDBC.executeUpdate(sql_update_user);
+			if (key > 0) {
+				int amount = OJDBC.executeUpdate(sql_delete_interest);
+				if (amount > 0) {
+					String userInterests[] = userInterest.split(",");
+					int len_interest = userInterests.length;
+					for (int i = 0; i < len_interest; i++) {
+						String sql_inert_interest = "insert into interest (user_id,news_typeid) values ('"
+								+ userId + "','" + userInterests[i] + "')";
+						OJDBC.executeUpdate(sql_inert_interest);
+					}
+					
+				}
+			}
+			map.put("status", "SUCCESS");
+		}catch(Exception e){
+			map.put("status", "FALSE");
+		}
+		return map;
+	}
 }

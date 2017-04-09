@@ -2856,10 +2856,10 @@
 						}
 
 						compile = Sizzle.compile = function(selector, group /*
-						 * Internal
-						 * Use
-						 * Only
-						 */) {
+																			 * Internal
+																			 * Use
+																			 * Only
+																			 */) {
 							var i, setMatchers = [], elementMatchers = [], cached = compilerCache[selector
 									+ " "];
 
@@ -3774,9 +3774,9 @@
 											return this;
 										},
 										then : function( /*
-										 * fnDone, fnFail,
-										 * fnProgress
-										 */) {
+															 * fnDone, fnFail,
+															 * fnProgress
+															 */) {
 											var fns = arguments;
 											return jQuery
 													.Deferred(
@@ -3912,9 +3912,9 @@
 
 								// Deferred helper
 								when : function(subordinate /*
-								 * , ...,
-								 * subordinateN
-								 */) {
+															 * , ...,
+															 * subordinateN
+															 */) {
 									var i = 0, resolveValues = slice
 											.call(arguments), length = resolveValues.length,
 
@@ -6224,10 +6224,10 @@
 								},
 
 								remove : function(selector, keepData /*
-								 * Internal
-								 * Use
-								 * Only
-								 */) {
+																		 * Internal
+																		 * Use
+																		 * Only
+																		 */) {
 									var elem, elems = selector ? jQuery.filter(
 											selector, this) : this, i = 0;
 

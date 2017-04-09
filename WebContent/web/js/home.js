@@ -46,6 +46,10 @@ $(function() {
 
 	function getUrl(type) {
 		var url = null;
+		if(type != menu_news && userId == null){
+			alert("请先登录");
+			window.location.href = "./../html/login.html";
+		}
 		switch(type) {
 			case "menu_users":
 				url = "./users.html";

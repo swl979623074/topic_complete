@@ -97,7 +97,7 @@ body>header>div>button:hover{
 	overflow-y: auto;
 }
 
-.block div {
+.block >div >div {
 	width: 15rem;
 	height: 5rem;
 	float: left;
@@ -115,6 +115,7 @@ body>header>div>button:hover{
 	display: inline-block;
 	font-family: "楷体";
 	font-size: 1.5rem;
+	min-height:13rem;
 }
 
 .newsType>div {

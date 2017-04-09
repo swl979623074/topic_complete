@@ -1,5 +1,6 @@
 package com.topic.controller;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +23,22 @@ public class RegisterController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map = registeService.insertUser(userAlias, userAccount, userPasswd,
 				userSex, userEmial, userProfession, userInterest);
+		return MVC.toString(map);
+	}
+
+	@RequestMapping("/updateuserMsg")
+	public ModelAndView updateuserMsg(String userId, String userAlias,
+			String userSex, String userEmial, String userProfession,
+			String userInterest) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		try {
+			map = registeService.updateUser(userId,userAlias,
+					userSex, userEmial, userProfession, userInterest);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return MVC.toString(map);
 	}
 }

@@ -21,4 +21,11 @@ public class NewsTypeController {
 		map = newsTypeService.getNewsType();
 		return MVC.toString(map);
 	}
+	
+	@RequestMapping("/getNewsTypeByUserId")
+	public ModelAndView getNewsTypeByUserId(String userId){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map = newsTypeService.getNewsTypeByUserId(userId);
+		return MVC.toString(map);
+	}
 }
