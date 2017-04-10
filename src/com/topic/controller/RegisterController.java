@@ -28,13 +28,13 @@ public class RegisterController {
 
 	@RequestMapping("/updateuserMsg")
 	public ModelAndView updateuserMsg(String userId, String userAlias,
-			String userSex, String userEmial, String userProfession,
+			String userSex, String userEmail, String userProfession,
 			String userInterest) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		try {
 			map = registeService.updateUser(userId,userAlias,
-					userSex, userEmial, userProfession, userInterest);
+					userSex, userEmail, userProfession, userInterest);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

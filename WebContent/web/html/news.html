@@ -18,13 +18,10 @@
 	<body>
 		<section>
 			<div class="newstype">
-				<ul>
+				<ul id='newsTypeList'>
 					<li>今日头条</li>
 					<li>历&nbsp&nbsp史</li>
-					<li>军&nbsp&nbsp事</li>
-					<li>动&nbsp&nbsp漫</li>
-					<li>科&nbsp&nbsp技</li>
-					<li>政&nbsp&nbsp治</li>
+					<li><div id='btn'>btn</div></li>
 				</ul>
 			</div>
 			<div>
@@ -34,7 +31,7 @@
 							<span>#1</span>
 							<span>华为meta9正式发布华为meta9正式发布华为meta9正式发布华为meta9正式发布</span>
 						</div>
-						<div> <img src="../img/logo.png" title="create topic" class="pointer" onclick="showDialog()" /> </div>
+						<div> <img src="../img/logo.png" title="create topic" class="pointer" onclick="openDialog()" /> </div>
 					</li>
 
 					<li class='model simple'>
@@ -49,7 +46,7 @@
 									<span>2017-01-23 18:20 来源：中国新闻网</span>
 								</div>
 								<div>
-									<img src="../img/logo.png" title="create topic" class="pointer" onclick="showDialog()" />
+									<img src="../img/logo.png" title="create topic" class="pointer" onclick="openDialog()" />
 								</div>
 							</footer>
 						</div>
@@ -68,7 +65,7 @@
 								<span>2017-01-23 18:20 来源：中国新闻网</span>
 							</div>
 							<div>
-								<img src="../img/logo.png" title="create topic" class="pointer" onclick="showDialog()" />
+								<img src="../img/logo.png" title="create topic" class="pointer" onclick="openDialog()" />
 							</div>
 						</footer>
 					</li>
@@ -78,7 +75,7 @@
 							<span>#1</span>
 							<span>华为meta9正式发布华为meta9正式发布华为meta9正式发布华为meta9正式发布</span>
 						</div>
-						<div> <img src="../img/logo.png" title="create topic" class="pointer" onclick="showDialog()" /> </div>
+						<div> <img src="../img/logo.png" title="create topic" class="pointer" onclick="openDialog()" /> </div>
 					</li>
 
 					<li class='model simple'>
@@ -93,7 +90,7 @@
 									<span>2017-01-23 18:20 来源：中国新闻网</span>
 								</div>
 								<div>
-									<img src="../img/logo.png" title="create topic" class="pointer" onclick="showDialog()" />
+									<img src="../img/logo.png" title="create topic" class="pointer" onclick="openDialog()" />
 								</div>
 							</footer>
 						</div>
@@ -112,7 +109,7 @@
 								<span>2017-01-23 18:20 来源：中国新闻网</span>
 							</div>
 							<div>
-								<img src="../img/logo.png" title="create topic" onclick="showDialog()" />
+								<img src="../img/logo.png" title="create topic" onclick="openDialog()" />
 							</div>
 						</footer>
 					</li>
@@ -123,7 +120,7 @@
 		</section>
 		<aside class='createTopic hide'>
 			<header>
-				<img title='关闭' src="../img/logo.png" onclick="hideDialog()" />
+				<img title='关闭' src="../img/logo.png" onclick="closeDialog()" />
 			</header>
 			<section>
 				<table>

@@ -1,116 +1,114 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="UTF-8">
-		<title>Topic update_password</title>
-		<meta name="author" content="swl" />
-		<meta name="keywords" content="topic,swl" />
-		<meta name='description' content="the pwd model" />
-		<link rel="shortcut icon" href="./../img/logo.png" />
-		<script type="text/javascript" src="../js/jquery-2.1.0.js"></script>
-		<script type="text/javascript" src="../js/angular.js"></script>
-		<script type="text/javascript" src="../js/pwd.js"></script>
-		<style>
-			html,
-			body {
-				width: 100%;
-				height: 100%;
-				margin: 0px;
-				padding: 0px;
-				overflow: hidden;
-			}
-			
-			body>section {
-				width: 100%;
-			}
-			
-			body>section>ul {
-				width: 80%;
-				margin: 1rem auto;
-				padding: 0rem;
-			}
-			
-			body>section>ul>li {
-				list-style: none;
-				width: 100%;
-				margin-top: 1rem;
-			}
-			
-			body>section>ul>li>label {
-				width: 30%;
-				display: inline-block;
-				text-align: right;
-				font-size: 1.3rem;
-				font-family: "宋体";
-			}
-			
-			body>section>ul>li>input {
-				border: 0.1rem solid #CCC;
-				font-size: 1rem;
-				height: 1.5rem;
-				width: 25%;
-			}
-			
-			body>section>ul>li>span {
-				font-size: 0.5rem;
-				color: blue;
-			}
-			
-			body>footer {
-				margin-top: 3rem;
-				text-align: center;
-			}
-			
-			body>footer>button {
-				width: 10rem;
-				height: 3rem;
-				font-size: 1.3rem;
-				margin-left: -11rem;
-				cursor: pointer;
-				background: dodgerblue;
-				border: none;
-			}
-			/*****************Prompt 提示**********************/
-			
-			.hide {
-				display: none;
-			}
-			
-			.error {
-				color: red;
-			}
-			
-			.error:before {
-				content: "error: ";
-				color: red;
-			}
-		</style>
-	</head>
+<head>
+<meta charset="UTF-8">
+<title>Topic update_password</title>
+<meta name="author" content="swl" />
+<meta name="keywords" content="topic,swl" />
+<meta name='description' content="the pwd model" />
+<link rel="shortcut icon" href="./../img/logo.png" />
+<script type="text/javascript" src="../js/jquery-2.1.0.js"></script>
+<script type="text/javascript" src="../js/angular.js"></script>
 
-	<body>
-		<section>
-			<ul>
-				<li>
-					<label>旧密码：</label>
-					<input type="text" />
-					<span class="error hide">密码不正确</span>
-				</li>
-				<li>
-					<label>新密码：</label>
-					<input type="text" />
-					<span class="">密码长度不小6位，不得包含特殊字符</span>
-				</li>
-				<li>
-					<label>重复新密码：</label>
-					<input type="text" />
-					<span class="error">两次密码不一致</span>
-				</li>
-			</ul>
-		</section>
-		<footer>
-			<button>确认修改</button>
-		</footer>
-	</body>
+<style>
+html,body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+}
+
+body>section {
+	width: 100%;
+}
+
+body>section>ul {
+	width: 80%;
+	margin: 1rem auto;
+	padding: 0rem;
+}
+
+body>section>ul>li {
+	list-style: none;
+	width: 100%;
+	margin-top: 1rem;
+}
+
+body>section>ul>li>label {
+	width: 30%;
+	display: inline-block;
+	text-align: right;
+	font-size: 1.3rem;
+	font-family: "宋体";
+}
+
+body>section>ul>li>input {
+	border: 0.1rem solid #CCC;
+	font-size: 1rem;
+	height: 1.5rem;
+	width: 25%;
+}
+
+body>section>ul>li>span {
+	font-size: 0.8rem;
+	color: blue;
+}
+
+#prompt {
+	text-align: center;
+	width: 80%;
+	margin-left: 4rem;
+}
+
+body>footer {
+	margin-top: 3rem;
+	text-align: center;
+}
+
+body>footer>button {
+	width: 10rem;
+	height: 3rem;
+	font-size: 1.3rem;
+	margin-left: -11rem;
+	cursor: pointer;
+	background: dodgerblue;
+	border: none;
+}
+/*****************Prompt 提示**********************/
+.hide {
+	display: none;
+}
+
+.error {
+	color: red;
+}
+
+.error:before {
+	content: "error: ";
+	color: red;
+}
+</style>
+</head>
+
+<body>
+	<section>
+		<ul>
+			<li><label>旧密码：</label> <input id='oldPwd' type="password" /> <span
+				class="error hide">密码不正确</span></li>
+			<li><label>新密码：</label> <input id='newPwd' type="password" /> <span
+				class="">密码长度为6-20位，不得包含特殊字符</span></li>
+			<li><label>重复新密码：</label> <input id='reNewPwd' type="password" /> <span
+				class="hide">两次密码不一致</span></li>
+		</ul>
+		<div id='prompt' class='hide'>密码修改成功</div>
+	</section>
+	<footer>
+		<button id='btn_commit'>确认修改</button>
+	</footer>
+	<script type="text/javascript" src="../js/pwd.js"></script>
+
+</body>
 
 </html>

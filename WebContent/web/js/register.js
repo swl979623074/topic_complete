@@ -40,8 +40,8 @@
 	});
 
 })();
-(function(){
-	window.clickProfession = function(that){
+(function() {
+	window.clickProfession = function(that) {
 		$(that).find("img").parent().toggleClass('hide');
 	}
 })();
@@ -159,14 +159,19 @@
 			userAccount : userAccount,
 			userPasswd : userPasswd,
 			userEmial : userEmial,
-			userSex : getSex(),
+			userSex : getSex() == "boy" ? "男" : "女",
 			userProfession : getProfession().toString(),
 			userInterest : getInterest().toString()
 		}
 
 		$.post("/Topic/registerController/registeUser", userData,
 				function(data) {
-					console.log(data);
+					if (data.status == 'SUCCESS') {
+						alert("注册成功，跳转到登陆界面！！");
+						window.location.href = "./../html/login.html";
+					} else {
+						alert("Error: " + data.msg);
+					}
 				})
 	}
 
@@ -174,5 +179,8 @@
 		if (13 == e.keyCode) {
 			userRegister();
 		}
-	})
+	});
+	$("#btn_register").click(function() {
+		userRegister();
+	});
 })();

@@ -46,7 +46,7 @@
 					var list = data.list;
 					cb_showView(list, editable);
 				} else {
-					console.log("init profession false");
+					console.log("init newsType false");
 				}
 			});
 		},
@@ -63,11 +63,20 @@
 				}
 			});
 		},
-		updateUserMsg : function(data) {
-			$.post("/Topic/registerController/updateuserMsg", data, function(
+		updateUserMsg : function(msg) {
+			$.post("/Topic/registerController/updateuserMsg", msg, function(
 					data) {
 				if (data.status == "SUCCESS") {
 					console.log("update success!!");
+				}
+			});
+		},
+		initUserMsg : function(cb_showUserMsg, userId) {
+			$.post("/Topic/userController/getUserMsg", {
+				userId : userId
+			}, function(data) {
+				if (data.status == "SUCCESS") {
+					cb_showUserMsg(data.userMsg);
 				}
 			});
 		}
@@ -100,7 +109,8 @@
 			var html = "";
 			var len = list.length;
 			for ( var i = 0; i < len; i++) {
-				html += "<div>" + list[i] + "</div>";
+				if (list[i] != "")
+					html += "<div>" + list[i] + "</div>";
 			}
 			$("#profession").html(html);
 		},
@@ -109,7 +119,7 @@
 					"border-color", '#836FFF');
 			$('#sex').attr("contenteditable", 'true').parent().css(
 					"border-color", '#836FFF');
-			$('#emial').attr("contenteditable", 'true').parent().css(
+			$('#email').attr("contenteditable", 'true').parent().css(
 					"border-color", '#836FFF');
 			var div_add_button = $("<div id='add_profession_btn' onclick='addProfessionEvent(this)' style='background:#836FFF;color:white;cursor:pointer'>+</div>");
 			$("#profession").html(div_add_button);
@@ -121,14 +131,20 @@
 			});
 		},
 		toNormalModel : function() {
-			$('#alias').attr("contenteditable", 'false').parent().css(
-					"border-color", '#CCC');
-			$('#sex').attr("contenteditable", 'false').parent().css(
-					"border-color", '#CCC');
-			$('#emial').attr("contenteditable", 'false').parent().css(
-					"border-color", '#CCC');
+			$('#alias').parent().css("border-color", '#CCC');
+			$('#sex').parent().css("border-color", '#CCC');
+			$('#email').parent().css("border-color", '#CCC');
+			$("[contenteditable]").attr("contenteditable", 'false');
 			$("#add_profession_btn").remove();
 			$(".newsType img").parent("[class='hide']").parent().hide();
+		},
+		showUserMsg : function(data) {
+			$("#account").html(data.userAccount);
+			$("#degree").html(data.userDegree);
+			$("#alias").html(data.userAlias);
+			$("#sex").html(data.userSex);
+			$("#email").html(data.userEmail);
+			$("#createtime").html(data.userCreatetime);
 		}
 	};
 	window.addProfessionEvent = function(that) {
@@ -141,25 +157,41 @@
 
 /** *******************control******************** */
 (function() {
+	$("#save").attr("disabled", "disabled");
+	$("#save").addClass('disabled');
+
 	var userMsg = window.sessionStorage;
 	var userId = userMsg.getItem("userId");
 	if (userId != null) {
+		window.model.initUserMsg(window.view.showUserMsg, userId);
+		window.model.initProfession(window.view.showProfession, userId);
 		window.model.initNewsTypeByUserId(window.view.showNewsType, false,
 				userId);
-		window.model.initProfession(window.view.showProfession, userId);
 	}
 
 	$("#edit").click(function() {
 		$(this).attr("disabled", "disabled");
 		$(this).addClass('disabled');
+		$("#save").removeAttr("disabled");
+		$("#save").removeClass('disabled');
 		window.view.toEditModel();
 		window.model.initNewsType(window.view.showNewsType, true);
 	});
 	$("#save").click(function() {
+		if (!window.validator.checkSex())
+			return;
+		if (!window.validator.checkEmail())
+			return;
+
+		$(this).attr("disabled", "disabled");
+		$(this).addClass('disabled');
 		$("#edit").removeAttr("disabled");
 		$("#edit").removeClass('disabled');
-		console.log(window.tool.getValues());
 		window.view.toNormalModel();
+		var msg = window.tool.getValues();
+		msg.userId = userId;
+		console.log(msg);
+		window.model.updateUserMsg(msg);
 	});
 })();
 
@@ -170,21 +202,47 @@
 			var profession = [];
 			var interest = [];
 			$("#profession div").map(function() {
-				profession.push($(this).html());
+				var data = $(this).html();
+				if (data != "")
+					profession.push(data);
 			});
 			$(".newsType img").parent().not("[class='hide']").parent().map(
 					function() {
 						interest.push($(this).attr("data-type"));
 					});
 			var result = {
-				alias : $("#alias").html(),
-				sex : $("#sex").html(),
-				emial : $("#emial").html(),
-				profession : profession.splice(0, profession.length - 1).join(
-						","),
-				interest : interest.join(",")
+				userAlias : $("#alias").html(),
+				userSex : $("#sex").html(),
+				userEmail : $("#email").html(),
+				userProfession : profession.join(","),
+				userInterest : interest.join(",")
 			};
 			return result;
+		}
+	};
+	window.validator = {
+		checkSex : function() {
+			var val = $("#sex").html();
+			alert(val)
+			if (val != '男' && val != '女') {
+				$("#sex").parent().css("border-color", 'red');
+				return false;
+			} else {
+				$("#sex").parent().css("border-color", '#836FFF');
+				return true;
+			}
+		},
+		checkEmail : function() {
+			var val = $("#email").html();
+			var reg_email = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+			var key_email = reg_email.test(val);
+			if (key_email == false) {
+				$("#email").parent().css("border-color", 'red');
+				return false;
+			} else {
+				$("#email").parent().css("border-color", '#836FFF');
+				return true;
+			}
 		}
 	}
 })();
