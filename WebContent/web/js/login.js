@@ -37,6 +37,8 @@
 							result.userAccount);
 					window.sessionStorage
 							.setItem("userAlias", result.userAlias);
+					window.sessionStorage
+					.setItem("userDegree", result.userDegree);
 					window.location.href = './../html/home.html';
 				} else {
 					alert("login false");

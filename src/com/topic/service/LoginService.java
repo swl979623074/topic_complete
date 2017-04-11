@@ -25,7 +25,7 @@ public class LoginService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String sql_update_online = "update user set user_online = '1' where user_account = '"
 				+ userName + "' and user_pwd = '" + passwd + "'";
-		String sql_find_user = "select user_id,user_account,user_alias,user_online from user where user_account = '"
+		String sql_find_user = "select user_id,user_account,user_alias,user_degree,user_online from user where user_account = '"
 				+ userName + "' and user_pwd = '" + passwd + "'";
 
 		// 当语句执行成功时返回1（无论是否更新，这点与数据库不同，数据库是成功更新后返回非0，未更新返回0）,失败时返回0
@@ -39,6 +39,7 @@ public class LoginService {
 				map.put("userAccount", rs.getString("user_account"));
 				map.put("userAlias", rs.getString("user_alias"));
 				map.put("userOnline", rs.getString("user_online"));
+				map.put("userDegree", rs.getString("user_degree"));
 				map.put("status", "SUCCESS");
 				return map;
 			} catch (SQLException e) {

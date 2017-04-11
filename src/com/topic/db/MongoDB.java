@@ -4,6 +4,7 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
@@ -39,12 +40,12 @@ public class MongoDB {
 	}
 	
 	public static void main(String[] args){
-//		MongoDB mongo = new MongoDB();
-//		DB db = mongo.getConnect();
-//		DBCollection collection = db.getCollection("world");
-//		DBCursor cur = collection.find(null,null);
-//		int num = collection.find(null,null).count();
-//		System.out.println(cur.toArray());
-//		System.out.println(num);
+		MongoDB mongo = new MongoDB();
+		DB db = mongo.getConnect();
+		DBCollection collection = db.getCollection("ent");
+		DBCursor cur = collection.find(null,null).sort(new BasicDBObject("date",-1)).skip(1390).limit(50);
+		int num = cur.count();
+		System.out.println(cur.toArray());
+		System.out.println(num);
 	}
 }
