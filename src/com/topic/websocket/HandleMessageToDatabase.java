@@ -57,7 +57,7 @@ public class HandleMessageToDatabase implements HandleMessage {
 		String sender = this.JSONObj.optString("senderid");
 		String recipient = this.JSONObj.optString("recipientid");
 		String msg = this.JSONObj.optString("msg");
-		String time = DateFormat.getDateString();
+		String time = DateFormat.getCurrentDate_string();
 		String sql = null;
 		switch (talkType) {
 		case "persion":

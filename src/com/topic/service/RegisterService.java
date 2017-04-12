@@ -16,7 +16,7 @@ public class RegisterService {
 			String userPasswd, String userSex, String userEmial,
 			String userProfession, String userInterest) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String userCreateTime = DateFormat.getDateString();
+		String userCreateTime = DateFormat.getCurrentDate_string();
 
 		String sql_find_user = "select user_id from user where user_account = '"
 				+ userAccount + "'";

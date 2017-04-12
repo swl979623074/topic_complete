@@ -13,7 +13,8 @@ public class TopicService {
 			String description, String stillTime, String url, String degree,
 			String typeId) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String date = DateFormat.getDateString();
+		String currentTime = DateFormat.getCurrentDate_string();
+		String delayDate = DateFormat.getDelayDate_string(stillTime);
 		String sql_insert_topic = "insert into topic (topi_createid , topi_title , topi_description , topi_stilltime , topi_url , topi_degree , topi_type , topi_createtime) values ('"
 				+ userId
 				+ "','"
@@ -21,18 +22,18 @@ public class TopicService {
 				+ "','"
 				+ description
 				+ "','"
-				+ stillTime
+				+ delayDate
 				+ "','"
 				+ url
 				+ "','"
 				+ degree
 				+ "','"
 				+ typeId
-				+ "','" + date + "')";
+				+ "','" + currentTime + "')";
 		int len = OJDBC.executeUpdate(sql_insert_topic);
-		if(len == 1){
+		if (len == 1) {
 			map.put("status", "SUCCESS");
-		}else{
+		} else {
 			map.put("status", "FALSE");
 		}
 		return map;
