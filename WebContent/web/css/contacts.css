@@ -65,9 +65,12 @@ body>section>div:nth-child(2) {
 
 .list>li> div:nth-child(2)> div {
 	height: 2.5rem;
+	width:15rem;
 	line-height: 2.5rem;
 	font-family: "楷体";
 	font-size: 1.5rem;
+	overflow:hidden;
+	text-overflow:ellipsis ;
 }
 
 
@@ -387,4 +390,7 @@ aside>footer>button {
 /**********************common********************/
 .hide{
 	display: none;
+}
+.visibility_hidden{
+	visibility:hidden;
 }

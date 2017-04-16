@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="utf-8" />
-		<title>Topic contacts</title>
-		<meta name="author" content="swl" />
-		<meta name="keywords" content="topic,swl" />
-		<meta name='description' content="the contacts model" />
-		<link rel="shortcut icon" href="./../img/logo.png" />
-		<link rel="stylesheet" href="../css/contacts.css" />
-		<script type="text/javascript" src="../js/jquery-2.1.0.js"></script>
-		<script type="text/javascript" src="../js/angular.js"></script>
-		<script type="text/javascript" src="../js/contacts.js"></script>
+<head>
+<meta charset="utf-8" />
+<title>Topic contacts</title>
+<meta name="author" content="swl" />
+<meta name="keywords" content="topic,swl" />
+<meta name='description' content="the contacts model" />
+<link rel="shortcut icon" href="./../img/logo.png" />
+<link rel="stylesheet" href="../css/contacts.css" />
 
-	</head>
 
-	<body>
-		<section>
-			<div>
+</head>
+
+<body>
+	<section>
+		<div>
+			<details open class='users'>
+				<summary style="font-size:20px;padding-left:10px;">联系人</summary>
 				<ul class='list'>
 					<li userId='123456789'>
 						<div>
@@ -28,16 +28,16 @@
 								<span>孙文龙</span>
 							</div>
 							<div>
-								<span>男</span>
-								<span>21岁</span>
-								<span>等级：49级</span>
+								<span>男</span> <span>21岁</span> <span>等级：49级</span>
 							</div>
 							<div>
 								<div>
-									<img src="../img/logo.png" userId='123456789' alt='delete' title="delete" onclick="openDialog(this.title)" />
+									<img src="../img/logo.png" userId='123456789' alt='delete'
+										title="delete" onclick="openDialog(this.title)" />
 								</div>
 								<div>
-									<img src="../img/logo.png" userId='123456789' alt='update' title="update" onclick="openDialog(this.title)" />
+									<img src="../img/logo.png" userId='123456789' alt='update'
+										title="update" onclick="openDialog(this.title)" />
 								</div>
 							</div>
 						</div>
@@ -46,150 +46,183 @@
 						</div>
 					</li>
 				</ul>
-			</div>
-			<div class='message'>
-				<div>
-					<div>
-						<span>more message</span>
-					</div>
-					<ul class='statement'>
-						<li class='left'>
+			</details>
+			<details open class='topic'>
+				<summary style="font-size:20px;padding-left:10px;">话题</summary>
+				<ul class='list'>
+					<li userId='123456789'>
+						<div>
+							<img src="../img/logo.png" />
+						</div>
+						<div>
 							<div>
-								<div class='headImg'>
-									<img title="ID:979623074" src="../img/logo.png" />
-								</div>
-								<div class='content'>
-									<p><span>孙文龙</span>&nbsp<time>2017/12/25 18:29:22</time> </p>
-									<p>
-										hello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello world
-									</p>
-								</div>
-							</div>
-						</li>
-						<li class='right'>
-							<div>
-								<div class='content'>
-									<p><span>孙文龙</span>&nbsp<time>2017/12/25 18:29:22</time> </p>
-									<p>
-										hello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello world
-									</p>
-								</div>
-								<div class='headImg'>
-									<img title="ID:979623074" src="../img/logo.png" />
-								</div>
-							</div>
-						</li>
-					</ul>
-				</div>
-				<div>
-					<div title='表情'>
-						<img src="../img/logo.png" />
-					</div>
-					<div title='图片'>
-						<img src="../img/logo.png" />
-					</div>
-				</div>
-				<div>
-					<div>
-						<textarea placeholder="up to 150 words" autofocus="true"></textarea>
-					</div>
-					<div>
-						<button alt='clear'>clear</button>
-						<button alt='send'>shift+enter</button>
-					</div>
-				</div>
-			</div>
-			<div class="summary">
-				<div class="currentTopic summary_model">
-					<header>
-						Topic Message
-					</header>
-					<section>
-						<ul>
-							<li>
-								<label>标题:</label>
-								<span>社会教育</span>
-							</li>
-							<li>
-								<label>描述:</label>
-								<span>
-									社会教育--社会教育--社会教育--社会教育--社会教育--
-									社会教育--社会教育--社会教育--社会教育--社会教育--
-									社会教育--社会教育--社会教育--社会教育--社会教育--
-									社会教育--社会教育--社会教育--社会教育--社会教育--
-									社会教育--社会教育--社会教育--社会教育--社会教育--
-								</span>
-							</li>
-							<li>
-								<label>创建时间:</label>
-								<span>2015-12-12 12:12:12</span>
-							</li>
-							<li>
-								<label>维持时间:</label>
-								<span>1h</span>
-							</li>
-							<li>
-								<label>参与等级:</label>
-								<span>4级</span>
-							</li>
-							<li>
-								<label>话题来源:</label>
-								<span>http://www.baidu.com</span>
-							</li>
-						</ul>
-					</section>
-					<footer>
-						<button topic='12306'>退出话题</button>
-					</footer>
-				</div>
-				<div class="currentUser summary_model">
-					<header>
-						User Message
-					</header>
-					<section>
-						<ul>
-							<li>
-								<label>ID:</label>
-								<span>979623074</span>
-							</li>
-							<li>
-								<label>昵称:</label>
 								<span>孙文龙</span>
-							</li>
-							<li>
-								<label>创建时间:</label>
-								<span>2015-12-12</span>
-							</li>
-							<li>
-								<label>等级:</label>
-								<span>4级</span>
-							</li>
-							<li>
-								<label>职业:</label>
-								<span>教师、程序员</span>
-							</li>
-						</ul>
-					</section>
-					<footer>
-						<button userId='979623074'>加为好友</button>
-					</footer>
+							</div>
+							<div>
+								<span>男</span> <span>21岁</span> <span>等级：49级</span>
+							</div>
+							<div>
+								<div>
+									<img src="../img/logo.png" userId='123456789' alt='delete'
+										title="delete" onclick="openDialog(this.title)" />
+								</div>
+								<div>
+									<img src="../img/logo.png" userId='123456789' alt='update'
+										title="update" onclick="openDialog(this.title)" />
+								</div>
+							</div>
+						</div>
+						<div alt='new message' title='new message'>
+							<img src="../img/logo.png" />
+						</div>
+					</li>
+				</ul>
+			</details>
+
+			<details open class='recommend'>
+				<summary style="font-size:20px;padding-left:10px;">话题推荐</summary>
+				<ul class='list'>
+					<li userId='123456789'>
+						<div>
+							<img src="../img/logo.png" />
+						</div>
+						<div>
+							<div>
+								<span>孙文龙</span>
+							</div>
+							<div>
+								<span>男</span> <span>21岁</span> <span>等级：49级</span>
+							</div>
+							<div>
+								<div>
+									<img src="../img/logo.png" userId='123456789' alt='delete'
+										title="delete" onclick="openDialog(this.title)" />
+								</div>
+								<div>
+									<img src="../img/logo.png" userId='123456789' alt='update'
+										title="update" onclick="openDialog(this.title)" />
+								</div>
+							</div>
+						</div>
+						<div alt='new message' title='new message'>
+							<img src="../img/logo.png" />
+						</div>
+					</li>
+				</ul>
+			</details>
+		</div>
+		<div class='message'>
+			<div class="">
+				<div>
+					<span>more message</span>
+				</div>
+				<ul class='statement hide'>
+					<li class='left'>
+						<div>
+							<div class='headImg'>
+								<img title="ID:979623074" src="../img/logo.png" />
+							</div>
+							<div class='content'>
+								<p>
+									<span>孙文龙</span>&nbsp
+									<time>2017/12/25 18:29:22</time>
+								</p>
+								<p>hello worldhello worldhello worldhello worldhello
+									worldhello worldhello worldhello worldhello worldhello
+									worldhello worldhello worldhello world</p>
+							</div>
+						</div>
+					</li>
+					<li class='right'>
+						<div>
+							<div class='content'>
+								<p>
+									<span>孙文龙</span>&nbsp
+									<time>2017/12/25 18:29:22</time>
+								</p>
+								<p>hello worldhello worldhello worldhello worldhello
+									worldhello worldhello worldhello worldhello worldhello
+									worldhello worldhello worldhello world</p>
+							</div>
+							<div class='headImg'>
+								<img title="ID:979623074" src="../img/logo.png" />
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div>
+				<div title='表情'>
+					<img src="../img/logo.png" />
+				</div>
+				<div title='图片'>
+					<img src="../img/logo.png" />
 				</div>
 			</div>
+			<div>
+				<div>
+					<textarea placeholder="up to 150 words" autofocus="true"></textarea>
+				</div>
+				<div>
+					<button alt='clear'>clear</button>
+					<button alt='send'>shift+enter</button>
+				</div>
+			</div>
+		</div>
+		<div class="summary">
+			<div class="currentTopic summary_model ">
+				<header> Topic Message </header>
+				<section>
+					<ul>
+						<li><label>标题:</label> <span>社会教育</span></li>
+						<li><label>描述:</label> <span>
+								社会教育--社会教育--社会教育--社会教育--社会教育-- 社会教育--社会教育--社会教育--社会教育--社会教育--
+								社会教育--社会教育--社会教育--社会教育--社会教育-- 社会教育--社会教育--社会教育--社会教育--社会教育--
+								社会教育--社会教育--社会教育--社会教育--社会教育-- </span></li>
+						<li><label>创建时间:</label> <span>2015-12-12 12:12:12</span></li>
+						<li><label>维持时间:</label> <span>1h</span></li>
+						<li><label>参与等级:</label> <span>4级</span></li>
+						<li><label>话题来源:</label> <span>http://www.baidu.com</span></li>
+					</ul>
+				</section>
+				<footer>
+					<button topic='12306'>退出话题</button>
+				</footer>
+			</div>
+			<div class="currentUser summary_model">
+				<header> User Message </header>
+				<section>
+					<ul>
+						<li><label>ID:</label> <span>979623074</span></li>
+						<li><label>昵称:</label> <span>孙文龙</span></li>
+						<li><label>创建时间:</label> <span>2015-12-12</span></li>
+						<li><label>等级:</label> <span>4级</span></li>
+						<li><label>职业:</label> <span>教师、程序员</span></li>
+					</ul>
+				</section>
+				<footer>
+					<button userId='979623074'>加为好友</button>
+				</footer>
+			</div>
+		</div>
+	</section>
+	<aside class="delete_or_update_dialog hide">
+		<header>
+			<img title='关闭' src="../img/logo.png" onclick="hideDialog()" />
+		</header>
+		<section>
+			<span class="delete hide">确认删除？</span> <input class="update hide"
+				type="text" placeholder="请输入备注名" />
 		</section>
-		<aside class="delete_or_update_dialog hide">
-			<header>
-				<img title='关闭' src="../img/logo.png" onclick="hideDialog()" />
-			</header>
-			<section >
-				<span class="delete hide">确认删除？</span>
-				<input class="update hide" type="text" placeholder="请输入备注名"/>
-			</section>
-			<footer>
-				<button>确定</button>
-				<button>取消</button>
-			</footer>
-		</aside>
-		
-	</body>
+		<footer>
+			<button>确定</button>
+			<button>取消</button>
+		</footer>
+	</aside>
+
+	<script type="text/javascript" src="../js/jquery-2.1.0.js"></script>
+	<script type="text/javascript" src="../js/angular.js"></script>
+	<script type="text/javascript" src="../js/contacts.js"></script>
+</body>
 
 </html>

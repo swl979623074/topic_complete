@@ -26,7 +26,7 @@ $(function(){
 	});
 	$(".list li").click(function(e){
 		console.log("user ID: "+$(this).attr("userId"));	//获取用户id
-		console.log(e.target.alt)	//事件类型 delete update other
+		console.log(e.target.alt);	//事件类型 delete update other
 	})
 	
 })

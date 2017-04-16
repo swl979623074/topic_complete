@@ -40,8 +40,9 @@
 					});
 		},
 		createTopic : function(topicMsg) {
-			$.post("/Topic/topicController/insertOneTopic",topicMsg,function(msg){
-				if(msg.status == "SUCCESS"){
+			$.post("/Topic/topicController/insertOneTopic", topicMsg, function(
+					msg) {
+				if (msg.status == "SUCCESS") {
 					console.log("create topic success");
 				}
 			})
@@ -64,6 +65,7 @@
 						+ typeAlias + "</li>";
 			}
 			$("#newsTypeList").html(html);
+			$("#newsTypeList").children("li").eq(0).addClass("newsTypeHover");
 		},
 		toSelectModel : function(that) {
 			$("[class='newsTypeHover']").removeClass("newsTypeHover");
@@ -88,6 +90,11 @@
 				$(".newslist").append(html);
 			}
 
+		},
+		initTopicMsg : function() {
+			$("#topic_title").val("");
+			$("#topic_description").val("");
+			$("#topic_stilltime").val("");
 		}
 	}
 })();
@@ -102,8 +109,9 @@
 	window.oldMousePoint = -1;
 	window.newsTypeId = 2;
 	window.topicUrl = "";
-
+	
 	window.model.initNewsType(window.view.showNewsType);
+	
 	window.model.getNewsByType(window.view.showNews, window.newsMsg);
 })();
 
@@ -115,9 +123,16 @@
 		window.newsTypeId = $(that).attr("data-id");
 		window.newsMsg.typeName = $(that).attr("data-name");
 		window.model.getNewsByType(window.view.showNews, window.newsMsg);
-		$("#box_scroll").prop('scrollTop',0);
+		$("#box_scroll").prop('scrollTop', 0);
 	};
 	window.openDialog = function(that) {
+		var userMsg = window.sessionStorage;
+		if (userMsg.getItem("userId") == null) {
+			alert("请先登录！！");
+			window.parent.location.href = "./../html/login.html";
+			return;
+		}
+		window.view.initTopicMsg();
 		$(".createTopic").removeClass('hide');
 		window.topicUrl = $(that).attr("data-href");
 	};
@@ -129,7 +144,8 @@
 	window.createTopic = function(that) {
 		var topicMsg = window.tool.getTopicMsg(that);
 		var key = window.validator.checkTopicMsg(that, topicMsg);
-		if(!key)return;
+		if (!key)
+			return;
 		window.model.createTopic(topicMsg);
 		$(".createTopic").addClass('hide');
 	};
@@ -212,24 +228,33 @@
 	window.validator = {
 		checkTopicMsg : function(that, topicMsg) {
 			var aside_box = $(that).parent().parent();
-			for ( var key in topicMsg) {
-				var topicKey = "#topic_" + key.toLowerCase();
-				if (!$(topicKey))
-					continue;
-				if (topicMsg[key].length < 1) {
-					$(aside_box).find(topicKey).parent().addClass("error");
-					return false;
-				} else {
-					$(aside_box).find(topicKey).parent().removeClass("error");
-				}
-			}
-			var stillTime = topicMsg["stillTime"];
-			var reg_stillTime = /^[0-9]{1,2}$/;
-			if(!reg_stillTime.test(stillTime)){
-				$(aside_box).find("#topic_stilltime").parent().addClass("error");
+			var title = topicMsg["title"];
+			if (title.length > 20 || title.length<1) {
+				$(aside_box).find("#topic_title").parent().addClass("error");
 				return false;
 			} else {
-				$(aside_box).find("#topic_stilltime").parent().removeClass("error");
+				$(aside_box).find("#topic_title").parent().removeClass("error");
+			}
+
+			var description = topicMsg["description"];
+			if (description.length > 200 || description.length<1) {
+				$(aside_box).find("#topic_stilltime").parent()
+						.addClass("error");
+				return false;
+			} else {
+				$(aside_box).find("#topic_description").parent().removeClass(
+						"error");
+			}
+
+			var stillTime = topicMsg["stillTime"];
+			var reg_stillTime = /^[0-9]{1,2}$/;
+			if (!reg_stillTime.test(stillTime)) {
+				$(aside_box).find("#topic_stilltime").parent()
+						.addClass("error");
+				return false;
+			} else {
+				$(aside_box).find("#topic_stilltime").parent().removeClass(
+						"error");
 			}
 			return true;
 		}

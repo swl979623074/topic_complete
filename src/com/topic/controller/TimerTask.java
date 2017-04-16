@@ -15,7 +15,7 @@ public class TimerTask {
     @Scheduled(fixedRate = 1000*60*1)   
     public void closeTopic(){  
     	int num = TopicTask.closeTopic();
-    	System.out.println("关闭了"+num+"个话题");
+//    	System.out.println("关闭了"+num+"个话题");
         //System.out.println("启动时执行一次，之后每隔2秒执行一次  ");  
     	
     }  
