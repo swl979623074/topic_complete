@@ -1,6 +1,6 @@
 @charset "utf-8";
-html,
-body {
+
+html,body {
 	width: 100%;
 	height: 100%;
 	margin: 0px;
@@ -8,9 +8,7 @@ body {
 	overflow: hidden;
 }
 
-
 /**************************section 左侧列表**************************/
-
 body>section {
 	background: #E2E4E6;
 	height: 100%;
@@ -52,7 +50,7 @@ body>section>div:nth-child(2) {
 	overflow: hidden;
 }
 
-.list li> div:first-child {
+.list li>div:first-child {
 	width: 5rem;
 	height: 5rem;
 	overflow: hidden;
@@ -63,35 +61,39 @@ body>section>div:nth-child(2) {
 	height: 100%;
 }
 
-.list>li> div:nth-child(2)> div {
+.list>li>div:nth-child(2)>div {
 	height: 2.5rem;
-	width:15rem;
+	width: 15rem;
 	line-height: 2.5rem;
 	font-family: "楷体";
 	font-size: 1.5rem;
-	overflow:hidden;
-	text-overflow:ellipsis ;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
+summary {
+	font-size: 20px;
+	padding-left: 10px;
+	cursor: pointer;
+}
 
 /*用户操作 update delete*/
-
-.list>li> div:nth-child(2)> div:last-child {
+.list>li>div:nth-child(2)>div:last-child {
 	position: absolute;
 	width: 2rem;
 	height: 5rem;
 	top: 0rem;
 	right: 0rem;
-	display: none; //隐藏操作键
+	display: none;
+	//
+	隐藏操作键
 }
 
-.list>li> div:nth-child(2)> div:last-child div {
+.list>li>div:nth-child(2)>div:last-child div {
 	height: 2.5rem;
 }
 
-
 /*new message*/
-
 .list>li>div:last-child {
 	width: 2rem;
 	height: 2rem;
@@ -104,12 +106,9 @@ body>section>div:nth-child(2) {
 	/*初始化时要隐藏*/
 }
 
-
 /**************************section 中间对话框**************************/
 
-
 /***********上端消息显示区***********/
-
 .message {
 	margin: 0rem;
 }
@@ -136,7 +135,7 @@ body>section>div:nth-child(2) {
 	background: white;
 }
 
-.message>div:first-child> div {
+.message>div:first-child>div {
 	height: 2rem;
 	width: 100%;
 	font-family: "宋体";
@@ -145,7 +144,7 @@ body>section>div:nth-child(2) {
 	text-align: center;
 }
 
-.message>div:first-child> div span {
+.message>div:first-child>div span {
 	border-bottom: 0.1rem dashed blue;
 	cursor: pointer;
 }
@@ -167,7 +166,7 @@ body>section>div:nth-child(2) {
 	display: flex;
 }
 
-.statement>li>div> .headImg {
+.statement>li>div>.headImg {
 	width: 3rem;
 }
 
@@ -202,9 +201,7 @@ body>section>div:nth-child(2) {
 	margin-left: 2%;
 }
 
-
 /***********中间表情***********/
-
 .message>div:nth-child(2) {
 	display: flex;
 }
@@ -217,9 +214,7 @@ body>section>div:nth-child(2) {
 	cursor: pointer;
 }
 
-
 /***********下端消息输入去***********/
-
 .message>div:last-child>div:first-child {
 	width: 100%;
 	height: 75%;
@@ -250,9 +245,7 @@ body>section>div:nth-child(2) {
 	border: 0.1rem solid white;
 }
 
-
 /**************************section 右侧简介**************************/
-
 .summary {
 	background: white;
 	width: 15%;
@@ -324,9 +317,7 @@ body>section>div:nth-child(2) {
 	text-align: center;
 }
 
-
 /**********************aside********************/
-
 aside {
 	position: fixed;
 	top: 0;
@@ -340,13 +331,13 @@ aside {
 	box-shadow: -0.1rem 0.3rem 0.5rem 0.3rem #CCCCCC;
 }
 
-aside> header {
+aside>header {
 	height: 2rem;
 	width: 100%;
 	background: gray;
 }
 
-aside> header img {
+aside>header img {
 	width: 2rem;
 	height: 2rem;
 	float: right;
@@ -385,12 +376,11 @@ aside>footer>button {
 	color: white;
 }
 
-
-
 /**********************common********************/
-.hide{
+.hide {
 	display: none;
 }
-.visibility_hidden{
-	visibility:hidden;
+
+.visibility_hidden {
+	visibility: hidden;
 }

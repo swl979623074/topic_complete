@@ -22,10 +22,39 @@ public class UserController {
 		return MVC.toString(map);
 	}
 	
+	@RequestMapping("/getUserMsgByAccount")
+	public ModelAndView getUserMsgByAccount(String userAccount){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map = userService.getUserMsgByAccount(userAccount);
+		return MVC.toString(map);
+	}
+	
+	
 	@RequestMapping("/updateUserPwd")
 	public ModelAndView updateUserPwd(String userId,String oldPwd,String newPwd){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map = userService.updateUserPwd(userId, oldPwd, newPwd);
+		return MVC.toString(map);
+	}
+	
+	@RequestMapping("/addFriend")
+	public ModelAndView addFriend(String userId, String firendAccount){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map = userService.addFriend(userId, firendAccount);
+		return MVC.toString(map);
+	}
+	
+	@RequestMapping("/updateFriendAlias")
+	public ModelAndView updateFriendAlias(String userId, String firendId , String aliasName){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map = userService.updateFriendAlias(userId, firendId, aliasName);
+		return MVC.toString(map);
+	}
+	
+	@RequestMapping("/deleteFriend")
+	public ModelAndView deleteFriend(String userId, String firendId){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map = userService.deleteFriend(userId, firendId);
 		return MVC.toString(map);
 	}
 }

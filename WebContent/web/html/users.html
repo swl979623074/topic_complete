@@ -39,14 +39,14 @@
 			</header>
 			<section>
 				<div>
-					<input type="text" placeholder="input user id" />
-					<button>search</button>
+					<input class='userAccount' type="text" placeholder="input user account" />
+					<button id='searchBtn' onclick="addSerachUserEvent()">search</button>
 				</div>
 				<div title="user message">
 					<div class="hide" title="问号头像">
 						<img src="../img/logo.png" />
 					</div>
-					<div>
+					<div class='addUser_rs'>
 						<ul class="userMessage">
 							<li>
 								<div>
@@ -75,20 +75,13 @@
 								<span>程序员、商贩、歌手</span>
 							</li>
 							<li>
-								<label>Ta的话题类型:</label>
-								<span>历史、政治、政治、政治、政治、政治、政治</span>
-							</li>
-							<li>
-								<button title="添加为好友">添加</button>
+								<button onclick='addFriend(this)' data-friendId='123' title="添加为好友">添加</button>
 							</li>
 						</ul>
 					</div>
 				</div>
 			</section>
 		</aside>
-
-		<aside class='updateUser hide'></aside>
-		<aside class="deleteUser hide"></aside>
 	</body>
 
 </html>
