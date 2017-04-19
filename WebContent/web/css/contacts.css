@@ -69,6 +69,7 @@ body>section>div:nth-child(2) {
 	font-size: 1.5rem;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	
 }
 
 summary {
@@ -85,8 +86,7 @@ summary {
 	top: 0rem;
 	right: 0rem;
 	display: none;
-	//
-	隐藏操作键
+	
 }
 
 .list>li>div:nth-child(2)>div:last-child div {
@@ -383,4 +383,7 @@ aside>footer>button {
 
 .visibility_hidden {
 	visibility: hidden;
+}
+.selected_li{
+	background:lightblue !important;
 }

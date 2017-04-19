@@ -18,7 +18,7 @@
 		<div>
 			<details open class='users'>
 				<summary>联系人</summary>
-				<ul class='list'>
+				<ul class='list usersList'>
 					<li userId='123456789'>
 						<div>
 							<img src="../img/logo.png" />
@@ -32,16 +32,16 @@
 							</div>
 							<div>
 								<div>
-									<img src="../img/logo.png" userId='123456789' alt='delete'
+									<img src="../img/logo.png" data-userId='123456789' alt='delete'
 										title="delete" onclick="openDialog(this.title)" />
 								</div>
 								<div>
-									<img src="../img/logo.png" userId='123456789' alt='update'
+									<img src="../img/logo.png" data-userId='123456789' alt='update'
 										title="update" onclick="openDialog(this.title)" />
 								</div>
 							</div>
 						</div>
-						<div alt='new message' title='new message'>
+						<div alt='new message' title='new message' class='newmsg' data-userId='123456789'>
 							<img src="../img/logo.png" />
 						</div>
 					</li>
@@ -49,7 +49,7 @@
 			</details>
 			<details open class='topic'>
 				<summary>话题</summary>
-				<ul class='list usersList'>
+				<ul class='list'>
 					<li userId='123456789'>
 						<div>
 							<img src="../img/logo.png" />
@@ -215,8 +215,8 @@
 				type="text" placeholder="请输入备注名" />
 		</section>
 		<footer>
-			<button>确定</button>
-			<button>取消</button>
+			<button onclick="commintUpdateOrDelete(this)">确定</button>
+			<button onclick="hideDialog()">取消</button>
 		</footer>
 	</aside>
 

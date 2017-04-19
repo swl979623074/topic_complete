@@ -2,6 +2,7 @@ package com.topic.service;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,8 +41,8 @@ public class UserService {
 
 	public Map<String, Object> getUserMsgByAccount(String account) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String sql_getUser = "select * from user where user_account = '" + account
-				+ "'";
+		String sql_getUser = "select * from user where user_account = '"
+				+ account + "'";
 		ResultSet rs = OJDBC.executeQuery(sql_getUser);
 		try {
 			rs.next();
@@ -67,7 +68,7 @@ public class UserService {
 
 		return map;
 	}
-	
+
 	public Map<String, Object> updateUserPwd(String userId, String oldPwd,
 			String newPwd) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -78,6 +79,36 @@ public class UserService {
 		if (len == 1) {
 			map.put("status", "SUCCESS");
 		} else {
+			map.put("status", "FALSE");
+		}
+		return map;
+	}
+
+	public Map<String, Object> getFriendByUserId(String userId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		String sql_select_friend = "select fri.frie_remark,fri.frie_missmsg,u.* from friend fri,user u where fri.user_id = "
+				+ userId + " and fri.frie_id = u.user_id";
+		ResultSet rs = OJDBC.executeQuery(sql_select_friend);
+		try {
+			ArrayList<Map<String, String>> list = new ArrayList<Map<String, String>>();
+			while(rs.next()){
+				Map<String, String> userMap = new HashMap<String, String>();
+
+				userMap.put("userId", rs.getString("user_id"));
+				userMap.put("firendRemark",rs.getString("frie_remark"));
+				userMap.put("friendMissMsg",rs.getString("frie_missmsg"));
+				userMap.put("userAlias", rs.getString("user_alias"));
+				userMap.put("userSex", rs.getString("user_sex"));
+				userMap.put("userDegree", rs.getString("user_degree"));
+				userMap.put("userphoto", rs.getString("user_photo"));
+				
+				list.add(userMap);
+			}
+			map.put("status", "SUCCESS");
+			map.put("list", list);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			map.put("status", "FALSE");
 		}
 		return map;

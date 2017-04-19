@@ -8,7 +8,6 @@ body {
 	overflow: hidden;
 }
 
-
 /**************************header**************************/
 
 body>header {
@@ -130,13 +129,17 @@ aside {
 	font-size: 1rem;
 	padding: 0rem;
 }
-
+.createTopic>section>table div{
+	height:2rem;
+	
+}
 .createTopic>section>table select {
 	width: 15.2rem;
-	height: 2rem;
 	border: 0.1rem solid #CCC;
 	font-size: 1rem;
 	padding: 0rem;
+	position:relative;
+	z-index:9999;
 }
 
 .createTopic>section>table textarea {
@@ -199,4 +202,8 @@ aside {
 
 .pointer {
 	cursor: pointer;
+}
+.error:after{
+	content: "error";
+	color: red;
 }

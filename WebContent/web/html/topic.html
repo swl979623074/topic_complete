@@ -1,73 +1,75 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<title>Topic topic</title>
-		<meta name="author" content="swl" />
-		<meta name="keywords" content="topic,swl" />
-		<meta name='description' content="the topic model" />
-		<link rel="shortcut icon" href="./../img/logo.png" />
-		<link rel="stylesheet" href="../css/topic.css" />
-		<script type="text/javascript" src="../js/jquery-2.1.0.js"></script>
-		<script type="text/javascript" src="../js/angular.js"></script>
-		<script type="text/javascript" src="../js/topic.js"></script>
-	</head>
-	<body>
+<head>
+<meta charset="utf-8" />
+<title>Topic topic</title>
+<meta name="author" content="swl" />
+<meta name="keywords" content="topic,swl" />
+<meta name='description' content="the topic model" />
+<link rel="shortcut icon" href="./../img/logo.png" />
+<link rel="stylesheet" href="../css/topic.css" />
+<script type="text/javascript" src="../js/jquery-2.1.0.js"></script>
+<script type="text/javascript" src="../js/angular.js"></script>
+<script type="text/javascript" src="../js/topic.js"></script>
+</head>
+<body>
+	<header>
+		<ul>
+			<li><input type="text"
+				placeholder="please input one searched topic name " />
+				<button>search</button></li>
+			<li>
+				<div>
+					<img src="../img/logo.png" title='add topic' onclick="showDialog()" />
+				</div>
+			</li>
+		</ul>
+	</header>
+	<section>
+		<iframe src="contacts.html" scrolling="no" frameborder="0"
+			width="100%" height="100%"></iframe>
+	</section>
+	<aside class='createTopic hide'>
 		<header>
-			<ul>
-				<li>
-					<input type="text" placeholder="please input one searched topic name " />
-					<button>search</button> 
-				</li>
-				<li>
-					<div>
-						<img src="../img/logo.png" title='add topic' onclick="showDialog()" />
-					</div>
-				</li>
-			</ul>
+			<img title='关闭' src="../img/logo.png" onclick="hideDialog()" />
 		</header>
 		<section>
-			<iframe src="contacts.html" scrolling="no" frameborder="0" width="100%" height="100%"></iframe>
-		</section>
-		<aside class='createTopic hide'>
-			<header>
-				<img title='关闭' src="../img/logo.png" onclick="hideDialog()" />
-			</header>
-			<section>
-				<table>
-					<tr>
-						<td>标&nbsp&nbsp题：</td>
-						<td><input type="text" /></td>
-					</tr>
-					<tr>
-						<td>描&nbsp&nbsp述：</td>
-						<td><textarea placeholder="up to 150 words"></textarea></td>
-					</tr>
-					<tr>
-						<td>维持时间：</td>
-						<td><input type="text" placeholder="hour" /></td>
-					</tr>
-					<tr>
-						<td>参与等级：</td>
-						<td>
-							<select>
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
+			<table>
+				<tr>
+					<td>标&nbsp&nbsp题：</td>
+					<td><input type="text" id='topic_title' placeholder="up to 20 words"/></td>
+				</tr>
+				<tr>
+					<td>描&nbsp&nbsp述：</td>
+					<td><textarea placeholder="up to 200 words"
+							id='topic_description'></textarea></td>
+				</tr>
+				<tr>
+					<td>维持时间：</td>
+					<td><input type="number" placeholder="hour"
+						id='topic_stilltime' /></td>
+				</tr>
+				
+				<tr>
+					<td>话题类型：</td>
+					<td>
+						<div>
+							<select class='newsTypeList' onfocus="selectFocus(this)">
+								<option onclick="selectClick(this)">1</option>
 							</select>
-						</td>
-					</tr>
-					<tr>
-						<td>话题来源：</td>
-						<td><input type="text" placeholder="url" /></td>
-					</tr>
-				</table>
-			</section>
-			<footer>
-				<button title="create topic">create</button>
-			</footer>
-		</aside>
-	</body>
+						</div>
+
+					</td>
+				</tr>
+				<tr>
+					<td>话题来源：</td>
+					<td><input type="text" placeholder="url" id='topic_url' /></td>
+				</tr>
+			</table>
+		</section>
+		<footer>
+			<button onclick='createTopic(this)' title="create topic">create</button>
+		</footer>
+	</aside>
+</body>
 </html>
- 

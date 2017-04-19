@@ -37,6 +37,13 @@ public class UserController {
 		return MVC.toString(map);
 	}
 	
+	@RequestMapping("/getFriend")
+	public ModelAndView getFriend(String userId){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map = userService.getFriendByUserId(userId);
+		return MVC.toString(map);
+	}
+	
 	@RequestMapping("/addFriend")
 	public ModelAndView addFriend(String userId, String firendAccount){
 		Map<String, Object> map = new HashMap<String, Object>();
