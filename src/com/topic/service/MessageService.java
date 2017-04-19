@@ -15,17 +15,22 @@ public class MessageService {
 			int pageSize, int pageNum) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		int begin = pageSize * pageNum;
-		String sql_select_friend = "select conversation.*,user_photo from conversation,user where user_come = '"
+		String sql_select_friend = "select conversation.*,user_photo from conversation,user where (user_come = '"
 				+ userId
 				+ "' and user_to = '"
 				+ friendId
-				+ "' and user_to = user_id ORDER BY conv_time desc LIMIT "
+				+ "' and user_to = user_id) or ((user_come = '"
+				+ friendId
+				+ "' and user_to = '"
+				+ userId
+				+ "' and user_to = user_id)) ORDER BY conv_time desc LIMIT "
 				+ begin + "," + pageNum + "";
 		ResultSet rs = OJDBC.executeQuery(sql_select_friend);
 		try {
 			ArrayList<Map<String, String>> list = new ArrayList<Map<String, String>>();
 			while (rs.next()) {
 				Map<String, String> msg = new HashMap<String, String>();
+				msg.put("userCome", rs.getString("user_come"));
 				msg.put("convContent", rs.getString("conv_content"));
 				msg.put("convTime", rs.getString("conv_time"));
 				msg.put("userPhoto", rs.getString("user_photo"));
@@ -45,17 +50,22 @@ public class MessageService {
 			int misNum) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		int begin = 0;
-		String sql_select_friend = "select conversation.*,user_photo from conversation,user where user_come = '"
+		String sql_select_friend = "select conversation.*,user_photo from conversation,user where (user_come = '"
 				+ userId
 				+ "' and user_to = '"
 				+ friendId
-				+ "' and user_to = user_id ORDER BY conv_time desc LIMIT "
+				+ "' and user_to = user_id) or ((user_come = '"
+				+ friendId
+				+ "' and user_to = '"
+				+ userId
+				+ "' and user_to = user_id)) ORDER BY conv_time desc LIMIT "
 				+ begin + "," + misNum + "";
 		ResultSet rs = OJDBC.executeQuery(sql_select_friend);
 		try {
 			ArrayList<Map<String, String>> list = new ArrayList<Map<String, String>>();
 			while (rs.next()) {
 				Map<String, String> msg = new HashMap<String, String>();
+				msg.put("userCome", rs.getString("user_come"));
 				msg.put("convContent", rs.getString("conv_content"));
 				msg.put("convTime", rs.getString("conv_time"));
 				msg.put("userPhoto", rs.getString("user_photo"));
@@ -84,6 +94,7 @@ public class MessageService {
 			ArrayList<Map<String, String>> list = new ArrayList<Map<String, String>>();
 			while (rs.next()) {
 				Map<String, String> msg = new HashMap<String, String>();
+				msg.put("meetUserId", rs.getString("meet_userid"));
 				msg.put("meetContent", rs.getString("meet_content"));
 				msg.put("meetTime", rs.getString("meet_time"));
 				msg.put("userPhoto", rs.getString("user_photo"));
@@ -111,6 +122,7 @@ public class MessageService {
 			ArrayList<Map<String, String>> list = new ArrayList<Map<String, String>>();
 			while (rs.next()) {
 				Map<String, String> msg = new HashMap<String, String>();
+				msg.put("meetUserId", rs.getString("meet_userid"));
 				msg.put("meetContent", rs.getString("meet_content"));
 				msg.put("meetTime", rs.getString("meet_time"));
 				msg.put("userPhoto", rs.getString("user_photo"));

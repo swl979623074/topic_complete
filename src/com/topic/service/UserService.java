@@ -24,6 +24,7 @@ public class UserService {
 			userMap.put("userAlias", rs.getString("user_alias"));
 			userMap.put("userEmail", rs.getString("user_email"));
 			userMap.put("userSex", rs.getString("user_sex"));
+			userMap.put("userProfession", rs.getString("user_profession"));
 			userMap.put("userCreatetime", rs.getString("user_createtime"));
 			userMap.put("userDegree", rs.getString("user_degree"));
 			userMap.put("userphoto", rs.getString("user_photo"));

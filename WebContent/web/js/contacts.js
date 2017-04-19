@@ -65,13 +65,22 @@
 			});
 		},
 		getFriendMissMessage : function(cb_showFriendMessage, data) {
-			$.post("/Topic/messageController/getFriendMissMsg", data, function(res) {
+			$.post("/Topic/messageController/getFriendMissMsg", data, function(
+					res) {
 				console.log(res);
 			})
 		},
 		getFriendMsg : function(cb_showFriendMsg, data) {
-			$.post("/Topic/messageController/getFriendMsg", data, function(res) {
-				console.log(res);
+			$.post("/Topic/messageController/getFriendMsg", data,
+					function(res) {
+						cb_showFriendMsg(res.list);
+					})
+		},
+		getUserMsg : function(cb_showUserMsg, data) {
+			$.post("/Topic/userController/getUserMsg", data, function(res) {
+				if (res.status == "SUCCESS") {
+					cb_showUserMsg(res.userMsg);
+				}
 			})
 		}
 	};
@@ -154,7 +163,48 @@
 			$("li[data-selectedId='" + friendId + "']").remove();
 		},
 		showContactMessage : function(list) {
+			var len = list.length;
+			var i = len;
+			var html = "";
+			while (i--) {
+				var userCome = list[i].userCome;
+				var convContent = list[i].convContent;
+				var convTime = list[i].convTime;
+				var userPhoto = list[i].userPhoto;
 
+				if (userCome == window.userId) {
+					html += "<li ><div class='right'><div class='content'><p><time>"
+							+ convTime
+							+ "</time></p><p><span>"
+							+ convContent
+							+ "</span></p></div><div class='headImg'><img title='' src='"
+							+ userPhoto + "' /></div></div></li>";
+				} else {
+					html += "<li><div  class='left'><div class='headImg'><img title='' src='"
+							+ userPhoto
+							+ "' /></div><div class='content'><p><time>"
+							+ convTime
+							+ "</time></p><p><span>"
+							+ convContent
+							+ "</span></p></div></div></li>";
+				}
+
+			}
+			var old_docHeight = $(".statement").height();
+			$(".statement").prepend(html);
+			var boxHeight = $(".statement").parent().height();
+			var moreBoxHeight = $(".statement").parent().children("div").eq(0)
+					.height();
+			var docHeight = $(".statement").height();
+			$(".statement").parent().scrollTop(
+					docHeight + moreBoxHeight - boxHeight - old_docHeight);
+		},
+		showUserMsg : function(data) {
+			$("#usreMsg_account").html(data.userAccount);
+			$("#usreMsg_alias").html(data.userAlias);
+			$("#usreMsg_createtime").html(data.userCreatetime);
+			$("#usreMsg_degree").html(data.userDegree);
+			$("#usreMsg_profession").html(data.userProfession);
 		}
 	};
 })();
@@ -163,12 +213,10 @@
 (function() {
 	var userMsg = window.sessionStorage;
 	window.userId = userMsg.getItem("userId");
- 
-	window.model.getFriendMsg(null,{userId:5,friendId:1,pageSize:0,pageNum:10});
-	
+
 	window.page = {
-		pageNum : 0,
-		pageSize : 10
+		pageSize : 0,
+		pageNum : 10
 	};
 	window.getWindow_friendId = null;
 	window.getWindow_groupId = null;
@@ -177,14 +225,14 @@
 
 	var parent_window = window.parent.window.location.href;
 	var strs = parent_window.split("/");
-	var parentType = strs[strs.length - 1];
-	window.parentType = parentType;
-	if (parentType == "users.html") {
+	window.parentType = strs[strs.length - 1];
+
+	if (window.parentType == "users.html") {
 		window.view.changeToUsersModel();
 		window.model.getFriendList(window.view.showFriend, {
 			userId : window.userId
 		});
-	} else if (parentType == "topic.html") {
+	} else if (window.parentType == "topic.html") {
 		window.view.changeToTopicModel();
 	}
 })();
@@ -223,11 +271,18 @@
 		$(that).children("div").eq(1).children('div').eq(2).hide();
 	};
 	window.clickFriend = function(that) {
+		window.page.pageSize = 0;
+		$(".statement").html("");
+		
 		var friendId = $(that).attr("data-selectedId");
 		var target = $(that).find(".newmsg");
 		var missNum = $(target).attr("data-missnum");
 		$(that).parent().find(".selected_li").removeClass("selected_li");
 		$(that).addClass("selected_li");
+
+		window.model.getUserMsg(window.view.showUserMsg, {
+			userId : friendId
+		});
 
 		if (window.getWindow_friendId != null)
 			window.model.closeFriendWindow({
@@ -270,5 +325,19 @@
 			console.log("contact.js Function:commintUpdateOrDelete Event");
 		}
 		window.hideDialog();
+	};
+	window.getMoreMessage = function() {
+
+		if (window.parentType == "users.html") {
+			window.page.userId = window.userId;
+			window.page.friendId = window.getWindow_friendId;
+			if (window.page.friendId == null)
+				return;
+			window.model.getFriendMsg(window.view.showContactMessage,
+					window.page);
+		} else if (window.parentType == "topic.html") {
+
+		}
+		window.page.pageSize++;
 	}
 })();

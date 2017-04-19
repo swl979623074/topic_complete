@@ -54,6 +54,7 @@ body>section>div:nth-child(2) {
 	width: 5rem;
 	height: 5rem;
 	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .list img {
@@ -131,7 +132,6 @@ summary {
 .message>div:last-child {
 	height: 30%;
 	margin-bottom: 0rem;
-	/*position: relative;*/
 	background: white;
 }
 
@@ -177,30 +177,44 @@ summary {
 }
 
 .statement p {
-	font-size: 1.4rem;
-	font-family: "楷体";
 	margin: 0.2rem 0.5rem;
 }
 
 .statement p:first-child span {
 	font-weight: bolder;
+	font-size: 1rem;
+	font-family: "楷体";
 }
 
 .statement p:last-child {
-	border: 0.1rem dashed #CCC;
 	border-radius: 0.5rem;
 	font-family: "宋体";
+	font-size: 2rem;
 }
-
-.right>div {
-	margin-left: 28%;
+.statement p:last-child >span{
+	border:0.1rem dotted #CCC;
+	border-radius:1rem;
+	padding:0 1rem;
+}
+.right {
+	margin-left:28%;
+	width:70%;
 	text-align: right;
 }
-
-.left>div {
+.right > div{
+	width:100%;
+}
+.left {
 	margin-left: 2%;
 }
 
+/*.left>div:after{
+	content: "."; 
+    display: block;
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}*/
 /***********中间表情***********/
 .message>div:nth-child(2) {
 	display: flex;
