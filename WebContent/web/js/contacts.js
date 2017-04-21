@@ -16,16 +16,23 @@
 	}
 })();
 
-// $(function() {
-// $(".list li").click(function(e) {
-// console.log("user ID: " + $(this).attr("userId")); // 获取用户id
-// console.log(e.target.alt); // 事件类型 delete update other
-// })
-// })
-
 /** **********************************model*********************************** */
 (function() {
 	window.model = {
+		initAllFriendWindow : function(data) {
+			$.post("/Topic/friendController/initAllWindowStatus",data,function(res){
+				if(res.status == "SUCCESS"){
+					console.log("init friend window over");
+				}
+			})
+		},
+		initAllTopicWindow : function(data) {
+			$.post("/Topic/topicController/initAllWindowStatus",data,function(res){
+				if(res.status == "SUCCESS"){
+					console.log("init topic window over");
+				}
+			})
+		},
 		getFriendList : function(cb_showUsers, data) {
 			$.post("/Topic/userController/getFriend", data, function(res) {
 				if (res.status == "SUCCESS") {
@@ -33,20 +40,25 @@
 				}
 			});
 		},
-		closeFriendWindowAndMissMsg : function(data) {
-			$.post("/Topic/friendController/updateOpenWindowAndMissMsg", data,
+		updateFriendWindowAndMissMsg : function(data) {
+			$
+					.post(
+							"/Topic/friendController/updateOpenWindowAndMissMsg",
+							data,
+							function(res) {
+								if (res.status == "SUCCESS") {
+									console
+											.log("updateFriendWindowAndMissMsg success");
+								}
+							});
+		},
+		closeOrOpenFriendWindow : function(data) {
+			$.post("/Topic/friendController/updateWindowStatus", data,
 					function(res) {
 						if (res.status == "SUCCESS") {
-							console.log("closeFriendWindowAndMissMsg success");
+							console.log("closeOrOpenFriendWindow success");
 						}
 					});
-		},
-		closeFriendWindow : function(data) {
-			$.post("/Topic/friendController/closeWindow", data, function(res) {
-				if (res.status == "SUCCESS") {
-					console.log("closeFriendWindow success");
-				}
-			});
 		},
 		updateRemark : function(cb_showNewRemark, data) {
 			$.post("/Topic/friendController/updateRemark", data, function(res) {
@@ -82,6 +94,60 @@
 					cb_showUserMsg(res.userMsg);
 				}
 			})
+		},
+		getTopicList : function(cb_showTopic, data) {
+			$.post("/Topic/topicController/getTopicListByUserId", data,
+					function(res) {
+						if (res.status == "SUCCESS") {
+							cb_showTopic(res.list);
+						}
+					})
+		},
+		deleteTopic : function(cb_deletTopic, data) {
+			$.post("/Topic/topicController/deleteTopicAboutUser", data,
+					function(res) {
+						if (res.status == "SUCCESS") {
+							cb_deletTopic(data.topicId);
+						}
+					})
+		},
+		updateTopicWindowAndMissMsg : function(data) {
+			$.post("/Topic/topicController/updateMeetWindowAndMissMsg", data,
+					function(res) {
+						if (res.status == "SUCCESS") {
+							console.log("updateMeetWindowAndMissMsg success");
+						}
+					})
+		},
+		updateTopicWindowStatus : function(data) {
+			$.post("/Topic/topicController/updateWindowStatus", data, function(
+					res) {
+				if (res.status == "SUCCESS") {
+					console.log("updateWindowStatus success");
+				}
+			})
+		},
+		getMeetMsg : function(cb_showMeetMsg, data) {
+			$.post("/Topic/messageController/getTopicMsg", data, function(res) {
+				if (res.status == "SUCCESS") {
+					cb_showMeetMsg(res.list);
+				}
+			})
+		},
+		getMeetMissMsg : function(cb_showMeetMsg, data) {
+			$.post("/Topic/messageController/getTopicMissMsg", data, function(
+					res) {
+				if (res.status == "SUCCESS") {
+					cb_showMeetMsg(res.list);
+				}
+			})
+		},
+		getTopicMsg : function(cb_showTopicMsg, data) {
+			$.post("/Topic/topicController/getTopicMsg", data, function(res) {
+				if (res.status == "SUCCESS") {
+					cb_showTopicMsg(res);
+				}
+			})
 		}
 	};
 })();
@@ -96,6 +162,9 @@
 			$(".currentTopic").removeClass("visibility_hidden");
 			$(".currentUser").removeClass("visibility_hidden");
 			$("#addFriend").removeClass("visibility_hidden");
+			$(".summary").find("span").html("");
+			$("#addFriend").attr("disabled", "true");
+			$("#addFriend").css("cursor", "not-allowed");
 		},
 		changeToUsersModel : function() {
 			$(".users").removeClass("hide");
@@ -104,13 +173,8 @@
 			$(".currentTopic").addClass("visibility_hidden");
 			$(".currentUser").removeClass("visibility_hidden");
 			$("#addFriend").addClass("visibility_hidden");
-			$(".list li").hover(function() {
-				$(this).css("background", "lightblue");
-				$(this).children("div").eq(1).children('div').eq(2).show();
-			}, function() {
-				$(this).css("background", "lightgoldenrodyellow");
-				$(this).children("div").eq(1).children('div').eq(2).hide();
-			});
+			$(".summary").find("span").html("");
+			$("#addFriend").hide();
 		},
 		showFriend : function(list) {
 			var html = "";
@@ -148,7 +212,9 @@
 						+ friendId
 						+ "' alt='update' title='update' data-missnum='"
 						+ friendMissMsg
-						+ "' onclick='openDialog(this)' /></div></div></div><div alt='new message' title='new message' class='"
+						+ "' onclick='openDialog(this)' /></div></div></div><div data-missnum='"
+						+ friendMissMsg
+						+ "' alt='new message' title='new message' class='"
 						+ showNewMsgClass
 						+ "'><img src='"
 						+ newMsg_flag
@@ -191,7 +257,10 @@
 
 			}
 			var old_docHeight = $(".statement").height();
-			$(".statement").prepend(html);
+			if (window.page.pageSize == 1)
+				$(".statement").html(html);
+			else
+				$(".statement").prepend(html);
 			var boxHeight = $(".statement").parent().height();
 			var moreBoxHeight = $(".statement").parent().children("div").eq(0)
 					.height();
@@ -205,6 +274,102 @@
 			$("#usreMsg_createtime").html(data.userCreatetime);
 			$("#usreMsg_degree").html(data.userDegree);
 			$("#usreMsg_profession").html(data.userProfession);
+
+			$("#addFriend").removeAttr("disabled");
+			$("#addFriend").css('cursor', 'pointer');
+		},
+		showMeetMsg : function(list) {
+			var len = list.length;
+			var i = len;
+			var html = "";
+			while (i--) {
+				var userCome = list[i].meetUserId;
+				var convContent = list[i].meetContent;
+				var convTime = list[i].meetTime;
+				var userPhoto = list[i].userPhoto;
+
+				if (userCome == window.userId) {
+					html += "<li ><div class='right'><div class='content'><p><time>"
+							+ convTime
+							+ "</time></p><p><span>"
+							+ convContent
+							+ "</span></p></div><div class='headImg'><img onclick='showUserMsg(this)' data-userid='"
+							+ userCome
+							+ "' title='' src='"
+							+ userPhoto
+							+ "' /></div></div></li>";
+				} else {
+					html += "<li><div  class='left'><div class='headImg'><img  onclick='showUserMsg(this)' data-userid='"
+							+ userCome
+							+ "'  title='' src='"
+							+ userPhoto
+							+ "' /></div><div class='content'><p><time>"
+							+ convTime
+							+ "</time></p><p><span>"
+							+ convContent
+							+ "</span></p></div></div></li>";
+				}
+
+			}
+			var old_docHeight = $(".statement").height();
+			if (window.page.pageSize == 1)
+				$(".statement").html(html);
+			else
+				$(".statement").prepend(html);
+			var boxHeight = $(".statement").parent().height();
+			var moreBoxHeight = $(".statement").parent().children("div").eq(0)
+					.height();
+			var docHeight = $(".statement").height();
+			$(".statement").parent().scrollTop(
+					docHeight + moreBoxHeight - boxHeight - old_docHeight);
+		},
+		showTopic : function(list) {
+			var html = "";
+			var len = list.length;
+			var delete_flag = "../img/logo.png";
+			var group_flag = "../img/logo.png";
+			var newMsg_flag = "../img/logo.png";
+			for ( var i = 0; i < len; i++) {
+				var topicId = list[i].topicId;
+				var topicTitle = list[i].topicTitle;
+				var topicDescriptione = list[i].topicDescriptione;
+				var topicMissNum = list[i].topicMissNum;
+				var showNewMsgClass = topicMissNum == 0 ? "newmsg hide"
+						: "newmsg";
+
+				html += "<li  onclick='clickTopic(this)' onmouseover='topicOver(this)' onmouseout='topicOut(this)' data-selectedId='"
+						+ topicId
+						+ "'><div><img src='"
+						+ group_flag
+						+ "' /></div><div><div><span class='friendRemark'>"
+						+ topicTitle
+						+ "</span></div><div><span>"
+						+ topicDescriptione
+						+ "</span> </div><div><div><img src='"
+						+ delete_flag
+						+ "' data-topicId='"
+						+ topicId
+						+ "' alt='delete' title='delete' onclick='openDialog(this)' /></div></div></div><div data-missnum='"
+						+ topicMissNum
+						+ "' alt='new message' title='new message' class='"
+						+ showNewMsgClass
+						+ "'><img src='"
+						+ newMsg_flag
+						+ "' /></div></li>	";
+			}
+			$(".topicList").html(html);
+		},
+		deleteTopic : function(topicId) {
+			$("li[data-selectedId='" + topicId + "']").remove();
+		},
+		showTopicMsg : function(data) {
+			$("#topicId").html(data.topicId);
+			$("#topicTitle").html(data.topicTitle);
+			$("#topicDescription").html(data.topicDescriptione);
+			$("#topicCreateTime").html(data.topicCreateTime);
+			$("#endTime").html(data.topicEndTime);
+			$("#topicDegree").html(data.topicDegree);
+			$("#topicUrl").html(data.topicUrl);
 		}
 	};
 })();
@@ -219,7 +384,7 @@
 		pageNum : 10
 	};
 	window.getWindow_friendId = null;
-	window.getWindow_groupId = null;
+	window.getWindow_topicId = null;
 
 	window.li_selectedId = null;
 
@@ -229,11 +394,16 @@
 
 	if (window.parentType == "users.html") {
 		window.view.changeToUsersModel();
+		window.model.initAllFriendWindow({userId:window.useId});
 		window.model.getFriendList(window.view.showFriend, {
 			userId : window.userId
 		});
 	} else if (window.parentType == "topic.html") {
 		window.view.changeToTopicModel();
+		window.model.initAllTopicWindow({userId:window.useId});
+		window.model.getTopicList(window.view.showTopic, {
+			userId : window.userId
+		});
 	}
 })();
 
@@ -266,14 +436,16 @@
 		$(that).css("background", "lightblue");
 		$(that).children("div").eq(1).children('div').eq(2).show();
 	};
+
 	window.friendOut = function(that) {
 		$(that).css("background", "lightgoldenrodyellow");
 		$(that).children("div").eq(1).children('div').eq(2).hide();
 	};
+
 	window.clickFriend = function(that) {
 		window.page.pageSize = 0;
 		$(".statement").html("");
-		
+
 		var friendId = $(that).attr("data-selectedId");
 		var target = $(that).find(".newmsg");
 		var missNum = $(target).attr("data-missnum");
@@ -285,19 +457,21 @@
 		});
 
 		if (window.getWindow_friendId != null)
-			window.model.closeFriendWindow({
+			window.model.closeOrOpenFriendWindow({
 				userId : window.userId,
-				friendId : window.getWindow_friendId
+				friendId : window.getWindow_friendId,
+				status : 0
+			// 0为窗口关闭状态 1为窗口打开状态
 			});
 
-		window.model.closeFriendWindowAndMissMsg({
-			userId : userId,
+		window.model.updateFriendWindowAndMissMsg({
+			userId : window.userId,
 			friendId : friendId
 		});
 
 		if (missNum > 0)
 			window.model.getFriendMissMessage(window.view.showContactMessage, {
-				userId : userId,
+				userId : window.userId,
 				friendId : friendId,
 				missNum : missNum
 			});
@@ -306,14 +480,59 @@
 		$(target).attr("data-missnum", '0');
 		$(target).addClass("hide");
 	};
+	window.clickTopic = function(that) {
+		window.page.pageSize = 0;
+		$(".statement").html("");
+
+		var topicId = $(that).attr("data-selectedId");
+		var target = $(that).find(".newmsg");
+		var missNum = $(target).attr("data-missnum");
+		$(that).parent().find(".selected_li").removeClass("selected_li");
+		$(that).addClass("selected_li");
+
+		window.model.getTopicMsg(window.view.showTopicMsg, {
+			topicId : topicId
+		});
+		if (window.getWindow_topicId != null) {
+			window.model.updateTopicWindowStatus({
+				userId : window.userId,
+				topicId : window.getWindow_topicId,
+				status : 0
+			});
+		}
+		window.model.updateTopicWindowAndMissMsg({
+			userId : window.userId,
+			topicId : topicId
+		});
+
+		if (missNum > 0) {
+			window.model.getMeetMissMsg(window.view.showMeetMsg, {
+				topicId : topicId,
+				misNum : missNum
+			});
+		}
+
+		window.getWindow_topicId = topicId;
+		$(target).attr("data-missnum", '0');
+		$(target).addClass("hide");
+	};
+
 	window.commintUpdateOrDelete = function(that) {
 		var delete_ele = $(that).parent().parent().find("span:not(.hide)");
 		var update_ele = $(that).parent().parent().find("input:not(.hide)");
 		if ($(delete_ele).size() > 0) {
-			window.model.deleteFriend(window.view.deleteFriend, {
-				userId : window.userId,
-				friendId : window.li_selectedId
-			});
+			if (window.parentType == "users.html") {
+				window.model.deleteFriend(window.view.deleteFriend, {
+					userId : window.userId,
+					friendId : window.li_selectedId
+				});
+			} else {
+				window.model.deleteTopic(window.view.deleteFriend, {
+					userId : window.userId,
+					topicId : window.li_selectedId
+				});
+			}
+
 		} else if ($(update_ele).size() > 0) {
 			var data = {
 				userId : window.userId,
@@ -336,8 +555,31 @@
 			window.model.getFriendMsg(window.view.showContactMessage,
 					window.page);
 		} else if (window.parentType == "topic.html") {
-
+			window.page.topicId = window.getWindow_topicId;
+			if (window.page.topicId == null)
+				return;
+			window.model.getMeetMsg(window.view.showMeetMsg, window.page);
 		}
 		window.page.pageSize++;
-	}
+	};
+	window.showUserMsg = function(that) {
+		var userId = $(that).attr("data-userid");
+		window.selected_user_id = userId;
+
+		window.model.getUserMsg(window.view.showUserMsg, {
+			userId : userId
+		});
+	};
+
+	window.topicOver = window.friendOver;
+	window.topicOut = window.friendOut;
+
+	window.showUserMsg = function(that) {
+		var userId = $(that).attr("data-userid");
+		window.model.getUserMsg(window.view.showUserMsg, {
+			userId : userId
+		});
+	};
 })();
+
+// 初始化window为0 groups、friend

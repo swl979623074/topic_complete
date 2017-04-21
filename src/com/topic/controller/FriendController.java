@@ -23,10 +23,10 @@ public class FriendController {
 		return MVC.toString(map);
 	}
 
-	@RequestMapping("/closeWindow")
-	public ModelAndView closeWindow(String userId, String friendId) {
+	@RequestMapping("/updateWindowStatus")
+	public ModelAndView updateWindowStatus(String userId, String friendId,String status) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map = friendService.closeWindow(userId, friendId);
+		map = friendService.updateWindowStatus(userId, friendId,status);
 		return MVC.toString(map);
 	}
 
@@ -42,6 +42,13 @@ public class FriendController {
 	public ModelAndView deleteFriend(String userId, String friendId) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map = friendService.deleteFriend(userId, friendId);
+		return MVC.toString(map);
+	}
+	
+	@RequestMapping("/initAllWindowStatus")
+	public ModelAndView initAllWindowStatus(String userId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map = friendService.initAllWindowStatus(userId);
 		return MVC.toString(map);
 	}
 }

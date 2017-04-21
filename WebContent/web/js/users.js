@@ -33,6 +33,8 @@ function hideDialog() {
 					res) {
 				if (res.status == "SUCCESS") {
 					cb_showUserMsg(res.userMsg);
+				}else{
+					cb_showUserMsg("FAlSE");
 				}
 
 			});
@@ -48,6 +50,11 @@ function hideDialog() {
 (function() {
 	window.view = {
 		showUserMsg : function(data) {
+			if(data == "FAlSE"){
+				$(".userMessage").html("<p style='width:100%;text-align:center !important;color:red;font-szie:3rem;!important'>Can Not Find The User</p>");
+				return;
+			}
+			
 			var userAlias = data.userAlias;
 			var userPhoto = data.userphoto;
 			var userSex = data.userSex;

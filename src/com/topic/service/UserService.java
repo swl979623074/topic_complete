@@ -46,21 +46,29 @@ public class UserService {
 				+ account + "'";
 		ResultSet rs = OJDBC.executeQuery(sql_getUser);
 		try {
-			rs.next();
-			Map<String, String> userMap = new HashMap<String, String>();
+			rs.last();
+			int len = rs.getRow();
+			if(len == 0){
+				map.put("status", "FALSE");
+			}else{
+				rs.first();
+				Map<String, String> userMap = new HashMap<String, String>();
 
-			userMap.put("userId", rs.getString("user_id"));
-			userMap.put("userAccount", rs.getString("user_account"));
-			userMap.put("userAlias", rs.getString("user_alias"));
-			userMap.put("userEmail", rs.getString("user_email"));
-			userMap.put("userSex", rs.getString("user_sex"));
-			userMap.put("userProfession", rs.getString("user_profession"));
-			userMap.put("userCreatetime", rs.getString("user_createtime"));
-			userMap.put("userDegree", rs.getString("user_degree"));
-			userMap.put("userphoto", rs.getString("user_photo"));
+				userMap.put("userId", rs.getString("user_id"));
+				userMap.put("userAccount", rs.getString("user_account"));
+				userMap.put("userAlias", rs.getString("user_alias"));
+				userMap.put("userEmail", rs.getString("user_email"));
+				userMap.put("userSex", rs.getString("user_sex"));
+				userMap.put("userProfession", rs.getString("user_profession"));
+				userMap.put("userCreatetime", rs.getString("user_createtime"));
+				userMap.put("userDegree", rs.getString("user_degree"));
+				userMap.put("userphoto", rs.getString("user_photo"));
 
-			map.put("status", "SUCCESS");
-			map.put("userMsg", userMap);
+				map.put("status", "SUCCESS");
+				map.put("userMsg", userMap);
+			}
+			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

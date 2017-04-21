@@ -49,7 +49,7 @@
 			</details>
 			<details open class='topic'>
 				<summary>话题</summary>
-				<ul class='list'>
+				<ul class='list topicList'>
 					<li userId='123456789'>
 						<div>
 							<img src="../img/logo.png" />
@@ -171,20 +171,19 @@
 				<header> Topic Message </header>
 				<section>
 					<ul>
-						<li><label>标题:</label> <span>社会教育</span></li>
-						<li><label>描述:</label> <span>
+						<li><label>ID:</label> <span id='topicId'>社会教育</span></li>
+						<li><label>标题:</label> <span id='topicTitle'>社会教育</span></li>
+						<li><label>描述:</label> <span id='topicDescription'>
 								社会教育--社会教育--社会教育--社会教育--社会教育-- 社会教育--社会教育--社会教育--社会教育--社会教育--
 								社会教育--社会教育--社会教育--社会教育--社会教育-- 社会教育--社会教育--社会教育--社会教育--社会教育--
 								社会教育--社会教育--社会教育--社会教育--社会教育-- </span></li>
-						<li><label>创建时间:</label> <span>2015-12-12 12:12:12</span></li>
-						<li><label>维持时间:</label> <span>1h</span></li>
-						<li><label>参与等级:</label> <span>4级</span></li>
-						<li><label>话题来源:</label> <span>http://www.baidu.com</span></li>
+						<li><label>创建时间:</label> <span id='topicCreateTime'>2015-12-12 12:12:12</span></li>
+						<li><label>维持时间:</label> <span id='endTime'>1h</span></li>
+						<li><label>参与等级:</label> <span id='topicDegree'>4级</span></li>
+						<li><label>话题来源:</label> <span id='topicUrl'>http://www.baidu.com</span></li>
 					</ul>
 				</section>
-				<footer>
-					<button topic='12306'>退出话题</button>
-				</footer>
+				
 			</div>
 			<div class="currentUser summary_model">
 				<header> User Message </header>
@@ -198,7 +197,7 @@
 					</ul>
 				</section>
 				<footer>
-					<button userId='979623074' id='addFriend'>加为好友</button>
+					<button id='addFriend'>加为好友</button>
 				</footer>
 			</div>
 		</div>

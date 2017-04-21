@@ -16,7 +16,6 @@
 	}
 })();
 
-
 /** ****************************model***************************** */
 (function() {
 	window.model = {
@@ -46,6 +45,18 @@
 					console.log("create topic success");
 				}
 			})
+		},
+		getTopicMsg : function(cb_showTopicMsg, data) {
+			$.post("/Topic/topicController/getTopicMsg", data,
+					function(res) {
+						cb_showTopicMsg(res);
+					})
+		},
+		addTopicForUser : function(cb_showAddResult, data) {
+			$.post("/Topic/topicController/addTopicForUser", data,
+					function(res) {
+						cb_showTopicMsg(res);
+					});
 		}
 	}
 })();
@@ -62,13 +73,47 @@
 						+ typeId + "'>" + typeAlias + "</option>";
 			}
 			$(".newsTypeList").html(html);
-			$(".newsTypeList").children("option").eq(0).attr("selected","");
+			$(".newsTypeList").children("option").eq(0).attr("selected", "");
+		},
+		showTopicMsg : function(res) {
+			if (res.status == "FALSE") {
+				$(".topicMsg").find("span").html(" ");
+				$("#addTopic").html("查找失败！");
+				$("#addTopic").css('cursor', 'not-allowed');
+				$("#addTopic").css('color', 'red');
+				$("#addTopic").attr("disabled");
+			} else {
+				$("#topicId").html(res.topicId);
+				$("#topicTitle").html(res.topicTitle);
+				$("#topicDescription").html(res.topicDescriptione);
+				$("#topicCreateTime").html(res.topicCreateTime);
+				$("#endTime").html(res.topicEndTime);
+				$("#topicDegree").html(res.topicDegree);
+				$("#topicUrl").html(res.topicUrl);
+
+				$("#addTopic").html("添加");
+				$("#addTopic").css('cursor', 'pointer');
+				$("#addTopic").removeAttr("disabled");
+			}
+		},
+		showAddResult : function(res) {
+			alert("sdfa")
+			if (res.status == "SUCCESS") {
+				$("#addTopic").html("添加成功！");
+				$("#addTopic").css('cursor', 'not-allow');
+				$("#addTopic").css('color', 'green');
+			} else {
+				$("#addTopic").html("添加失败！");
+				$("#addTopic").css('cursor', 'not-allow');
+				$("#addTopic").css('color', 'red');
+			}
 		}
 	}
 })();
 /** ****************************control***************************** */
 (function() {
 	window.model.getNewsType(window.view.showNewsType);
+	window.serach_topicId = null;
 })();
 /** ****************************event***************************** */
 (function() {
@@ -92,11 +137,24 @@
 	};
 	window.showDialog = function() {
 		$(".createTopic").removeClass('hide');
-	}
+	};
 	window.hideDialog = function() {
 		$(".createTopic").addClass('hide');
+	};
+	window.searchTopic = function() {
+		$(".topicMsg").toggleClass("hide");
+		window.serach_topicId = $("#searchText").val();
+		window.model.getTopicMsg(window.view.showTopicMsg, {
+			topicId : window.serach_topicId
+		});
+	};
+	window.addTopicForUser = function() {
+		var userId = window.sessionStorage.getItem("userId");
+		window.model.addTopicForUser(window.view.showAddResult, {
+			userId : userId,
+			topicId : window.serach_topicId
+		});
 	}
-	
 })();
 /** ****************************tool***************************** */
 (function() {

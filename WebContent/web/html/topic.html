@@ -15,9 +15,9 @@
 <body>
 	<header>
 		<ul>
-			<li><input type="text"
+			<li><input id='searchText' type="text"
 				placeholder="please input one searched topic name " />
-				<button>search</button></li>
+				<button onclick="searchTopic()">search</button></li>
 			<li>
 				<div>
 					<img src="../img/logo.png" title='add topic' onclick="showDialog()" />
@@ -37,7 +37,8 @@
 			<table>
 				<tr>
 					<td>标&nbsp&nbsp题：</td>
-					<td><input type="text" id='topic_title' placeholder="up to 20 words"/></td>
+					<td><input type="text" id='topic_title'
+						placeholder="up to 20 words" /></td>
 				</tr>
 				<tr>
 					<td>描&nbsp&nbsp述：</td>
@@ -49,7 +50,7 @@
 					<td><input type="number" placeholder="hour"
 						id='topic_stilltime' /></td>
 				</tr>
-				
+
 				<tr>
 					<td>话题类型：</td>
 					<td>
@@ -69,6 +70,30 @@
 		</section>
 		<footer>
 			<button onclick='createTopic(this)' title="create topic">create</button>
+		</footer>
+	</aside>
+
+	<aside class='topicMsg hide'>
+		<header>
+			<img title='关闭' src="../img/logo.png" onclick="hideDialog()" />
+		</header>
+		<section>
+			<ul>
+				<li><label>ID:</label> <span id='topicId'>社会教育</span></li>
+				<li><label>标题:</label> <span id='topicTitle'>社会教育</span></li>
+				<li><label>描述:</label> <span id='topicDescription'>
+						社会教育--社会教育--社会教育--社会教育--社会教育-- 社会教育--社会教育--社会教育--社会教育--社会教育--
+						社会教育--社会教育--社会教育--社会教育--社会教育-- 社会教育--社会教育--社会教育--社会教育--社会教育--
+						社会教育--社会教育--社会教育--社会教育--社会教育-- </span></li>
+				<li><label>创建时间:</label> <span id='topicCreateTime'>2015-12-12
+						12:12:12</span></li>
+				<li><label>维持时间:</label> <span id='endTime'>1h</span></li>
+				<li><label>参与等级:</label> <span id='topicDegree'>4级</span></li>
+				<li><label>话题来源:</label> <span id='topicUrl'>http://www.baidu.com</span></li>
+			</ul>
+		</section>
+		<footer>
+			<button id='addTopic' onclick='addTopicForUser'>add</button>
 		</footer>
 	</aside>
 </body>

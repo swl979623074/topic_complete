@@ -93,13 +93,13 @@ aside {
 	box-shadow: -0.1rem 0.3rem 0.5rem 0.3rem #CCCCCC;
 }
 
-.createTopic> header {
+aside> header {
 	height: 2rem;
 	width: 100%;
 	background: gray;
 }
 
-.createTopic> header img {
+aside> header img {
 	width: 2rem;
 	height: 2rem;
 	float: right;
@@ -187,6 +187,62 @@ aside {
 	border: 0.1rem solid #CCC;
 	cursor: pointer;
 	color: white;
+}
+
+
+/***************************************************/
+
+
+
+.topicMsg>section {
+	width: 100%;
+	height: 75%;
+	overflow-y: auto;
+	box-shadow: 0.1rem 0.2rem 2rem 0.1rem #CCC;
+}
+
+.topicMsg>footer {
+	width: 100%;
+	height: 15%;
+	text-align: center;
+	border-left: 0.1rem solid #CCC;
+}
+
+.topicMsg>section>ul {
+	margin: 0px auto;
+	padding: 0px;
+	height: 100%;
+	width: 95%;
+}
+
+.topicMsg>section li {
+	list-style: none;
+	font-family: '楷体';
+	padding-top: 1rem;
+}
+
+.topicMsg>section label {
+	font-size: 1.2rem;
+	font-weight: bolder;
+	color: #3E3E40;
+	padding-left: 1rem;
+}
+
+.topicMsg>section span {
+	color: #3E3E40;
+	font-family: "宋体";
+	font-size: 1rem;
+}
+.topicMsg>footer>button {
+	width: 10rem;
+	height: 3rem;
+	margin-top: 2rem;
+	border: none;
+	border-radius: 0.5rem;
+	cursor: pointer;
+	font-size: 1rem;
+	line-height: 1.5rem;
+	text-align: center;
 }
 
 

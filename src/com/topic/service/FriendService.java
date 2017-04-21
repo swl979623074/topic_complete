@@ -11,7 +11,7 @@ public class FriendService {
 	public Map<String, Object> updateOpenWindowAndMissMsg(String userId,
 			String friendId) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String update_friend = "update friend set frie_openwindow = 0,frie_missmsg=0 where user_id = '"
+		String update_friend = "update friend set frie_openwindow = 1,frie_missmsg=0 where user_id = '"
 				+ userId + "' and frie_id = '" + friendId + "'";
 		int len = OJDBC.executeUpdate(update_friend);
 		if (len == 1) {
@@ -22,9 +22,9 @@ public class FriendService {
 		return map;
 	}
 
-	public Map<String, Object> closeWindow(String userId, String friendId) {
+	public Map<String, Object> updateWindowStatus(String userId, String friendId,String status) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String update_friend = "update friend set frie_openwindow = 0 where user_id = '"
+		String update_friend = "update friend set frie_openwindow = '"+status+"' where user_id = '"
 				+ userId + "' and frie_id = '" + friendId + "'";
 		int len = OJDBC.executeUpdate(update_friend);
 		if (len == 1) {
@@ -63,4 +63,11 @@ public class FriendService {
 		return map;
 	}
 
+	public Map<String, Object> initAllWindowStatus(String userId){
+		Map<String, Object> map = new HashMap<String, Object>();
+		String sql_update = "update friend set frie_openwindow = 0 where user_id = '"+userId+"'";
+		OJDBC.executeUpdate(sql_update);
+		map.put("status", "SUCCESS");
+		return map;
+	}
 }

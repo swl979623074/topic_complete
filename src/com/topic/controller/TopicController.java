@@ -25,4 +25,54 @@ public class TopicController {
 		return MVC.toString(map);
 
 	}
+
+	@RequestMapping("/getTopicListByUserId")
+	public ModelAndView getTopicListByUserId(String userId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map = topicService.getTopicListByUserId(userId);
+		return MVC.toString(map);
+	}
+
+	@RequestMapping("/updateMeetWindowAndMissMsg")
+	public ModelAndView updateMeetWindowAndMissMsg(String userId, String topicId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map = topicService.updateMeetWindowAndMissMsg(userId, topicId);
+		return MVC.toString(map);
+	}
+
+	@RequestMapping("/updateWindowStatus")
+	public ModelAndView updateWindowStatus(String userId, String topicId,
+			String status) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map = topicService.updateWindowStatus(userId, topicId, status);
+		return MVC.toString(map);
+	}
+
+	@RequestMapping("/deleteTopicAboutUser")
+	public ModelAndView deleteTopicAboutUser(String userId, String topicId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map = topicService.deleteTopicAboutUser(userId, topicId);
+		return MVC.toString(map);
+	}
+	
+	@RequestMapping("/getTopicMsg")
+	public ModelAndView getTopicMsg(String topicId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map = topicService.getTopicMsg(topicId);
+		return MVC.toString(map);
+	}
+	
+	@RequestMapping("/initAllWindowStatus")
+	public ModelAndView initAllWindowStatus(String userId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map = topicService.initAllWindowStatus(userId);
+		return MVC.toString(map);
+	}
+	
+	@RequestMapping("/addTopicForUser")
+	public ModelAndView addTopicForUser(String userId,String topicId){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map = topicService.addTopicForUser(userId, topicId);
+		return MVC.toString(map);
+	}
 }

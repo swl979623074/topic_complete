@@ -22,6 +22,7 @@ public class ImgOperation {
 		BufferedImage bi;
 		try {
 			bi = ImageIO.read(f);
+			if(bi == null)return null;
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			ImageIO.write(bi, imgType, baos);
 			byte[] bytes = baos.toByteArray();
