@@ -55,7 +55,7 @@
 		addTopicForUser : function(cb_showAddResult, data) {
 			$.post("/Topic/topicController/addTopicForUser", data,
 					function(res) {
-						cb_showTopicMsg(res);
+						cb_showAddResult(res);
 					});
 		}
 	}
@@ -92,12 +92,12 @@
 				$("#topicUrl").html(res.topicUrl);
 
 				$("#addTopic").html("添加");
+				$("#addTopic").css('color', 'black');
 				$("#addTopic").css('cursor', 'pointer');
 				$("#addTopic").removeAttr("disabled");
 			}
 		},
 		showAddResult : function(res) {
-			alert("sdfa")
 			if (res.status == "SUCCESS") {
 				$("#addTopic").html("添加成功！");
 				$("#addTopic").css('cursor', 'not-allow');
@@ -133,16 +133,18 @@
 		if (!key)
 			return;
 		window.model.createTopic(topicMsg);
+		window.tool.initTopicMsg(that);
 		$(".createTopic").addClass('hide');
 	};
 	window.showDialog = function() {
 		$(".createTopic").removeClass('hide');
 	};
-	window.hideDialog = function() {
-		$(".createTopic").addClass('hide');
+	window.hideDialog = function(that) {
+//		$(".createTopic").addClass('hide');
+		$(that).parent().parent().addClass('hide');
 	};
 	window.searchTopic = function() {
-		$(".topicMsg").toggleClass("hide");
+		$(".topicMsg").removeClass("hide");
 		window.serach_topicId = $("#searchText").val();
 		window.model.getTopicMsg(window.view.showTopicMsg, {
 			topicId : window.serach_topicId
@@ -172,6 +174,14 @@
 				typeId : $("option[selected]").attr("data-typeid")
 			};
 			return topicMsg;
+		},
+		initTopicMsg:function(that){
+			var aside_box = $(that).parent().parent();
+			
+			$(aside_box).find("#topic_title").val("");
+			$(aside_box).find("#topic_description").val("");
+			$(aside_box).find("#topic_stilltime").val("");
+			$(aside_box).find("#topic_url").val("");
 		}
 	};
 	window.validator = {

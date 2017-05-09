@@ -31,7 +31,7 @@
 	</section>
 	<aside class='createTopic hide'>
 		<header>
-			<img title='关闭' src="../img/logo.png" onclick="hideDialog()" />
+			<img title='关闭' src="../img/logo.png" onclick="hideDialog(this)" />
 		</header>
 		<section>
 			<table>
@@ -75,25 +75,22 @@
 
 	<aside class='topicMsg hide'>
 		<header>
-			<img title='关闭' src="../img/logo.png" onclick="hideDialog()" />
+			<img title='关闭' src="../img/logo.png" onclick="hideDialog(this)" />
 		</header>
 		<section>
 			<ul>
-				<li><label>ID:</label> <span id='topicId'>社会教育</span></li>
-				<li><label>标题:</label> <span id='topicTitle'>社会教育</span></li>
-				<li><label>描述:</label> <span id='topicDescription'>
-						社会教育--社会教育--社会教育--社会教育--社会教育-- 社会教育--社会教育--社会教育--社会教育--社会教育--
-						社会教育--社会教育--社会教育--社会教育--社会教育-- 社会教育--社会教育--社会教育--社会教育--社会教育--
-						社会教育--社会教育--社会教育--社会教育--社会教育-- </span></li>
-				<li><label>创建时间:</label> <span id='topicCreateTime'>2015-12-12
-						12:12:12</span></li>
-				<li><label>维持时间:</label> <span id='endTime'>1h</span></li>
-				<li><label>参与等级:</label> <span id='topicDegree'>4级</span></li>
-				<li><label>话题来源:</label> <span id='topicUrl'>http://www.baidu.com</span></li>
+				<li><label>ID:</label> <span id='topicId'></span></li>
+				<li><label>标题:</label> <span id='topicTitle'></span></li>
+				<li><label>描述:</label> <span id='topicDescription'></span></li>
+				<li><label>创建时间:</label> <span id='topicCreateTime'></span></li>
+				<li><label>维持时间:</label> <span id='endTime'></span></li>
+				<li><label>参与等级:</label> <span id='topicDegree'></span></li>
+				<li><label>话题来源:</label> <span id='topicUrl'></span></li>
 			</ul>
+			
 		</section>
 		<footer>
-			<button id='addTopic' onclick='addTopicForUser'>add</button>
+			<button id='addTopic' onclick='addTopicForUser()'>add</button>
 		</footer>
 	</aside>
 </body>
