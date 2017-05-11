@@ -151,7 +151,7 @@ public class TopicService {
 	public Map<String, Object> initAllWindowStatus(String userId){
 		Map<String, Object> map = new HashMap<String, Object>();
 		String sql_update = "update groups set group_openwindow = 0 where group_userid = '"+userId+"'";
-		OJDBC.executeUpdate(sql_update);
+		int num = OJDBC.executeUpdate(sql_update);
 		map.put("status", "SUCCESS");
 		return map;
 	}

@@ -145,6 +145,7 @@
 			$("#sex").html(data.userSex);
 			$("#email").html(data.userEmail);
 			$("#createtime").html(data.userCreatetime);
+			$("#userHeaderImg").attr("src",data.userphoto);
 		}
 	};
 	window.addProfessionEvent = function(that) {
@@ -212,7 +213,7 @@
 					});
 			var result = {
 				userAlias : $("#alias").html(),
-				userSex : $("#sex").html(),
+				userSex : $("#sex").html().substring(0,1),
 				userEmail : $("#email").html(),
 				userProfession : profession.join(","),
 				userInterest : interest.join(",")
@@ -223,8 +224,7 @@
 	window.validator = {
 		checkSex : function() {
 			var val = $("#sex").html();
-			alert(val)
-			if (val != '男' && val != '女') {
+			if(val.indexOf("男") == -1 && val.indexOf("女") == -1){
 				$("#sex").parent().css("border-color", 'red');
 				return false;
 			} else {
@@ -246,3 +246,71 @@
 		}
 	}
 })();
+
+/*************************头像上传*******************/
+(function(){
+	var userMsg = window.sessionStorage;
+	var userAccount = userMsg.getItem("userAccount");
+	console.log(userMsg);
+	var key = "";
+	var uploadBtn = $("#uploadBtn");
+	$(uploadBtn).click(function() {
+		$("#file"+key).click();
+	});
+	$("#file"+key).change(function(){
+		uploadImg(key);
+	});
+	function uploadImg(key){
+		if(!checkFile()){
+			alert("请上传jpg、png、jpeg,且不超过5M！");
+			return;
+		}
+		var key = "";
+		$.ajaxFileUpload({
+			url : '/Topic/imgUploadController/fileUpload?'+userAccount,
+			type : 'post',
+			secureuri : false, //一般设置为false
+			fileElementId : 'file'+key, // 上传文件的id、name属性名
+			dataType : 'text', //返回值类型，一般设置为json、application/json
+			data:{userId:"fsadfasdf"},
+			success : function(data, status) {
+				var strs = data.match( /{(\S*)}/ig);
+				var jsonStr = JSON.parse(strs[0]);
+				var binatyImg = jsonStr.binaryImg;
+				$("#userHeaderImg").attr("src",binatyImg);
+			},
+			complete:function(){
+				var _obj = $("#file"+key);
+				_obj.replaceWith("<input type='file' id='file"+key+"' name='file"+key+"' style='display:none;'>");
+				
+				$(uploadBtn).click(function() {
+					$("#file"+key).click();
+				});
+				
+				$("#file"+key).change(function(){
+					uploadImg(key);
+				});
+			},
+			error : function(data, status, e) {
+				console.log(e);
+			}
+		});
+	};
+	function checkFile(){
+		var key = true;
+		var size = $("#file")[0].files[0].size;
+		var mid = size / 1024;
+		if(mid >= 5000){
+			key = false;
+		}
+		var type = $("#file")[0].files[0].name;
+		var reg = /(jpg|png|jpeg)$/ig;
+		var rs = reg.test(type);
+		if(rs == false){
+			key = false;
+		}
+		return key;
+	}
+})();
+
+

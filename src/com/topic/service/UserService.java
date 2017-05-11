@@ -7,10 +7,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.topic.db.OperateJDBC;
+import com.topic.tool.ImgOperation;
 
 public class UserService {
 	private OperateJDBC OJDBC = new OperateJDBC();
 
+	private String getImgBinaryData(String imgPath){
+		if(imgPath == null)
+			return null;
+		String type = imgPath.split("\\.")[1];
+		String imgHeader = "data:image/" + type
+				+ ";base64,";
+		String imgData = imgHeader
+				+ ImgOperation.getImageBinary(imgPath);
+		return imgData;
+	}
+	
 	public Map<String, Object> getUserMsg(String userId) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String sql_getUser = "select * from user where user_id = '" + userId
@@ -27,7 +39,7 @@ public class UserService {
 			userMap.put("userProfession", rs.getString("user_profession"));
 			userMap.put("userCreatetime", rs.getString("user_createtime"));
 			userMap.put("userDegree", rs.getString("user_degree"));
-			userMap.put("userphoto", rs.getString("user_photo"));
+			userMap.put("userphoto", getImgBinaryData(rs.getString("user_photo")));
 
 			map.put("status", "SUCCESS");
 			map.put("userMsg", userMap);
@@ -62,7 +74,7 @@ public class UserService {
 				userMap.put("userProfession", rs.getString("user_profession"));
 				userMap.put("userCreatetime", rs.getString("user_createtime"));
 				userMap.put("userDegree", rs.getString("user_degree"));
-				userMap.put("userphoto", rs.getString("user_photo"));
+				userMap.put("userphoto", getImgBinaryData(rs.getString("user_photo")));
 
 				map.put("status", "SUCCESS");
 				map.put("userMsg", userMap);
@@ -109,7 +121,7 @@ public class UserService {
 				userMap.put("userAlias", rs.getString("user_alias"));
 				userMap.put("userSex", rs.getString("user_sex"));
 				userMap.put("userDegree", rs.getString("user_degree"));
-				userMap.put("userphoto", rs.getString("user_photo"));
+				userMap.put("userphoto", getImgBinaryData(rs.getString("user_photo")));
 				
 				list.add(userMap);
 			}

@@ -9,8 +9,7 @@
 <meta name='description' content="the user model" />
 <link rel="shortcut icon" href="./../img/logo.png" />
 <link rel="stylesheet" href="../css/user.css" />
-<script type="text/javascript" src="../js/jquery-2.1.0.js"></script>
-<script type="text/javascript" src="../js/angular.js"></script>
+
 
 
 </head>
@@ -37,10 +36,10 @@
 					<td colspan="2" rowspan="3">
 						<div class="headImg">
 							<div>
-								<img src="../img/logo.png" />
+								<img src="../img/logo.png" id='userHeaderImg'/>
 							</div>
 							<div>
-								<button title="upload head portrait">上传头像</button>
+								<button title="upload head portrait" id="uploadBtn">修改头像</button>
 							</div>
 						</div>
 					</td>
@@ -95,7 +94,10 @@
 			</table>
 		</div>
 	</section>
+	<input type="file" id="file" name="file" style='display: none;'>
 
+	<script type="text/javascript" src="../js/jquery-2.1.0.js"></script>
+	<script type="text/javascript" src='../js/ajaxfileupload.js'></script>
 	<script type="text/javascript" src="../js/user.js"></script>
 </body>
 

@@ -12,10 +12,19 @@ import java.util.Map;
 import net.sf.json.JSONObject;
 
 public class FileOperation {
-	
-	private String filepath = "F:/workspace/Topic/src/dbconfig";
-//	private String filepath = ".\\src\\dbconfig";
-	   
+	private String filepath = null;
+
+	public FileOperation(){
+		String eclipseRootPath = System.getProperty("user.dir");
+		String rootPath = eclipseRootPath.substring(0, eclipseRootPath.lastIndexOf("\\"));
+		URL realPath = this.getClass().getResource("/");
+		String projectName = realPath.getPath().substring(realPath.getPath().indexOf("webapps")+8, realPath.getPath().indexOf("WEB-INF")-1);
+		
+		String saveBasePath = rootPath + "\\" + projectName +"Config";
+		System.out.println(saveBasePath);
+		
+		this.filepath = saveBasePath +"\\db\\dbconfig";
+	}
 	public Map<String, String> getConfigData(String dbtype) throws FileNotFoundException {
 		
 		Map<String, String> map = new HashMap<String, String>();

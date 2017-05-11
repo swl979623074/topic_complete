@@ -7,10 +7,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.topic.db.OperateJDBC;
+import com.topic.tool.ImgOperation;
 
 public class MessageService {
 	private OperateJDBC OJDBC = new OperateJDBC();
 
+	private String getImgBinaryData(String imgPath){
+		if(imgPath == null)
+			return null;
+		String type = imgPath.split("\\.")[1];
+		String imgHeader = "data:image/" + type
+				+ ";base64,";
+		String imgData = imgHeader
+				+ ImgOperation.getImageBinary(imgPath);
+		return imgData;
+	}
+	
 	public Map<String, Object> getFriendMsg(String userId, String friendId,
 			int pageSize, int pageNum) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -33,7 +45,7 @@ public class MessageService {
 				msg.put("userCome", rs.getString("user_come"));
 				msg.put("convContent", rs.getString("conv_content"));
 				msg.put("convTime", rs.getString("conv_time"));
-				msg.put("userPhoto", rs.getString("user_photo"));
+				msg.put("userPhoto", getImgBinaryData(rs.getString("user_photo")));
 				list.add(msg);
 			}
 			map.put("status", "SUCCESS");
@@ -97,7 +109,7 @@ public class MessageService {
 				msg.put("meetUserId", rs.getString("meet_userid"));
 				msg.put("meetContent", rs.getString("meet_content"));
 				msg.put("meetTime", rs.getString("meet_time"));
-				msg.put("userPhoto", rs.getString("user_photo"));
+				msg.put("userPhoto", getImgBinaryData(rs.getString("user_photo")));
 				list.add(msg);
 			}
 			map.put("status", "SUCCESS");
@@ -125,7 +137,7 @@ public class MessageService {
 				msg.put("meetUserId", rs.getString("meet_userid"));
 				msg.put("meetContent", rs.getString("meet_content"));
 				msg.put("meetTime", rs.getString("meet_time"));
-				msg.put("userPhoto", rs.getString("user_photo"));
+				msg.put("userPhoto", getImgBinaryData(rs.getString("user_photo")));
 				list.add(msg);
 			}
 			map.put("status", "SUCCESS");

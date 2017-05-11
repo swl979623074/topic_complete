@@ -20,18 +20,20 @@
 (function() {
 	window.model = {
 		initAllFriendWindow : function(data) {
-			$.post("/Topic/friendController/initAllWindowStatus",data,function(res){
-				if(res.status == "SUCCESS"){
-					console.log("init friend window over");
-				}
-			})
+			$.post("/Topic/friendController/initAllWindowStatus", data,
+					function(res) {
+						if (res.status == "SUCCESS") {
+							console.log("init friend window over");
+						}
+					})
 		},
 		initAllTopicWindow : function(data) {
-			$.post("/Topic/topicController/initAllWindowStatus",data,function(res){
-				if(res.status == "SUCCESS"){
-					console.log("init topic window over");
-				}
-			})
+			$.post("/Topic/topicController/initAllWindowStatus", data,
+					function(res) {
+						if (res.status == "SUCCESS") {
+							console.log("init topic window over");
+						}
+					})
 		},
 		getFriendList : function(cb_showUsers, data) {
 			$.post("/Topic/userController/getFriend", data, function(res) {
@@ -369,7 +371,9 @@
 			$("#topicCreateTime").html(data.topicCreateTime);
 			$("#endTime").html(data.topicEndTime);
 			$("#topicDegree").html(data.topicDegree);
-			$("#topicUrl").html(data.topicUrl);
+			$("#topicUrl").html(
+					"<a target='_blank' href='" + data.topicUrl + "'>"
+							+ data.topicUrl + "</a>");
 		}
 	};
 })();
@@ -394,13 +398,17 @@
 
 	if (window.parentType == "users.html") {
 		window.view.changeToUsersModel();
-		window.model.initAllFriendWindow({userId:window.useId});
+		window.model.initAllFriendWindow({
+			userId : window.userId
+		});
 		window.model.getFriendList(window.view.showFriend, {
 			userId : window.userId
 		});
 	} else if (window.parentType == "topic.html") {
 		window.view.changeToTopicModel();
-		window.model.initAllTopicWindow({userId:window.useId});
+		window.model.initAllTopicWindow({
+			userId : window.userId
+		});
 		window.model.getTopicList(window.view.showTopic, {
 			userId : window.userId
 		});
@@ -520,7 +528,8 @@
 	window.commintUpdateOrDelete = function(that) {
 		var delete_ele = $(that).parent().parent().find("span:not(.hide)");
 		var update_ele = $(that).parent().parent().find("input:not(.hide)");
-		if ($(delete_ele).size() > 0) {
+		console.log($(delete_ele).length);
+		if ($(delete_ele).length > 0) {
 			if (window.parentType == "users.html") {
 				window.model.deleteFriend(window.view.deleteFriend, {
 					userId : window.userId,
@@ -533,7 +542,7 @@
 				});
 			}
 
-		} else if ($(update_ele).size() > 0) {
+		} else if ($(update_ele).length > 0) {
 			var data = {
 				userId : window.userId,
 				friendId : window.li_selectedId,
