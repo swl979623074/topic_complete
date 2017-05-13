@@ -12,7 +12,7 @@ import com.topic.tool.ImgOperation;
 public class MessageService {
 	private OperateJDBC OJDBC = new OperateJDBC();
 
-	private String getImgBinaryData(String imgPath){
+	private String getImgBinaryDataByPath(String imgPath){
 		if(imgPath == null)
 			return null;
 		String type = imgPath.split("\\.")[1];
@@ -31,11 +31,11 @@ public class MessageService {
 				+ userId
 				+ "' and user_to = '"
 				+ friendId
-				+ "' and user_to = user_id) or ((user_come = '"
+				+ "' and user_come = user_id) or ((user_come = '"
 				+ friendId
 				+ "' and user_to = '"
 				+ userId
-				+ "' and user_to = user_id)) ORDER BY conv_time desc LIMIT "
+				+ "' and user_come = user_id)) ORDER BY conv_time desc LIMIT "
 				+ begin + "," + pageNum + "";
 		ResultSet rs = OJDBC.executeQuery(sql_select_friend);
 		try {
@@ -45,7 +45,9 @@ public class MessageService {
 				msg.put("userCome", rs.getString("user_come"));
 				msg.put("convContent", rs.getString("conv_content"));
 				msg.put("convTime", rs.getString("conv_time"));
-				msg.put("userPhoto", getImgBinaryData(rs.getString("user_photo")));
+//				msg.put("userPhoto", getImgBinaryData(userId));
+				msg.put("userPhoto", getImgBinaryDataByPath(rs.getString("user_photo")));
+				
 				list.add(msg);
 			}
 			map.put("status", "SUCCESS");
@@ -66,11 +68,11 @@ public class MessageService {
 				+ userId
 				+ "' and user_to = '"
 				+ friendId
-				+ "' and user_to = user_id) or ((user_come = '"
+				+ "' and user_come = user_id) or ((user_come = '"
 				+ friendId
 				+ "' and user_to = '"
 				+ userId
-				+ "' and user_to = user_id)) ORDER BY conv_time desc LIMIT "
+				+ "' and user_come = user_id)) ORDER BY conv_time desc LIMIT "
 				+ begin + "," + misNum + "";
 		ResultSet rs = OJDBC.executeQuery(sql_select_friend);
 		try {
@@ -80,7 +82,7 @@ public class MessageService {
 				msg.put("userCome", rs.getString("user_come"));
 				msg.put("convContent", rs.getString("conv_content"));
 				msg.put("convTime", rs.getString("conv_time"));
-				msg.put("userPhoto", rs.getString("user_photo"));
+				msg.put("userPhoto", getImgBinaryDataByPath(rs.getString("user_photo")));
 				list.add(msg);
 			}
 			map.put("status", "SUCCESS");
@@ -109,7 +111,7 @@ public class MessageService {
 				msg.put("meetUserId", rs.getString("meet_userid"));
 				msg.put("meetContent", rs.getString("meet_content"));
 				msg.put("meetTime", rs.getString("meet_time"));
-				msg.put("userPhoto", getImgBinaryData(rs.getString("user_photo")));
+				msg.put("userPhoto", getImgBinaryDataByPath(rs.getString("user_photo")));
 				list.add(msg);
 			}
 			map.put("status", "SUCCESS");
@@ -137,7 +139,7 @@ public class MessageService {
 				msg.put("meetUserId", rs.getString("meet_userid"));
 				msg.put("meetContent", rs.getString("meet_content"));
 				msg.put("meetTime", rs.getString("meet_time"));
-				msg.put("userPhoto", getImgBinaryData(rs.getString("user_photo")));
+				msg.put("userPhoto", getImgBinaryDataByPath(rs.getString("user_photo")));
 				list.add(msg);
 			}
 			map.put("status", "SUCCESS");

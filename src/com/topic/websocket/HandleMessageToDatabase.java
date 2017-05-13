@@ -65,7 +65,7 @@ public class HandleMessageToDatabase implements HandleMessage {
 					+ sender + "','" + recipient + "','" + msg + "','" + time + "')";
 			break;
 		case "group":
-			sql = "insert into meeting (meet_userid,meet_groupid,meet_content,conv_time) values ('"
+			sql = "insert into meeting (meet_userid,meet_topicid,meet_content,meet_time) values ('"
 					+ sender + "','" + recipient + "','" + msg + "','" + time + "')";
 			break;
 		default:

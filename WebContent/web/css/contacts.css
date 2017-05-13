@@ -128,7 +128,7 @@ summary {
 .message>div:nth-child(2) {
 	margin: auto;
 	height: 5%;
-	border: 0.1rem solid #CCC;
+	//border: 0.1rem solid #CCC;
 }
 
 .message>div:last-child {
@@ -166,12 +166,15 @@ summary {
 .statement>li>div {
 	max-width: 70%;
 	display: flex;
+	overflow:hidden;
 }
 
 .statement>li>div>.headImg {
 	width: 3rem;
 }
-
+.statement>li>div>.content{
+	width:200%;
+}
 .statement img {
 	width: 3rem;
 	height: 3rem;
@@ -180,6 +183,7 @@ summary {
 
 .statement p {
 	margin: 0.2rem 0.5rem;
+	width:2 rem;
 }
 
 .statement p:first-child span {
@@ -192,31 +196,31 @@ summary {
 	border-radius: 0.5rem;
 	font-family: "宋体";
 	font-size: 2rem;
+	word-wrap : break-word;
+	overflow:hidden;
+	background:white;
+	padding:1rem 0.5rem;
+	
 }
 .statement p:last-child >span{
-	border:0.1rem dotted #CCC;
 	border-radius:1rem;
 	padding:0 1rem;
+	text-align: right;
 }
 .right {
 	margin-left:28%;
-	width:70%;
+	max-width:70%;
 	text-align: right;
 }
 .right > div{
-	width:100%;
+	width:92%;
+	
 }
 .left {
+	width:70%;
 	margin-left: 2%;
 }
 
-/*.left>div:after{
-	content: "."; 
-    display: block;
-    height: 0; 
-    clear: both; 
-    visibility: hidden;
-}*/
 /***********中间表情***********/
 .message>div:nth-child(2) {
 	display: flex;

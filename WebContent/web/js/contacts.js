@@ -167,6 +167,10 @@
 			$(".summary").find("span").html("");
 			$("#addFriend").attr("disabled", "true");
 			$("#addFriend").css("cursor", "not-allowed");
+			$("#userInputMsg").val("");
+			$("#userInputMsg").attr("readonly","readonly");
+			$("#userInputMsg").focus();
+			$("#userInputMsg").css("cursor","not-allowed");
 		},
 		changeToUsersModel : function() {
 			$(".users").removeClass("hide");
@@ -177,6 +181,10 @@
 			$("#addFriend").addClass("visibility_hidden");
 			$(".summary").find("span").html("");
 			$("#addFriend").hide();
+			$("#userInputMsg").val("");
+			$("#userInputMsg").attr("readonly","readonly");
+			$("#userInputMsg").focus();
+			$("#userInputMsg").css("cursor","not-allowed");
 		},
 		showFriend : function(list) {
 			var html = "";
@@ -225,7 +233,8 @@
 			$(".usersList").html(html);
 		},
 		showNewRemark : function(remark) {
-			$(".friendRemark").html(remark);
+//			$(".friendRemark").find('data').html(remark);
+			$(".usersList").find("[data-selectedid='" + window.li_selectedId + "']").find(".friendRemark").html(remark);
 		},
 		deleteFriend : function(friendId) {
 			$("li[data-selectedId='" + friendId + "']").remove();
@@ -385,18 +394,23 @@
 
 	window.page = {
 		pageSize : 0,
-		pageNum : 10
+		pageNum : 5
 	};
 	window.getWindow_friendId = null;
 	window.getWindow_topicId = null;
 
+	// 做删除和更新时使用的id
 	window.li_selectedId = null;
+	// 发送消息时使用的id
+	window.recipientid = null;
+	window.recipienttype = null;
 
 	var parent_window = window.parent.window.location.href;
 	var strs = parent_window.split("/");
 	window.parentType = strs[strs.length - 1];
 
 	if (window.parentType == "users.html") {
+		window.recipienttype = "persion";
 		window.view.changeToUsersModel();
 		window.model.initAllFriendWindow({
 			userId : window.userId
@@ -405,6 +419,7 @@
 			userId : window.userId
 		});
 	} else if (window.parentType == "topic.html") {
+		window.recipienttype = "group";
 		window.view.changeToTopicModel();
 		window.model.initAllTopicWindow({
 			userId : window.userId
@@ -438,7 +453,7 @@
 		$(".update").hasClass("hide") ? null : $(".update").addClass('hide');
 		$(".delete_or_update_dialog").hasClass("hide") ? null : $(
 				".delete_or_update_dialog").addClass('hide');
-		window.li_selectedId = null;
+//		window.li_selectedId = null;
 	};
 	window.friendOver = function(that) {
 		$(that).css("background", "lightblue");
@@ -451,12 +466,16 @@
 	};
 
 	window.clickFriend = function(that) {
+		$("#userInputMsg").removeAttr("readonly");
+		$("#userInputMsg").css("cursor","auto");
+		
 		window.page.pageSize = 0;
 		$(".statement").html("");
 
 		var friendId = $(that).attr("data-selectedId");
+		window.recipientid = friendId;
 		var target = $(that).find(".newmsg");
-		var missNum = $(target).attr("data-missnum");
+//		var missNum = $(target).attr("data-missnum");
 		$(that).parent().find(".selected_li").removeClass("selected_li");
 		$(that).addClass("selected_li");
 
@@ -477,24 +496,30 @@
 			friendId : friendId
 		});
 
-		if (missNum > 0)
-			window.model.getFriendMissMessage(window.view.showContactMessage, {
-				userId : window.userId,
-				friendId : friendId,
-				missNum : missNum
-			});
+			window.page.userId = window.userId;
+			window.page.friendId = friendId;
+			if (window.page.friendId == null)
+				return;
+			window.model.getFriendMsg(window.view.showContactMessage,
+					window.page);
 
 		window.getWindow_friendId = friendId;
 		$(target).attr("data-missnum", '0');
 		$(target).addClass("hide");
+		$("#userInputMsg").focus();
+		$("#userInputMsg").val("");
 	};
 	window.clickTopic = function(that) {
+		$("#userInputMsg").removeAttr("readonly");
+		$("#userInputMsg").css("cursor","auto");
+		
 		window.page.pageSize = 0;
 		$(".statement").html("");
 
 		var topicId = $(that).attr("data-selectedId");
+		window.recipientid = topicId;
 		var target = $(that).find(".newmsg");
-		var missNum = $(target).attr("data-missnum");
+//		var missNum = $(target).attr("data-missnum");
 		$(that).parent().find(".selected_li").removeClass("selected_li");
 		$(that).addClass("selected_li");
 
@@ -513,16 +538,16 @@
 			topicId : topicId
 		});
 
-		if (missNum > 0) {
-			window.model.getMeetMissMsg(window.view.showMeetMsg, {
-				topicId : topicId,
-				misNum : missNum
-			});
-		}
+		window.page.topicId = topicId;
+		if (window.page.topicId == null)
+			return;
+		window.model.getMeetMsg(window.view.showMeetMsg, window.page);
 
 		window.getWindow_topicId = topicId;
 		$(target).attr("data-missnum", '0');
 		$(target).addClass("hide");
+		$("#userInputMsg").focus();
+		$("#userInputMsg").val("");
 	};
 
 	window.commintUpdateOrDelete = function(that) {
@@ -592,3 +617,116 @@
 })();
 
 // 初始化window为0 groups、friend
+
+/** *********************************WebSocket************************** */
+(function() {
+	var userMsg = window.sessionStorage;
+	var userId = userMsg.getItem("userId");
+
+	var websocket = null;
+	if ("WebSocket" in window) {
+		websocket = new WebSocket("ws://localhost:8080/Topic/mywebsocket");
+		// websocket = new
+		// WebSocket("ws://192.168.191.4:8080/Topic/mywebsocket");
+	} else {
+		coonsole.log("Current Brower Not Support WebSocket");
+	}
+	;
+	websocket.oneror = function() {
+		console.log("error in websocket");
+	};
+	websocket.onopen = function() {
+		console.log("open websocket");
+		var obj = {
+			type : "onOpen",
+			userid : userId
+		}
+		websocket.send(JSON.stringify(obj));
+	};
+	websocket.onmessage = function(event) {
+		console.log("onmessage")
+		showMeetMsg(JSON.parse(event.data));
+	};
+	websocket.onclose = function() {
+		var obj = {
+			type : "onClose",
+			userid : userId
+		}
+		websocket.send(JSON.stringify(obj));
+	};
+	window.onbeforeunload = function() {
+		var obj = {
+			type : "onClose",
+			userid : '2'
+		};
+		websocket.send(JSON.stringify(obj));
+		websocket.close();
+	};
+	window.sendMessage = function() {
+		var msg = $("#userInputMsg").val();
+		var length = msg.replace(/(^\s*)|(\s*$)/g, "").length;
+		if(length <= 0){
+			return;
+		}
+		var data = {
+			type : "onMessage",
+			senderid : userId,
+			recipientid : window.recipientid,
+			recipienttype : window.recipienttype,
+			msg : msg.replace(/\n/g, "<br />")
+		};
+		console.log(msg);
+		websocket.send(JSON.stringify(data));
+		$("#userInputMsg").val("");
+	};
+	document.onkeydown = function(event){
+		var key = event.keyCode;
+		if(event.shiftKey && key == 13){
+			window.sendMessage();
+			$("#userInputMsg").val("");
+		}
+	}
+	function showMeetMsg(data) {
+		var recipientid = data.recipientid;
+		var recipienttype = data.recipienttype;
+		var userCome = data.senderid;
+		var convContent = data.msg;
+		var convTime = data.time;
+		var userPhoto = data.userPhoto;
+		var html = "";
+		if (userCome == window.userId || userCome == recipientid) {
+			html += "<li ><div class='right'><div class='content'><p><time>"
+					+ convTime
+					+ "</time></p><p><span>"
+					+ convContent
+					+ "</span></p></div><div class='headImg'><img title='' src='"
+					+ userPhoto + "' /></div></div></li>";
+		} else if ((recipientid == userId && userCome == window.recipientid
+				&& recipienttype == window.recipienttype) || (recipientid == window.recipientid)) {
+			html += "<li><div  class='left'><div class='headImg'><img title='' src='"
+					+ userPhoto
+					+ "' /></div><div class='content'><p><time>"
+					+ convTime
+					+ "</time></p><p><span>"
+					+ convContent
+					+ "</span></p></div></div></li>";
+		}else if (recipientid == userId) {
+			if (recipienttype == 'persion') {
+				var ele = $(".usersList").find("[data-selectedid='" + userCome + "']").find('.newmsg');
+				$(ele).removeClass("hide");
+				$(ele).attr("data-missnum", '1');
+			} else if (recipienttype == 'group') {
+				var ele = $(".topicList").find("[data-selectedid='" + userCome + "']").find('.newmsg');
+				$(ele).removeClass("hide");
+				$(ele).attr("data-missnum", '1');
+			}
+		}
+		$(".statement").append(html);
+		var boxHeight = $(".statement").parent().height();
+		var moreBoxHeight = $(".statement").parent().children("div").eq(0)
+				.height();
+		var docHeight = $(".statement").height();
+		$(".statement").parent().scrollTop(
+				docHeight + moreBoxHeight - boxHeight);
+	}
+})();

@@ -16,8 +16,7 @@
 <body>
 	<section>
 		<div>
-			<details open class='users'>
-				<summary>联系人</summary>
+			<div class='users'>
 				<ul class='list usersList'>
 					<li userId='123456789'>
 						<div>
@@ -46,9 +45,8 @@
 						</div>
 					</li>
 				</ul>
-			</details>
-			<details open class='topic'>
-				<summary>话题</summary>
+			</div>
+			<div class='topic'>
 				<ul class='list topicList'>
 					<li userId='123456789'>
 						<div>
@@ -77,7 +75,7 @@
 						</div>
 					</li>
 				</ul>
-			</details>
+			</div>
 		</div>
 		<div class='message'>
 			<div class="">
@@ -126,11 +124,11 @@
 			</div>
 			<div>
 				<div>
-					<textarea placeholder="up to 150 words" autofocus="true"></textarea>
+					<textarea id='userInputMsg'  autofocus="true"></textarea>
 				</div>
 				<div>
 					<button alt='clear'>clear</button>
-					<button alt='send'>shift+enter</button>
+					<button alt='send' onclick="sendMessage()">shift+enter</button>
 				</div>
 			</div>
 		</div>

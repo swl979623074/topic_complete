@@ -137,11 +137,18 @@ public class UserService {
 
 	public Map<String, Object> addFriend(String userId, String firendAccount) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String insert_friend = "insert into friend (user_id,frie_id) values('"
+		String insert_friend_one = "insert into friend (user_id,frie_id) values('"
 				+ userId + "',(select user_id from user where user_account='"
 				+ firendAccount + "'))";
-		int key = OJDBC.executeUpdate(insert_friend);
-		if (key == 1) {
+		String insert_friend_two = "insert into friend (frie_id,user_id) values('"
+				+ userId + "',(select user_id from user where user_account='"
+				+  firendAccount  + "'))";
+		int key_one = OJDBC.executeUpdate(insert_friend_one);
+		int key_two = OJDBC.executeUpdate(insert_friend_two);
+		Boolean key = false;
+		if(key_one == 1 && key_two == 1)
+			key = true;;
+		if (key == true) {
 			map.put("status", "SUCCESS");
 		} else {
 			map.put("status", "FALSE");
@@ -162,9 +169,13 @@ public class UserService {
 
 	public Map<String, Object> deleteFriend(String userId, String firendId) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String update_friend = "delete from friend where user_id = '" + userId
+		String update_friend_one = "delete from friend where user_id = '" + userId
 				+ "' and frie_id = '" + firendId + "'";
-		OJDBC.executeUpdate(update_friend);
+		String update_friend_two = "delete from friend where user_id = '" + firendId
+				+ "' and frie_id = '" + userId + "'";
+		
+		OJDBC.executeUpdate(update_friend_one);
+		OJDBC.executeUpdate(update_friend_two);
 		map.put("status", "SUCCESS");
 		return map;
 	}
