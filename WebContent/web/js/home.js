@@ -4,15 +4,25 @@ var userId = userMsg.getItem("userId");
 var userAlias = userMsg.getItem("userAlias");
 
 (function(initMsg){
-	console.log(initMsg);
 	if("" != userId && null != userId && "null" != userId){
 		if("" != userAlias && null != userAlias && "null" != userAlias){
-			console.log("userAlias: "+ userAlias);
 			$(".usermsg a:first").text(userAlias);
 		}else{
 			$(".usermsg a:first").text(userAccount);
 		}
 	}
+	$("#mainmenu").find("img").eq(0).attr("data-selected","true").css("background","#86EE60");
+	$("#mainmenu").find("img").click(function(){
+		$("#mainmenu").find("img[data-selected]").removeAttr("data-selected").css("background","white");
+		$(this).attr("data-selected","true").css("background","#86EE60");
+	});
+	$("#mainmenu").find("img").hover(function(){
+		if(!$(this).attr("data-selected"))
+			$(this).css("background","#C1EA9F");
+	},function(){
+		if(!$(this).attr("data-selected"))
+			$(this).css("background","#FFF");
+	})
 })("init user message");
 
 

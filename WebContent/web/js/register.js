@@ -18,7 +18,7 @@
 })();
 
 (function() {
-	var flag = "../img/logo.png";
+	var flag = "../img/icon_confrim.png";
 	$.get("/Topic/newsTypeController/getNewsType", function(data) {
 		var status = data.status;
 		if (status == "SUCCESS") {

@@ -158,6 +158,7 @@
 (function() {
 	window.view = {
 		changeToTopicModel : function() {
+			$(".list").html("");
 			$(".users").addClass("hide");
 			$(".topic").removeClass("hide");
 			$(".recommend").removeClass("hide");
@@ -173,6 +174,7 @@
 			$("#userInputMsg").css("cursor","not-allowed");
 		},
 		changeToUsersModel : function() {
+			$(".list").html("");
 			$(".users").removeClass("hide");
 			$(".topic").addClass("hide");
 			$(".recommend").addClass("hide");
@@ -189,9 +191,10 @@
 		showFriend : function(list) {
 			var html = "";
 			var len = list.length;
-			var delete_flag = "../img/logo.png";
-			var update_flag = "../img/logo.png";
-			var newMsg_flag = "../img/logo.png";
+			var delete_flag = "../img/icon_delete.png";
+			var update_flag = "../img/icon_update.png";
+			var newMsg_flag = "../img/icon_newmsg.png";
+			
 			for ( var i = 0; i < len; i++) {
 				var friendId = list[i].userId;
 				var userDegree = list[i].userDegree;
@@ -202,9 +205,9 @@
 				var friendMissMsg = list[i].friendMissMsg;
 				var showNewMsgClass = friendMissMsg == 0 ? "newmsg hide"
 						: "newmsg";
-				html += "<li onclick='clickFriend(this)' onmouseover='friendOver(this)' onmouseout='friendOut(this)' data-selectedId='"
+				html += "<li  onclick='clickFriend(this)' onmouseover='friendOver(this)' onmouseout='friendOut(this)' data-selectedId='"
 						+ friendId
-						+ "'><div><img src='"
+						+ "'><div><img onerror='imgError(this)' src='"
 						+ userphoto
 						+ "' /></div><div><div><span class='friendRemark'>"
 						+ firendRemark
@@ -337,9 +340,9 @@
 		showTopic : function(list) {
 			var html = "";
 			var len = list.length;
-			var delete_flag = "../img/logo.png";
-			var group_flag = "../img/logo.png";
-			var newMsg_flag = "../img/logo.png";
+			var delete_flag = "../img/icon_delete.png";
+			var group_flag = "../img/icon_groupchat.png";
+			var newMsg_flag = "../img/icon_newmsg.png";
 			for ( var i = 0; i < len; i++) {
 				var topicId = list[i].topicId;
 				var topicTitle = list[i].topicTitle;
@@ -432,6 +435,9 @@
 
 /** **********************************event*********************************** */
 (function() {
+	window.imgError = function(that){
+		that.src = "../img/icon_unkown_people.png";
+	};
 	window.openDialog = function(that) {
 		var title = $(that).attr("title");
 		$(".delete_or_update_dialog").removeClass("hide");
@@ -453,10 +459,9 @@
 		$(".update").hasClass("hide") ? null : $(".update").addClass('hide');
 		$(".delete_or_update_dialog").hasClass("hide") ? null : $(
 				".delete_or_update_dialog").addClass('hide');
-//		window.li_selectedId = null;
 	};
 	window.friendOver = function(that) {
-		$(that).css("background", "lightblue");
+		$(that).css("background", "#A55540");
 		$(that).children("div").eq(1).children('div').eq(2).show();
 	};
 
@@ -625,7 +630,8 @@
 
 	var websocket = null;
 	if ("WebSocket" in window) {
-		websocket = new WebSocket("ws://localhost:8080/Topic/mywebsocket");
+		//websocket = new WebSocket("ws://localhost:8080/Topic/mywebsocket");
+		websocket = new WebSocket("ws://112.74.44.49:8080/Topic/mywebsocket");
 		// websocket = new
 		// WebSocket("ws://192.168.191.4:8080/Topic/mywebsocket");
 	} else {
@@ -661,6 +667,9 @@
 		};
 		websocket.send(JSON.stringify(obj));
 		websocket.close();
+	};
+	window.clearMessage = function(){
+		$("#userInputMsg").val("");
 	};
 	window.sendMessage = function() {
 		var msg = $("#userInputMsg").val();

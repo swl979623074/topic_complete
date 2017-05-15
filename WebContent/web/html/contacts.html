@@ -18,7 +18,7 @@
 		<div>
 			<div class='users'>
 				<ul class='list usersList'>
-					<li userId='123456789'>
+					<!-- <li userId='123456789'>
 						<div>
 							<img src="../img/logo.png" />
 						</div>
@@ -43,12 +43,12 @@
 						<div alt='new message' title='new message' class='newmsg' data-userId='123456789'>
 							<img src="../img/logo.png" />
 						</div>
-					</li>
+					</li> -->
 				</ul>
 			</div>
 			<div class='topic'>
 				<ul class='list topicList'>
-					<li userId='123456789'>
+					<!-- <li userId='123456789'>
 						<div>
 							<img src="../img/logo.png" />
 						</div>
@@ -73,14 +73,14 @@
 						<div alt='new message' title='new message'>
 							<img src="../img/logo.png" />
 						</div>
-					</li>
+					</li> -->
 				</ul>
 			</div>
 		</div>
 		<div class='message'>
 			<div class="">
 				<div>
-					<span onclick='getMoreMessage()'>more message</span>
+					<span onclick='getMoreMessage()'>更多信息</span>
 				</div>
 				<ul class='statement'>
 					<!-- <li >
@@ -116,10 +116,10 @@
 			</div>
 			<div>
 				<div title='表情'>
-					<img src="../img/logo.png" />
+					<img src="../img/icon_smiling.png" />
 				</div>
 				<div title='图片'>
-					<img src="../img/logo.png" />
+					<img src="../img/icon_picture.png" />
 				</div>
 			</div>
 			<div>
@@ -127,14 +127,14 @@
 					<textarea id='userInputMsg'  autofocus="true"></textarea>
 				</div>
 				<div>
-					<button alt='clear'>clear</button>
+					<button alt='clear' onclick="clearMessage()">clear</button>
 					<button alt='send' onclick="sendMessage()">shift+enter</button>
 				</div>
 			</div>
 		</div>
 		<div class="summary">
 			<div class="currentTopic summary_model ">
-				<header> Topic Message </header>
+				<header>话题信息</header>
 				<section>
 					<ul>
 						<li><label>ID:</label> <span id='topicId'>社会教育</span></li>
@@ -152,7 +152,7 @@
 				
 			</div>
 			<div class="currentUser summary_model">
-				<header> User Message </header>
+				<header>用户信息</header>
 				<section>
 					<ul>
 						<li><label>账户:</label> <span id='usreMsg_account'>979623074</span></li>
@@ -170,7 +170,7 @@
 	</section>
 	<aside class="delete_or_update_dialog hide">
 		<header>
-			<img title='关闭' src="../img/logo.png" onclick="hideDialog()" />
+			<img title='关闭' src="../img/icon_close.png" onclick="hideDialog()" />
 		</header>
 		<section>
 			<span class="delete hide">确认删除？</span> <input class="update hide"

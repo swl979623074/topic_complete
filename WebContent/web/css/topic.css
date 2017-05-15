@@ -21,6 +21,7 @@ body>header ul {
 	height: 100%;
 	display: flex;
 	padding-left: 2rem;
+	background:url(../img/background.jpg) repeat;
 }
 
 body>header li {

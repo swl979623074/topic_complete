@@ -17,7 +17,7 @@
 (function() {
 	var browerType = navigator.userAgent;
 	if (browerType.indexOf("Firefox") != -1) {
-		$(".headImg").css("margin-top", "-30%");
+		$(".headImg").css("margin-top", "-40%");
 	} else if (browerType.indexOf("Chrome") != -1) {
 		$(".headImg").css("margin-top", "0px");
 	}
@@ -88,7 +88,7 @@
 (function() {
 	window.view = {
 		showNewsType : function(list, editable) {
-			var flag = "../img/logo.png";
+			var flag = "../img/icon_confrim.png";
 			var html = "";
 			var len = list.length;
 			var envent = "onclick='clickNewsTypeEvent(this)'";

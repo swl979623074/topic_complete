@@ -13,28 +13,27 @@ body>header{
 	width: 100%;
 	display: flex;
 	border-bottom: 0.1rem solid #CCC;
-	padding-top: 0.5rem;
+	background:#005691;
 }
 body>header>div{
 	height: 100%;
 	width: 10rem;
 	font-size: 1.3rem;
 	cursor: pointer;
-	line-height: 4rem;
+	line-height: 3.5rem;
 	text-align: center;
+	color:white;
 }
 body>header>div:hover{
-	background: #D3D3D3;
+	background: #004A7C;
+	color:#E8F1F5;
 }
 .menu_select{
-	border-bottom: 0.1rem solid white;
-	border-top: 0.1rem solid #CCC;
-	border-left: 0.1rem solid #CCC;
-	border-right: 0.1rem solid #CCC;
-	background: #D3D3D3;
+	color:#E8F1F5;
+	background: #004A7C;
 }
 body>section{
-	height: 90%;
+	height: 93%;
 	width: 100%;
 	overflow: hidden;
 }

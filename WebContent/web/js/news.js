@@ -157,7 +157,10 @@
 			window.newsMsg.pageSize++;
 			window.model.getNewsByType(window.view.showNews, window.newsMsg);
 		}
-	}
+	};
+	window.imgError = function(that){
+		that.src = "../img/icon_loading.gif";
+	};
 })();
 
 /** ***************************tool**************************** */
@@ -178,13 +181,13 @@
 			return topicMsg;
 		},
 		makeSimpleNewsHtml : function(data) {
-			var flag = "../img/logo.png";
+			var flag = "../img/icon_add_topic.png";
 			var title = data.topic;
 			var description = data.brief;
 			var source = data.date + " " + "来源：" + data.source;
 			var photoUrl = data.lbimg[0].src;
 			var topicUrl = "https://mini.eastday.com/a/" + data.url;
-			var html = "<li class='model simple'><div><img src='"
+			var html = "<li class='model simple'><div><img onerror='imgError(this)' src='"
 					+ photoUrl
 					+ "' /></div><div><header class='header'> <a target='_blank' href='"
 					+ topicUrl
@@ -201,7 +204,7 @@
 			return html;
 		},
 		makeComplxNewsHtml : function(data) {
-			var flag = "../img/logo.png";
+			var flag = "../img/icon_add_topic.png";
 			var title = data.topic;
 			var photoUrl = data.miniimg;
 			var source = data.date + " " + "来源：" + data.source;
@@ -210,11 +213,11 @@
 					+ topicUrl
 					+ "'>"
 					+ title
-					+ "</a></header><section><img src='"
+					+ "</a></header><section><img onerror='imgError(this)' src='"
 					+ photoUrl[0].src
-					+ "' /> <img src='"
+					+ "' /> <img onerror='imgError(this)' src='"
 					+ photoUrl[1].src
-					+ "' /><img src='"
+					+ "' /><img onerror='imgError(this)' src='"
 					+ photoUrl[2].src
 					+ "' /></section> <footer class='footer'><div><span>"
 					+ source

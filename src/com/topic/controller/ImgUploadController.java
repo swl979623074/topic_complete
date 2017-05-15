@@ -26,17 +26,18 @@ public class ImgUploadController {
 	@RequestMapping("/fileUpload")
 	public ModelAndView fileUpload(@RequestParam("file") MultipartFile file,
 			HttpServletRequest req) {
-		String eclipseRootPath = System.getProperty("user.dir");
-		String rootPath = eclipseRootPath.substring(0,
-				eclipseRootPath.lastIndexOf("\\"));
-		URL realPath = this.getClass().getResource("/");
-		String projectName = realPath.getPath().substring(
-				realPath.getPath().indexOf("webapps") + 8,
-				realPath.getPath().indexOf("WEB-INF") - 1);
-		String saveBasePath = rootPath + "\\" + projectName + "Config\\users";
+//		String eclipseRootPath = System.getProperty("user.dir");
+//		String rootPath = eclipseRootPath.substring(0,
+//				eclipseRootPath.lastIndexOf("\\"));
+//		URL realPath = this.getClass().getResource("/");
+//		String projectName = realPath.getPath().substring(
+//				realPath.getPath().indexOf("webapps") + 8,
+//				realPath.getPath().indexOf("WEB-INF") - 1);
+//		String saveBasePath = rootPath + "\\" + projectName + "Config\\users";
 
 		String userAccount = req.getQueryString();
 
+		String saveBasePath = "C:\\Users\\Administrator\\Desktop\\TopicUsersimg";
 		Map<String, Object> map = new HashMap<String, Object>();
 		// 判断文件是否为空
 		if (!file.isEmpty()) {

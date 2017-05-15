@@ -49,6 +49,9 @@
 		}
 	};
 	$("#signIn").click(userLogin);
+	$("#register").click(function(){
+		window.location.href = './../html/register.html';
+	})
 	$(document).keydown(function(e){
 		if(e.keyCode == 13){
 			userLogin();

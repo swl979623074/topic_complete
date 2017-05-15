@@ -21,7 +21,8 @@ body>section>div {
 
 body>section>div:first-child {
 	width: 20%;
-	background: darkgray;
+	//background: darkgray;
+	background:#4B4A5A;
 	overflow-x: hidden;
 	overflow-y: auto;
 }
@@ -33,7 +34,7 @@ body>section>div:nth-child(2) {
 .list {
 	list-style: none;
 	padding: 0px;
-	margin-top: 0.5rem;
+	margin-top: 0.1rem;
 	width: 100%;
 }
 
@@ -59,8 +60,9 @@ body>section>div:nth-child(2) {
 }
 
 .list img {
-	width: 100%;
-	height: 100%;
+	width: 80%;
+	height: 80%;
+	padding:10%;
 	border-radius:1rem;
 }
 
@@ -114,6 +116,7 @@ summary {
 /***********上端消息显示区***********/
 .message {
 	margin: 0rem;
+	background:#F9F8EB;
 }
 
 .message>div {
@@ -270,6 +273,7 @@ summary {
 	background: white;
 	width: 15%;
 	height: 100%;
+	background:#E9EAB4;
 }
 
 .summary_model {
@@ -280,7 +284,7 @@ summary {
 .summary_model>header {
 	height: 10%;
 	width: 100%;
-	background: #ADD8E6;
+	background:#B7B56E;
 	font-size: 1.3rem;
 	line-height: 2rem;
 }
@@ -340,7 +344,9 @@ aside {
 aside>header {
 	height: 2rem;
 	width: 100%;
-	background: gray;
+	//background: gray;
+	
+	background: #0E7CF4;
 }
 
 aside>header img {
@@ -391,5 +397,7 @@ aside>footer>button {
 	visibility: hidden;
 }
 .selected_li{
-	background:lightblue !important;
+	//background:lightblue !important;
+	background:#E79A58 !important;
+	
 }

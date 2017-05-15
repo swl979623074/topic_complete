@@ -15,15 +15,18 @@ public class FileOperation {
 	private String filepath = null;
 
 	public FileOperation(){
-		String eclipseRootPath = System.getProperty("user.dir");
-		String rootPath = eclipseRootPath.substring(0, eclipseRootPath.lastIndexOf("\\"));
+//		String eclipseRootPath = System.getProperty("user.dir");
+//		String rootPath = eclipseRootPath.substring(0, eclipseRootPath.lastIndexOf("\\"));
+		
+		String tomcatPath = System.getProperty("catalina.home");
+		String rootPath = tomcatPath.substring(0, tomcatPath.lastIndexOf("\\"));
 		URL realPath = this.getClass().getResource("/");
 		String projectName = realPath.getPath().substring(realPath.getPath().indexOf("webapps")+8, realPath.getPath().indexOf("WEB-INF")-1);
 		
 		String saveBasePath = rootPath + "\\" + projectName +"Config";
-		System.out.println(saveBasePath);
 		
 		this.filepath = saveBasePath +"\\db\\dbconfig";
+		
 	}
 	public Map<String, String> getConfigData(String dbtype) throws FileNotFoundException {
 		
@@ -56,14 +59,14 @@ public class FileOperation {
 	}
 
 	public static void main(String[] args) {
-		Map<String, String> map = new HashMap<String, String>();
-		FileOperation fileOp = new FileOperation();
-		try {
-			map = fileOp.getConfigData("mysql");
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println(map);
+//		Map<String, String> map = new HashMap<String, String>();
+//		FileOperation fileOp = new FileOperation();
+//		try {
+//			map = fileOp.getConfigData("mysql");
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		System.out.println(map);
 	}
 }

@@ -67,10 +67,10 @@ body>header>div>button:hover{
 
 .headImg>div:first-child {
 	width: 12rem;
-	height: 6.5rem;
+	height: 10rem;
 	margin: 0.2rem auto;
 	padding: 0.1rem;
-	border: 0.5rem solid #CCC;
+	border: 0.3rem solid #CCC;
 }
 
 .headImg>div:first-child>img {
