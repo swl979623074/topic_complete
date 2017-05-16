@@ -63,7 +63,6 @@ public class HandleMessageToClient implements HandleMessage {
 		this.JSONObj.put("userPhoto", getImgBinaryData(userId));
 		this.JSONObj.put("time", DateFormat.getCurrentDate_string());
 		this.message = this.JSONObj.toString();
-		
 		try {
 			if(senderSession != recipientSession)
 				senderSession.getBasicRemote().sendText(this.message);
@@ -94,7 +93,6 @@ public class HandleMessageToClient implements HandleMessage {
 		String sql_group = "select group_userid , group_topicid ,user_online , group_openwindow from groups , user where user_id = group_userid and group_topicid = '"
 				+ groupTopicId + "'";
 
-		System.out.println(sql_group);
 		try {
 			String onwindow = "0";
 			ResultSet rs = this.OJDBC.executeQuery(sql_group);
@@ -142,7 +140,6 @@ public class HandleMessageToClient implements HandleMessage {
 		} else {
 			System.out.println("recipientType ERROR: " + recipientType);
 		}
-		System.out.println(sql);
 		try {
 			ResultSet rs_onwindow = OJDBC.executeQuery(sql);
 			rs_onwindow.next();

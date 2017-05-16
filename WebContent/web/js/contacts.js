@@ -74,7 +74,7 @@
 			$.post("/Topic/friendController/deleteFriend", data, function(res) {
 				if (res.status == "SUCCESS") {
 					cb_deleteFriend(data.friendId)
-					console.log("deleteFriend success");
+					console.log("delete friend success");
 				}
 			});
 		},
@@ -257,10 +257,10 @@
 							+ convTime
 							+ "</time></p><p><span>"
 							+ convContent
-							+ "</span></p></div><div class='headImg'><img title='' src='"
+							+ "</span></p></div><div class='headImg'><img onerror='imgError(this)' title='' src='"
 							+ userPhoto + "' /></div></div></li>";
 				} else {
-					html += "<li><div  class='left'><div class='headImg'><img title='' src='"
+					html += "<li><div  class='left'><div class='headImg'><img onerror='imgError(this)' title='' src='"
 							+ userPhoto
 							+ "' /></div><div class='content'><p><time>"
 							+ convTime
@@ -307,13 +307,13 @@
 							+ convTime
 							+ "</time></p><p><span>"
 							+ convContent
-							+ "</span></p></div><div class='headImg'><img onclick='showUserMsg(this)' data-userid='"
+							+ "</span></p></div><div class='headImg'><img onerror='imgError(this)' onclick='showUserMsg(this)' data-userid='"
 							+ userCome
 							+ "' title='' src='"
 							+ userPhoto
 							+ "' /></div></div></li>";
 				} else {
-					html += "<li><div  class='left'><div class='headImg'><img  onclick='showUserMsg(this)' data-userid='"
+					html += "<li><div  class='left'><div class='headImg'><img onerror='imgError(this)' onclick='showUserMsg(this)' data-userid='"
 							+ userCome
 							+ "'  title='' src='"
 							+ userPhoto
@@ -558,7 +558,6 @@
 	window.commintUpdateOrDelete = function(that) {
 		var delete_ele = $(that).parent().parent().find("span:not(.hide)");
 		var update_ele = $(that).parent().parent().find("input:not(.hide)");
-		console.log($(delete_ele).length);
 		if ($(delete_ele).length > 0) {
 			if (window.parentType == "users.html") {
 				window.model.deleteFriend(window.view.deleteFriend, {
@@ -650,7 +649,6 @@
 		websocket.send(JSON.stringify(obj));
 	};
 	websocket.onmessage = function(event) {
-		console.log("onmessage")
 		showMeetMsg(JSON.parse(event.data));
 	};
 	websocket.onclose = function() {
@@ -684,7 +682,6 @@
 			recipienttype : window.recipienttype,
 			msg : msg.replace(/\n/g, "<br />")
 		};
-		console.log(msg);
 		websocket.send(JSON.stringify(data));
 		$("#userInputMsg").val("");
 	};
@@ -708,11 +705,11 @@
 					+ convTime
 					+ "</time></p><p><span>"
 					+ convContent
-					+ "</span></p></div><div class='headImg'><img title='' src='"
+					+ "</span></p></div><div class='headImg'><img onerror='imgError(this)' title='' src='"
 					+ userPhoto + "' /></div></div></li>";
 		} else if ((recipientid == userId && userCome == window.recipientid
 				&& recipienttype == window.recipienttype) || (recipientid == window.recipientid)) {
-			html += "<li><div  class='left'><div class='headImg'><img title='' src='"
+			html += "<li><div  class='left'><div class='headImg'><img onerror='imgError(this)' title='' src='"
 					+ userPhoto
 					+ "' /></div><div class='content'><p><time>"
 					+ convTime
