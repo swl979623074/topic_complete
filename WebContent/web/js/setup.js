@@ -29,6 +29,7 @@ $(function(){
 	function getUrl(type){
 		var url = null;
 		switch(type){
+			case "topicManager":url='./topicmanager.html';break;
 			case "summary":url='./summary.html';break;
 			case "pwd":url='./pwd.html';break;
 			case "grade":url='./grade.html';break;

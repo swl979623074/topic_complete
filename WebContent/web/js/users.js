@@ -51,7 +51,7 @@ function hideDialog() {
 	window.view = {
 		showUserMsg : function(data) {
 			if(data == "FAlSE"){
-				$(".userMessage").html("<p style='width:100%;text-align:center !important;color:red;font-szie:3rem;!important'>Can Not Find The User</p>");
+				$(".userMessage").html("<p style='width:100%;text-align:center !important;color:red;font-szie:3rem;!important'>用户不存在，请检测账号是否存在错误！</p>");
 				return;
 			}
 			
@@ -82,10 +82,12 @@ function hideDialog() {
 
 		},
 		closeDialog : function(data) {
+			alert(data)
 			if (data == "SUCCESS") {
 				$(".addUserDialog").addClass('hide');
 			} else {
-				$(".userMessage").html("<p style='width:100%;text-align:center !important;color:red;font-szie:3rem;!important'>Add Friend False</p>");
+				alert(data)
+				$(".userMessage").html("<p style='width:100%;text-align:center !important;color:red;font-szie:3rem;!important'>添加失败，好友已经存在！</p>");
 			}
 		}
 	}
@@ -97,7 +99,7 @@ function hideDialog() {
 	window.addSerachUserEvent = function() {
 		var userAccount = $('.userAccount').val();
 		if (userAccount.length < 1) {
-			alert("user account can not be null");
+			$(".userMessage").html("<p style='width:100%;text-align:center !important;color:red;font-szie:3rem;!important'>用户名不能为空！</p>");
 			return;
 		}
 		window.model.getUserMsg(window.view.showUserMsg, {

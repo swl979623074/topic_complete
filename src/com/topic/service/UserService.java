@@ -144,11 +144,8 @@ public class UserService {
 				+ userId + "',(select user_id from user where user_account='"
 				+  firendAccount  + "'))";
 		int key_one = OJDBC.executeUpdate(insert_friend_one);
-		int key_two = OJDBC.executeUpdate(insert_friend_two);
-		Boolean key = false;
-		if(key_one == 1 && key_two == 1)
-			key = true;;
-		if (key == true) {
+		OJDBC.executeUpdate(insert_friend_two);
+		if (key_one == 1) {
 			map.put("status", "SUCCESS");
 		} else {
 			map.put("status", "FALSE");

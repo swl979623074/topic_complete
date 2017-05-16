@@ -75,4 +75,11 @@ public class TopicController {
 		map = topicService.addTopicForUser(userId, topicId);
 		return MVC.toString(map);
 	}
+	
+	@RequestMapping("/getRecommendTopic")
+	public ModelAndView getRecommendTopic(String userId,String typeId,int pageSize,int pageNum){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map = topicService.getRecommendTopic(userId, typeId,pageSize,pageNum);
+		return MVC.toString(map);
+	}
 }

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Topic topic_manager</title>
+<meta name="author" content="swl" />
+<meta name="keywords" content="topic,swl" />
+<meta name='description' content="the pwd model" />
+<link rel="shortcut icon" href="./../img/logo.png" />
+<link rel="stylesheet" href="../css/bootstrap.min.css" />
+
+<style>
+html,body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+	background: url(../img/background.jpg) repeat;
+}
+
+.content,.row {
+	height: 100%;
+	padding: 0.5rem 0rem;
+}
+
+#topicList,#typeListCan {
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+#typeList {
+	border: 1px solid #CCC;
+	margin: 0px 1rem;
+	padding: 1rem 1rem;
+	border: 0.1rem solid #CCC;
+	border-radius: 0.5rem;
+	color: white;
+}
+
+#typeList>li {
+	list-style: none;
+	width: 90%;
+	height: 2rem;
+	margin: 0.2rem auto;
+	background: blue;
+	border: 0px solid white;
+	border-radius: 0.5rem;
+	text-align: center;
+	line-height: 2rem;
+	cursor: pointer;
+}
+
+table tr:nth-child(odd) {
+	background-color: #f1f1f1;
+}
+
+table tr:nth-child(even) {
+	background-color: #ffffff;
+}
+
+table button {
+	width: 80%;
+	text-align: center;
+	margin: 0 10%;
+}
+</style>
+</head>
+
+<body ng-app='app' ng-controller="rootController">
+	<div class="content">
+		<div class="row">
+			<div class="col-md-2" id="typeListCan" ng-controller="typeList">
+				<ul id='typeList'>
+					<li ng-repeat="data in datas" ng-click="getTopicList(data.typeId)"
+						data-typeid="{{data.typeId}}">{{data.typeAlias}}</li>
+				</ul>
+			</div>
+			<div class="col-md-10 " id="topicList" ng-controller="topicList"
+				ng-module="typeId=null">
+				<div class='row'>
+					<div class="col-md-11">
+						<table class="table table-bordered">
+							<tr>
+								<th class='col-md-1'>#</th>
+								<th class='col-md-2'>标题</th>
+								<th class='col-md-5'>描述</th>
+								<th class='col-md-2'>关闭时间</th>
+								<th class='col-md-2'>行为</th>
+							</tr>
+							<tr ng-repeat="data in datas">
+								<td>{{$index+1}}</td>
+								<td>{{data.topicTitle}}</td>
+								<td>{{data.topicDescription}}</td>
+								<td>{{data.topicEndTime}}</td>
+								<td>
+									<button class="btn btn-primary"
+										ng-click="addTopic(data.topicId)"
+										data-topicId="{{data.topicId}}">添加</button>
+								</td>
+							</tr>
+						</table>
+						<ul class="pager">
+							<li class="previous"><a href="#" ng-click="prevPage()">&larr; 上一页</a></li>
+							<li class="next"><a href="#" ng-click="nextPage()">下一页 &rarr;</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="../js/jquery-2.1.0.js"></script>
+	<script type="text/javascript" src="../js/angular.js"></script>
+	<script>
+		var userMsg = window.sessionStorage;
+		var userId = userMsg.getItem("userId");
+		var pageSize = 0;
+		var pageNum = 10;
+		var typeId = null;
+
+		var app = angular.module("app", []);
+		app.config(function($httpProvider) {
+			$httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded';
+			$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
+			// Override $http service's default transformRequest
+			$httpProvider.defaults.transformRequest = [ function(data) {
+				/**
+				 * The workhorse; converts an object to x-www-form-urlencoded serialization.
+				 * @param {Object} obj
+				 * @return {String}
+				 */
+				var param = function(obj) {
+					var query = '';
+					var name, value, fullSubName, subName, subValue, innerObj, i;
+
+					for (name in obj) {
+						value = obj[name];
+
+						if (value instanceof Array) {
+							for (i = 0; i < value.length; ++i) {
+								subValue = value[i];
+								fullSubName = name + '[' + i + ']';
+								innerObj = {};
+								innerObj[fullSubName] = subValue;
+								query += param(innerObj) + '&';
+							}
+						} else if (value instanceof Object) {
+							for (subName in value) {
+								subValue = value[subName];
+								fullSubName = name + '[' + subName
+										+ ']';
+								innerObj = {};
+								innerObj[fullSubName] = subValue;
+								query += param(innerObj) + '&';
+							}
+						} else if (value !== undefined
+								&& value !== null) {
+							query += encodeURIComponent(name) + '='
+									+ encodeURIComponent(value) + '&';
+						}
+					}
+
+					return query.length ? query.substr(0,
+							query.length - 1) : query;
+				};
+
+				return angular.isObject(data)
+						&& String(data) !== '[object File]' ? param(data)
+						: data;
+			} ];
+		});
+		app.controller("rootController", function($scope) {
+			$scope.$on("typeIdChange", function(event, msg) {
+				$scope.$broadcast("typeIdChangeFromRoot", msg);
+			})
+		})
+		app.controller("typeList", [ "$scope", "$http",
+				function($scope, $http) {
+					var url = "/Topic/newsTypeController/getNewsType";
+					$http.get(url).then(function(res) {
+						$scope.datas = res.data.list;
+					}, function(res) {
+						console.log("ERROR" + res);
+					});
+					$scope.getTopicList = function(data) {
+						typeId = data;
+						pageSize = 0;
+						var url = "/Topic/topicController/getRecommendTopic";
+						$http.post(url, {
+							userId : userId,
+							typeId : typeId,
+							pageSize:pageSize,
+							pageNum:pageNum
+						}).then(function(res) {
+							$scope.$emit("typeIdChange", res.data.list);
+						}, function(res) {
+							console.log("ERROR" + res);
+						})
+					}
+				} ]);
+		app.controller("topicList", [ "$scope", "$http",
+				function($scope, $http) {
+					$scope.addTopic = function(data) {
+						var topicId = data;
+						var url = "/Topic/topicController/addTopicForUser";
+						$http.post(url,{topicId:topicId,userId:userId}).then(function(res){
+							if(res.data.status == "SUCCESS"){
+								alert("添加成功")
+							}
+						},function(){
+							
+						})
+					};
+					$scope.$on("typeIdChangeFromRoot", function(event, msg) {
+						$scope.datas = msg;
+						console.log(msg)
+					});
+					$scope.prevPage = function(){
+						if(pageSize<=0){
+							pageSize = 0;
+							alert("这是第一页");
+							return;
+						}
+						pageSize--;
+						var url = "/Topic/topicController/getRecommendTopic";
+						$http.post(url, {
+							userId : userId,
+							typeId : typeId,
+							pageSize:pageSize,
+							pageNum:pageNum
+						}).then(function(res) {
+							$scope.$emit("typeIdChange", res.data.list);
+						}, function(res) {
+							console.log("ERROR" + res);
+						})
+					};
+					$scope.nextPage = function(){
+						pageSize++;
+						var url = "/Topic/topicController/getRecommendTopic";
+						$http.post(url, {
+							userId : userId,
+							typeId : typeId,
+							pageSize:pageSize,
+							pageNum:pageNum
+						}).then(function(res) {
+							if(res.data.list.length == 0){
+								alert("这是最后一页");
+								pageSize--;
+								return;
+							}
+							$scope.$emit("typeIdChange", res.data.list);
+						}, function(res) {
+							console.log("ERROR" + res);
+						})
+					};
+				} ]);
+	</script>
+</body>
+
+</html>

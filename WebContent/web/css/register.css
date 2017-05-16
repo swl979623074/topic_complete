@@ -5,6 +5,7 @@ body {
 	/*height: 100%;*/
 	margin: 0px;
 	padding: 0px;
+	overflow:auto;
 	background:url(../img/background.jpg) repeat;
 }
 

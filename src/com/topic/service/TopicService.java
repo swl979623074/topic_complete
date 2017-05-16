@@ -180,4 +180,32 @@ public class TopicService {
 		}
 		return map;
 	}
+	
+	public Map<String, Object>  getRecommendTopic(String userId,String typeId,int pageSize,int pageNum){
+		int skip = pageSize*pageNum;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		String sql_select_recommendTopic = "select topi_id,topi_title,topi_description,topi_stilltime from topic where topi_type = '"+typeId+"' and topi_closed = 0 and topi_id not in (select group_topicid from groups where group_userid = '"+userId+"' ) order by topi_stilltime limit "+skip+","+pageNum+"";
+		System.out.println(sql_select_recommendTopic);
+		ResultSet rs = OJDBC.executeQuery(sql_select_recommendTopic);
+		try {
+			ArrayList<Map<String, String>> list = new ArrayList<Map<String, String>>();
+			
+			while (rs.next()) {
+				Map<String, String> msg = new HashMap<String, String>();
+				msg.put("topicId", rs.getString("topi_id"));
+				msg.put("topicTitle", rs.getString("topi_title"));
+				msg.put("topicDescription", rs.getString("topi_description"));
+				msg.put("topicEndTime", rs.getString("topi_stilltime"));
+				list.add(msg);
+			}
+			map.put("status", "SUCCESS");
+			map.put("list", list);
+		} catch (SQLException e) {
+			map.put("status", "FALSE");
+			map.put("msg", "SQLException");
+			e.printStackTrace();
+		}
+		return map;
+	}
 }

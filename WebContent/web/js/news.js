@@ -95,6 +95,10 @@
 			$("#topic_title").val("");
 			$("#topic_description").val("");
 			$("#topic_stilltime").val("");
+		},
+		loading:function(){
+			var html = "<li><img src='../img/icon_loading.gif' style='width:50%;height:50%;padding:10% 25%;'/></li>";
+			$(".newslist").html(html)
 		}
 	}
 })();
@@ -110,6 +114,7 @@
 	window.newsTypeId = 2;
 	window.topicUrl = "";
 	
+	window.view.loading();
 	window.model.initNewsType(window.view.showNewsType);
 	
 	window.model.getNewsByType(window.view.showNews, window.newsMsg);
@@ -118,6 +123,7 @@
 /** ***************************event**************************** */
 (function() {
 	window.addClickEventToNewsType = function(that) {
+		window.view.loading();
 		window.view.toSelectModel(that);
 		window.newsMsg.pageSize = 0;
 		window.newsTypeId = $(that).attr("data-id");

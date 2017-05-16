@@ -55,7 +55,7 @@
 		}
 	}
 	function checkUserAlias(userAlias) {
-		var reg_account = /^[A-Za-z0-9]{1,5}$/;
+		var reg_account = /^[\u4e00-\u9fa5_a-zA-Z0-9]{1,5}$/;
 		var key = reg_account.test(userAlias);
 		return key;
 	}
@@ -125,27 +125,32 @@
 		key = checkUserAlias(userAlias);
 		if (key == false) {
 			$("#userAlias").next().addClass("error");
+			window.location.href = "#userAlias";
 			return;
 		}
 
 		key = checkUserAccount(userAccount);
 		if (key == false) {
 			$("#userAccount").next().addClass("error");
+			window.location.href = "#userAccount";
 			return;
 		}
 
 		var keyArr = checkUserPasswd(userPasswd, reUserPasswd);
 		if (keyArr[0] == 0 || keyArr[2] == 0) {
 			$("#userPasswd").next().addClass("error");
+			window.location.href = "#userPasswd";
 			return;
 		} else if (keyArr[1] == 0 || keyArr[3] == 0) {
 			$("#reUserPasswd").next().addClass("error");
+			window.location.href = "#reUserPasswd";
 			return;
 		}
 
 		key = checkUserEmial(userEmial);
 		if (key == false) {
 			$("#userEmial").next().addClass("error");
+			window.location.href = "#userEmial";
 			return;
 		}
 

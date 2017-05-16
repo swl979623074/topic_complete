@@ -13,21 +13,19 @@
 		overflow:hidden;
 	}
 </style>
-<script type="text/javascript" src='./web/jquery.min.js'></script>
 </head>
 <body>
 	
 	<script>
 		var userAgent =navigator.userAgent;
 		if(!userAgent.match(/window/ig)){
-			document.write("尚未支持移动端设备，请在PC端登陆");
-		}else{
-			var html ="<iframe id='changUrl' src='./web/html/home.html' scrolling='no' frameborder='0' width='100%' height='100%'></iframe>";
+			var html = "<h2>目前仅适应windows PC端设备</h2><br/><a href='./web/html/home.html'>若坚持继续浏览站点，点击这里...</a>";
 			document.write(html);
-			//window.location.href='./web/html/home.html';
+		}else{
+			var html ="<iframe id='changUrl' src='./web/html/home.html' scrolling='yes' frameborder='0' width='100%' height='100%'></iframe>";
+			//window.location.href = "./web/html/home.html";
+			document.write(html);
 		}
-		console.log(userAgent);
-		//
 	</script>
 </body>
 </html>
