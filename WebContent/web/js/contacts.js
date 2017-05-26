@@ -572,10 +572,15 @@
 			}
 
 		} else if ($(update_ele).length > 0) {
+			var remarkName = $(update_ele).val();
+			if(remarkName.length > 24){
+				alert("备注名不能超过24位");
+				return;
+			}
 			var data = {
 				userId : window.userId,
 				friendId : window.li_selectedId,
-				remark : $(update_ele).val()
+				remark : remarkName
 			}
 			window.model.updateRemark(window.view.showNewRemark, data);
 		} else {

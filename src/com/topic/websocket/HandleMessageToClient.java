@@ -44,13 +44,12 @@ public class HandleMessageToClient implements HandleMessage {
 	}
 
 	/**
-	 * 从服务端向客户端发送信息 当用户在线且客户端窗口是打开时，从socket发送信息 其他情况下，在friend表中记录有新消息
+	 * 描述：从服务端向客户端发送信息 当用户在线且客户端窗口是打开时，从socket发送信息 其他情况下，在friend表中记录有新消息
 	 * 
-	 * @param session
-	 *            需要接受信息的客户端的session
-	 * @param msg
-	 *            要发送的信息
-	 * 
+	 * @param senderSession
+	 *            信息发送者的session
+	 * @param recipientSession
+	 *            接受信息的session
 	 */
 	private void sendMsgToPersion(Session senderSession,
 			Session recipientSession) {
@@ -58,13 +57,13 @@ public class HandleMessageToClient implements HandleMessage {
 				this.JSONObj.optString("senderid"),
 				this.JSONObj.optString("recipientid"),
 				this.JSONObj.optString("recipienttype"));
-		
+
 		String userId = this.JSONObj.optString("senderid");
 		this.JSONObj.put("userPhoto", getImgBinaryData(userId));
 		this.JSONObj.put("time", DateFormat.getCurrentDate_string());
 		this.message = this.JSONObj.toString();
 		try {
-			if(senderSession != recipientSession)
+			if (senderSession != recipientSession)
 				senderSession.getBasicRemote().sendText(this.message);
 			if (false == onwindow) {
 				String sql = "update friend set frie_missmsg = '1' where user_id = '"
@@ -72,10 +71,11 @@ public class HandleMessageToClient implements HandleMessage {
 						+ "' and frie_id = '"
 						+ this.JSONObj.optString("senderid") + "'";
 				OJDBC.executeUpdate(sql);
-				this.JSONObj.put("userPhoto","");
-				this.JSONObj.put("time","");
+				this.JSONObj.put("userPhoto", "");
+				this.JSONObj.put("time", "");
 			}
-			if(recipientSession == null) return;
+			if (recipientSession == null)
+				return;
 			recipientSession.getBasicRemote().sendText(this.message);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
@@ -84,9 +84,10 @@ public class HandleMessageToClient implements HandleMessage {
 	}
 
 	/**
-	 * 向话题群组发送信息，当被接收人在线并且窗口打开时，通过socket发送细信息；否则，在group表中记录有新消息
+	 * 描述：向话题群组发送信息，当被接收人在线并且窗口打开时，通过socket发送细信息；否则，在group表中记录有新消息
 	 * 
-	 * @param session
+	 * @param map
+	 *            处于连接状态的session集合
 	 */
 	private void sendMsgToGroup(Map<String, Session> map) {
 		String groupTopicId = this.JSONObj.optString("recipientid");
@@ -116,7 +117,8 @@ public class HandleMessageToClient implements HandleMessage {
 				}
 
 				try {
-					(map.get(recipientUserId)).getBasicRemote().sendText(this.message);
+					(map.get(recipientUserId)).getBasicRemote().sendText(
+							this.message);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

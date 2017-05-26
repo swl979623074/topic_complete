@@ -24,6 +24,7 @@
 					msg) {
 				if (msg.status == "SUCCESS") {
 					console.log("create topic success");
+					window.location.reload();
 				}
 			});
 		},
@@ -42,7 +43,7 @@
 			$.post("/Topic/topicController/insertOneTopic", topicMsg, function(
 					msg) {
 				if (msg.status == "SUCCESS") {
-					console.log("create topic success");
+					window.location.reload();
 				}
 			})
 		},
@@ -197,7 +198,7 @@
 
 			var description = topicMsg["description"];
 			if (description.length > 200 || description.length < 1) {
-				$(aside_box).find("#topic_stilltime").parent()
+				$(aside_box).find("#topic_description").parent()
 						.addClass("error");
 				return false;
 			} else {

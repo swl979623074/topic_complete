@@ -67,6 +67,9 @@
 			$.post("/Topic/registerController/updateuserMsg", msg, function(
 					data) {
 				if (data.status == "SUCCESS") {
+					var userMsg = window.sessionStorage;
+					userMsg.setItem("userAlias",msg.userAlias);
+					window.parent.location.reload();
 					console.log("update success!!");
 				}
 			});
@@ -191,7 +194,6 @@
 		window.view.toNormalModel();
 		var msg = window.tool.getValues();
 		msg.userId = userId;
-		console.log(msg);
 		window.model.updateUserMsg(msg);
 	});
 })();
@@ -251,7 +253,6 @@
 (function(){
 	var userMsg = window.sessionStorage;
 	var userAccount = userMsg.getItem("userAccount");
-	console.log(userMsg);
 	var key = "";
 	var uploadBtn = $("#uploadBtn");
 	$(uploadBtn).click(function() {

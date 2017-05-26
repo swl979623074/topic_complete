@@ -42,6 +42,7 @@ function hideDialog() {
 		addFrined : function(cb_closeDialog, data) {
 			$.post("/Topic/userController/addFriend", data, function(res) {
 				cb_closeDialog(res.status);
+				window.location.reload();
 			});
 		}
 	}
